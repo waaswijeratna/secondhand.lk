@@ -1,0 +1,14 @@
+const db = require('../Services/db');
+
+const sendPromotionDetails = (req, res, next) => {
+    db.query('SELECT * FROM promotion_details', (error, results) => {
+        if (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Error fetching subcategories' });
+        } else {
+          res.json(results);
+        }
+      });
+}
+
+module.exports = { sendPromotionDetails };
