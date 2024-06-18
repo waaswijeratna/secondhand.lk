@@ -1,0 +1,46 @@
+<header class="header">
+    <div class="header-container">
+        <div class="logo-container">
+            <img src="../../assets/logo.png" width="162px" height="56px" routerLink="">
+        </div>
+        <div class="language-selection">
+            <select id="language-select">
+                <option value="english">English</option>
+                <option value="sinhala">Sinhala</option>
+                <option value="tamil">Tamil</option>
+            </select>
+        </div>
+        <div class="user-section">
+            <mat-icon id="acc">account_circle</mat-icon>
+            <span>Login/SignIn</span>
+            <mat-icon id="cart">shopping_cart</mat-icon>
+            <button class="post-ad-btn" routerLink="/advertisement">Post an Ad</button>
+        </div>
+    </div>
+
+
+    <form class="search-bar-container" [formGroup]="searchForm">
+        <div class="search-bar">
+            <div class="search-selection">
+                <i class="material-icons">location_on</i>
+                <select id="districts" >
+                    <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
+                </select>                  
+            </div>
+            <input type="text" placeholder="Search..." formControlName="searchText">
+            <div class="search-icon">
+                <div class="search-icon-circle" (click)="search()">
+                    <i class="material-icons">search</i>
+                </div>
+            </div>
+        </div>
+        <div class="location-icon-circle" [class.active]="isLocationIconClicked" (click)="toggleLocationIcon()">
+            <i class="material-icons">location_on</i>
+        </div>
+    </form>
+
+</header>
+
+
+
+  

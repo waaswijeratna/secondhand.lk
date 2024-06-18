@@ -1,0 +1,95 @@
+/* Chat Bot Component CSS */
+.bot-message {
+    text-align: left;
+    margin-bottom: 2vh; /* Changed from 10px */
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    text-align: right;
+    margin-bottom: 2vh; /* Changed from 10px */
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.date {
+    font-size: 0.8em;
+    color: gray;
+    margin-top: 1vh; /* Changed from 5px */
+    background-color: transparent !important;
+}
+
+.bot-date {
+    text-align: left;
+}
+
+.user-date {
+    text-align: right;
+}
+
+.bot-message button {
+    background-color: #4caf50; /* Green background for bot buttons */
+    border: none; /* Remove border */
+    border-radius: 1rem; /* Changed from 10px */
+    padding: 1rem; /* Changed from 10px */
+    display: inline-block;
+    color: white;
+    cursor: pointer; /* Added cursor pointer */
+}
+
+.user-message button {
+    background-color: #2196f3; /* Blue background for user buttons */
+    color: white;
+    border: none; /* Remove border */
+    border-radius: 1rem 1rem 0rem 1rem; /* Changed from 0px 10px 10px 10px */
+    padding: 1rem; /* Changed from 10px */
+    display: inline-block;
+    cursor: pointer; /* Added cursor pointer */
+}
+
+.bot-message p {
+    background-color: #dcedc8; /* Light green background for bot text responses */
+    border-radius: 0 1rem 1rem 1rem; /* Changed from 0px 10px 10px 10px */
+    padding: 1rem; /* Changed from 10px */
+    display: inline-block;
+    margin: 0;
+}
+
+.bot-message button {
+    margin-top: 2vh; /* Changed from 2vh */
+    margin-left: 1.8vh; /* Changed from 1.8vh */
+}
+
+.user-message p {
+    background-color: #bbdefb; /* Light blue background for user text responses */
+    border-radius: 1rem; /* Changed from 10px */
+    padding: 1rem; /* Changed from 10px */
+    display: inline-block;
+    margin: 0;
+}
+
+.botImage {
+    background-image: url('../../../assets/images/chatbot.png');
+    background-size: cover;
+}
+
+.fixed-header-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Header styles */
+.header-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: white;
+}
+
+.scrollable-content {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-top: 1rem; /* Adjust based on header height */
+}

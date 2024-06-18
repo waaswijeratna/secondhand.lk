@@ -1,0 +1,121 @@
+.formContainer{
+    margin: 5% 10%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2vh;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 3% 7%;
+}
+
+.formGeneral{
+    padding: 0% 20%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    /* gap: .8vw;  */
+}
+
+.formGeneral mat-form-field{
+    width: 34vw;
+}
+
+.flexRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;    
+}
+.flexRow mat-form-field{
+    width: 16vw;
+}
+
+.addTelephone{
+    display: flex;
+    align-items: center;
+}
+.addTelephone mat-form-field{
+    width: 23vw;    
+}
+.addTelephone button{
+    margin-left: 1vw;    
+}
+.addedTelephone mat-list{
+    display: flex; 
+    margin: 0.7vw;
+    padding: 0;   
+}
+.addedTelephone p{
+    margin: 0;
+    padding: 0;   
+}
+.removeNumbericon{
+    color: rgb(110, 176, 251);
+}
+
+
+mat-icon:hover {
+    cursor: pointer;
+}
+
+input[type="file"]{
+    display: none;
+}
+.imageUploadbtn{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.customUploader{
+    width: 34vw;
+    padding: 2vw;
+}
+.imageIcon{
+    margin-left: 1vw;
+}
+
+
+/* images list styles */
+.addedImages{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2vw;
+}
+.imagesList{
+    position: relative;
+    display: inline-block;
+}
+.imageRemoveicon{
+    position: absolute;
+    color: rgb(110, 176, 251);
+    top: 0;
+    right: 0;
+}
+.error-message{
+    color: red;
+    font-size: 2.5vmin;
+    font-style: italic;
+}
+
+
+/* loader animation styling */
+.loaderAnimation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.loaderAnimation p{
+    font-size: 2.5vmin;
+}
+
+.devider {
+    margin: 5% 0%;
+    width: 34vw;
+}
+
+
+
+

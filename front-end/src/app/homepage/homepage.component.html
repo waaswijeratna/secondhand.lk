@@ -1,0 +1,14 @@
+<!-- category-grid.component.html -->
+
+<div class="category-grid">
+    <div *ngFor="let category of categories" class="category-item">
+      <div class="category-icon">
+        <img src="../../assets/{{category.icon }}.png" alt="{{ category.name }}">
+      </div>
+      <div class="category-name">{{ category.name }}</div>
+    </div>
+</div>
+<div>
+  <button mat-raised-button color="primary" id="postButton" (click)="sendAdId()">Avertisement:{{ad_id}}</button>
+</div>
+  

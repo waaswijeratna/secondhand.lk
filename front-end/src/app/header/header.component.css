@@ -1,0 +1,188 @@
+.header {
+    background-color: #2A7AAD;
+}
+
+.header-container {
+    color: white;
+    display: flex;
+    justify-content: space-between; /* Adjust space between elements */
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo-container {
+    margin-right: 20px; /* Adjust as needed to create spacing between logo and language selection */
+}
+
+
+.logo-container img{
+    cursor: pointer;
+}
+
+.language-selection select {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.language-selection select option {
+    background-color: #2A7AAD;   
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+}
+
+.user-section span {
+    margin-right: 15px;
+}
+
+.user-section #cart {
+    margin-right: 15px;
+}
+
+.post-ad-btn {
+    background-color: #43F7C1;
+    border: none;
+    border-radius: 10px;
+    color: #304E74;
+    padding: 8px 13px;
+    cursor: pointer;
+    font-weight: bold; /* Make the text on the button bold */
+}
+
+/* Move user-section to the right corner */
+.user-section {
+    margin-left: auto;
+}
+
+/* Search bar styles */
+
+/* Search bar styles */
+
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    padding-bottom: 6%;
+    width: 50%; /* Set the desired width */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: white; /* Adjust background color */
+    border-radius: 50px; /* Adjust border-radius for rounded ends */
+    overflow: hidden; /* Ensure the search icon circle stays within the border-radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box-shadow for depth */
+    width: 80%; /* Make the search bar fill the container */
+
+}
+
+.search-selection {
+    display: flex;
+    align-items: center;
+    background-color: #304E74;
+    color: white;
+    padding: 8px;
+}
+
+.search-selection select {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#districts option{
+    background-color: #304E74;   
+}
+
+.search-selection i {
+    margin-right: 5px;
+}
+
+.search-bar input[type="text"] {
+    flex: 1;
+    padding: 8px 30px 8px 10px; /* Adjust padding as needed */
+    border: none;
+    outline: none;
+    background-color: transparent; /* Transparent background */
+    color: rgb(37, 4, 4);
+}
+
+.search-icon-circle {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px; /* Adjust size of the circle */
+    height: 40px; /* Adjust size of the circle */
+    background-color: #43F7C1;
+    border-radius: 50%; /* Create a circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box-shadow for depth */
+    cursor: pointer; /* Change cursor to pointer when hovering over the icon */
+}
+
+.search-icon-circle i {
+    color: #304E74;
+}
+
+.location-icon-circle {
+    width: 40px; /* Adjust size of the circle */
+    height: 40px; /* Adjust size of the circle */
+    background-color: #304E74; /* Light yellow background color */
+    border-radius: 50%; /* Create a circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px; /* Adjust spacing between search bar and location icon circle */
+    margin-top: 1px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box-shadow for depth */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition for smooth color change */
+}
+
+.location-icon-circle i {
+    color: rgb(255, 255, 255); /* Adjust icon color */
+}
+
+.language-selection select:focus,
+#districts:focus {
+    outline: none; /* Remove the outline when the select element is focused */
+    border: none; /* Remove any border when the select element is focused */
+    box-shadow: none; /* Remove any box shadow when the select element is focused */
+    background-color: transparent; /* Set background color to transparent when focused */
+}
+
+.location-icon-circle.active {
+    animation: glow 0.5s infinite alternate; /* Apply the glow animation when active */
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 2px 1px #43F7C1; /* Initial shadow */
+    }
+    100% {
+        box-shadow: 0 0 4px 3px #43F7C1; /* Increased shadow for glow effect */
+    }
+}
+
+
+
+
+
+
+
+

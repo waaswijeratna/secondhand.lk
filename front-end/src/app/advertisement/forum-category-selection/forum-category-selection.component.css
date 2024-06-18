@@ -1,0 +1,48 @@
+.formContainer{
+    margin: 5% 0%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2vh;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 3% 7%;
+}
+
+.formSet {
+    display: grid;
+    grid-template-columns: 3fr 2fr; /* 1fr means take remaining space */
+    grid-template-rows: 2fr 24fr; /* Adjust as needed */
+    gap: 2vh; /* Adjust gap between grid items */
+}
+
+.adTypes {
+    grid-column: 1 / span 2; /* Span across both columns */
+}
+.atRadio {
+    margin: 0 4%;
+}
+  
+.categories {
+    grid-column: 1; /* First column */
+}
+  
+.subcategories {
+    grid-column: 2; /* Second column */
+}
+
+.categories mat-radio-button,
+.subcategories mat-radio-button {
+    display: block; /* Display each radio button as block element */
+    margin-bottom: 1.5vmin; /* Adjust as needed */
+}
+
+/* icon styling */
+.icon {
+    width: 4vmin;
+    height: 4vmin;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: bottom; /* Align icon to bottom */
+    margin-right: .5vw;
+    margin-left: .8vw;
+}
+

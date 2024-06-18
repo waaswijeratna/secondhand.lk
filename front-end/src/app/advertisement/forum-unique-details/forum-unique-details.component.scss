@@ -1,0 +1,21 @@
+
+.formContainer{
+    margin: 5% 10%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2vh;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 3% 7%;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+mat-form-field{
+    width: 30vw;
+}
+
