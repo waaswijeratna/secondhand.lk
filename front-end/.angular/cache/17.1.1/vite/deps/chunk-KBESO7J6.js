@@ -2,13 +2,13 @@ import {
   DomPortalOutlet,
   PortalModule,
   TemplatePortal
-} from "./chunk-HGCSL3KO.js";
+} from "./chunk-6VMCLUEU.js";
 import {
   ArrayDataSource,
   _RecycleViewRepeaterStrategy,
   _VIEW_REPEATER_STRATEGY,
   isDataSource
-} from "./chunk-TY2LYSU5.js";
+} from "./chunk-YUVFHFK5.js";
 import {
   BidiModule,
   Directionality,
@@ -24,11 +24,11 @@ import {
   getRtlScrollAxisType,
   hasModifierKey,
   supportsScrollBehavior
-} from "./chunk-RKSOZWWK.js";
+} from "./chunk-KYIXQCOQ.js";
 import {
   DOCUMENT,
   Location
-} from "./chunk-FMYXQAGX.js";
+} from "./chunk-BHX6PC2Y.js";
 import {
   ANIMATION_MODULE_TYPE,
   ApplicationRef,
@@ -87,7 +87,7 @@ import {
   ɵɵqueryRefresh,
   ɵɵstyleProp,
   ɵɵviewQuery
-} from "./chunk-D5Z2BX4D.js";
+} from "./chunk-LNEI2XG3.js";
 import {
   Observable,
   Subject,
@@ -103,11 +103,11 @@ import {
   take,
   takeUntil,
   takeWhile
-} from "./chunk-IOPHKB2L.js";
+} from "./chunk-CICD3YWD.js";
 import {
   __spreadProps,
   __spreadValues
-} from "./chunk-ASLTLD6L.js";
+} from "./chunk-J4B6MK7R.js";
 
 // node_modules/@angular/cdk/fesm2022/scrolling.mjs
 var _c0 = ["contentWrapper"];
@@ -4330,21 +4330,14 @@ var FullscreenOverlayContainer = _FullscreenOverlayContainer;
 })();
 
 export {
-  ScrollDispatcher,
   ViewportRuler,
   CdkScrollableModule,
-  ScrollingModule,
-  BlockScrollStrategy,
-  ScrollStrategyOptions,
   OverlayConfig,
   OverlayContainer,
   OverlayRef,
-  FlexibleConnectedPositionStrategy,
-  GlobalPositionStrategy,
-  OverlayPositionBuilder,
   Overlay,
   CdkOverlayOrigin,
   CdkConnectedOverlay,
   OverlayModule
 };
-//# sourceMappingURL=chunk-QTS5XRP6.js.map
+//# sourceMappingURL=chunk-KBESO7J6.js.map

@@ -1,6 +1,6 @@
 import {
   DOCUMENT
-} from "./chunk-FMYXQAGX.js";
+} from "./chunk-BHX6PC2Y.js";
 import {
   ComponentFactoryResolver$1,
   Directive,
@@ -22,7 +22,7 @@ import {
   ɵɵdefineNgModule,
   ɵɵdirectiveInject,
   ɵɵgetInheritedFactory
-} from "./chunk-D5Z2BX4D.js";
+} from "./chunk-LNEI2XG3.js";
 
 // node_modules/@angular/cdk/fesm2022/portal.mjs
 function throwNullPortalError() {
@@ -553,28 +553,13 @@ var PortalModule = _PortalModule;
     }]
   }], null, null);
 })();
-var PortalInjector = class {
-  constructor(_parentInjector, _customTokens) {
-    this._parentInjector = _parentInjector;
-    this._customTokens = _customTokens;
-  }
-  get(token, notFoundValue) {
-    const value = this._customTokens.get(token);
-    if (typeof value !== "undefined") {
-      return value;
-    }
-    return this._parentInjector.get(token, notFoundValue);
-  }
-};
 
 export {
   ComponentPortal,
   TemplatePortal,
   BasePortalOutlet,
   DomPortalOutlet,
-  CdkPortal,
   CdkPortalOutlet,
-  PortalModule,
-  PortalInjector
+  PortalModule
 };
-//# sourceMappingURL=chunk-HGCSL3KO.js.map
+//# sourceMappingURL=chunk-6VMCLUEU.js.map
