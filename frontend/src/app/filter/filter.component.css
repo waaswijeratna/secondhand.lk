@@ -1,0 +1,51 @@
+.checkboxes {
+    padding-top: 100px;
+    padding-left:0;
+  }
+  
+  .checkboxes label {
+    display: block; 
+    margin-bottom: 10px; 
+  }
+  
+  .checkboxes input[type="checkbox"] {
+    transform: scale(1.5); 
+    margin-right: 0px; 
+  }
+  
+
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .dropdown select {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #304E74;
+    width: 200px;
+    margin-top: 20px;
+  }
+  
+  .dropdown select:focus {
+    outline: none;
+  }
+  
+  /* Style for the first option in each dropdown */
+  .dropdown select option:first-child {
+    color: gray;
+  }
+
+  .main{
+    font-size: 20px;
+  }
+
+
+
+
+  .h3{
+    margin-left: 200px;
+}

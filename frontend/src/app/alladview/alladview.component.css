@@ -1,0 +1,36 @@
+.body-container{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+.adview-box{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    width: 50%;
+    border-top: 1px solid rgb(250, 202, 202);
+    border-bottom: 1px solid rgb(250, 202, 202);
+    height: auto;
+    margin-bottom: 2%;
+    padding: 2%;
+    color: #304E74;
+}
+
+img{
+    width: 200px;
+    height: 150px;
+    margin-right: 5%;
+}
+
+.ad-details{
+    padding-left: 5%;
+    color: #304E74;
+}
+
+
