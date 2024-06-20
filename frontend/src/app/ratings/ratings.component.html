@@ -1,0 +1,47 @@
+
+<app-header></app-header>
+    <form [formGroup]="ratings" (ngSubmit)="submitForm()" class="formStyles">
+        <div class="left">
+          <h4>Enter Your Rating</h4>
+        <div class="star-rating">
+          <input type="radio" id="star5" value="5" formControlName="rating"><label for="star5"></label>
+          <input type="radio" id="star4" value="4" formControlName="rating"><label for="star4"></label>
+          <input type="radio" id="star3" value="3" formControlName="rating"><label for="star3"></label>
+          <input type="radio" id="star2" value="2" formControlName="rating"><label for="star2"></label>
+          <input type="radio" id="star1" value="1" formControlName="rating"><label for="star1"></label>
+        </div>
+        <div class="para_1">
+          <p><span>0 Stars:</span> Completely unsatisfactory. The experience fell far <br>
+          below expectations, and there may have been significant <br>
+          issues or problems.</p>
+      </div>
+      <div class="para_2">
+          <p><span>1 Stars:</span> Very poor. The experience was disappointing, with<br>
+              multiple issues and a lack of satisfaction.</p>
+      </div>
+      <div class="para_3">
+          <p><span>2 Stars:</span> Below average. The experience had noticeable flaws <br>
+              and shortcomings, leaving much to be desired..</p>
+      </div>
+      <div class="para_4">
+          <p><span>3 Stars:</span>Average. The experience was neither particularly<br>
+              good nor bad, with some positive aspects but also room for<br>
+              improvement.</p>
+      </div>
+      <div class="para_5">
+          <p><span>4 Stars:</span> Above average. The experience was generally <br>
+              positive, with notable strengths and few weaknesses.</p>
+      </div>
+      <div class="para_6">
+          <p><span>5 Stars:</span>Excellent. The experience exceeded expectations in <br>
+              every way, demonstrating exceptional quality and satisfaction.</p>
+      </div>
+  </div>
+
+  <div class="right">
+      <h4>Enter Your Review</h4>
+      <textarea rows="15" cols="60" formControlName="review" placeholder="Tell your experience"></textarea>
+      <button type="submit" [disabled]="!ratings.valid">Submit</button>
+  </div>
+</form>
+<app-footer></app-footer>

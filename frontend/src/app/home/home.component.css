@@ -1,0 +1,23 @@
+.home-body{
+    height: 50vh;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+    align-items: center;
+}
+
+button{
+    height: 50px;
+    width: 100px;
+    margin-right: 2%;
+    border-radius: 8px;
+    background-color: #2A7AAD;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    border: 1px solid white;
+}
+
+button:hover{
+    opacity: 60%;
+}
