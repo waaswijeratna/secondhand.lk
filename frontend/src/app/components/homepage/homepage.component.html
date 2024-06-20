@@ -1,0 +1,9 @@
+<!-- category-grid.component.html -->
+<div class="category-grid">
+    <div *ngFor="let category of categories" class="category-item">
+      <div class="category-icon">
+        <img src="../../assets/icon1/{{category.icon }}.png" alt="{{ category.name }}">
+      </div>
+      <div class="category-name">{{ category.name }}</div>
+    </div>
+</div>
