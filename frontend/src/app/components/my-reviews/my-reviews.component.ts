@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './my-reviews.component.css'
 })
 export class MyReviewsComponent {
+navData: any;
+collapsed: any;
 
 }

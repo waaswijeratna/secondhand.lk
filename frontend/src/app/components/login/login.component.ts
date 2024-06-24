@@ -11,10 +11,6 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   message: string = '';
-  auth: any;
-  userStore: any;
-  snackBar: any;
-  spinner: any;
   router: any;
   hide: any;
 
@@ -27,37 +23,50 @@ export class LoginComponent {
 
   async onLogin() {
 
-    (await this.authService.loginNew(this.loginForm.value))
-      .subscribe({
-        next: async (res: { accessToken: any; }) => {
-
-        },
-        error: (err: { status: string; }) => {
-          this.snackBar.open("Login Error! Error Code " + err.status, "", { panelClass: ['app-notification-error'] })._dismissAfter(3000);
-        }
-      });
-
-  }
-
-
-  onSubmit() {
-    // Ensure that email and password are not undefined
-    if (!this.email || !this.password) {
-      this.message = 'Email and password are required.';
+    if (this.loginForm.invalid) {
+      this.message = 'Please fill in all fields correctly.';
       return;
     }
 
-    this.authService.login(this.email, this.password)
-      .subscribe(
-        (data: { accessToken: string }) => { // Specify the type for data
-          console.log(data);
-          this.message = 'Login successful!';
-        },
-        (error: any) => { // Specify the type for error
-          console.log(error);
-          this.message = 'Invalid email or password.';
-        }
-      );
+    (this.authService.loginNew({
+      email: this.loginForm.value.email || '',
+      password: this.loginForm.value.password || ''
+    })).subscribe({
+      next: (res: { accessToken: string; }) => {
+        console.log('Login successful', res);
+        this.message = 'Login successful!';
+        localStorage.setItem('accessToken', res.accessToken); // Store the token in local storage
+        this.router.navigate(['/homepage']); // Redirect to homepage
+
+      },
+      error: (err: any) => {
+        console.error('Login error', err);
+        this.message = 'Invalid email or password.';
+      }
+    });
+
+
   }
+
+
+  // onSubmit() {
+  //   // Ensure that email and password are not undefined
+  //   if (!this.email || !this.password) {
+  //     this.message = 'Email and password are required.';
+  //     return;
+  //   }
+
+  //   this.authService.login(this.email, this.password)
+  //     .subscribe(
+  //       (data: { accessToken: string }) => { // Specify the type for data
+  //         console.log(data);
+  //         this.message = 'Login successful!';
+  //       },
+  //       (error: any) => { // Specify the type for error
+  //         console.log(error);
+  //         this.message = 'Invalid email or password.';
+  //       }
+  //     );
+  // }
 
 }

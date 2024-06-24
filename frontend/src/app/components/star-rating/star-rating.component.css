@@ -1,0 +1,20 @@
+.star-rating {
+    font-size: 1.5em;
+    margin-left: 150px;
+  }
+  
+  .star-rating .fa-star,
+  .star-rating .fa-star-half-o {
+    color: #34caf3;
+  }
+  
+  .star-rating .fa-star-o {
+    color: #ccc; /* Grey color for empty stars */
+  }
+
+  .rating-number {
+    margin-left: 0.5em;
+    color: #0a7ad0; /* Adjust this color as needed */
+    font-size: 0.7em; /* Adjust the size as needed */
+  }
+  

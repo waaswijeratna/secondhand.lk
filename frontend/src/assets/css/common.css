@@ -1,89 +1,108 @@
-.btn-primary{
-    background-color:#075585;
+.btn-primary {
+    background-color: #075585;
 }
 
-.panel-heading{
+.panel-heading {
     text-align: center;
     margin-bottom: 10px;
 }
 
-#forget{
+#forget {
     min-width: 100px;
-    margin:  auto;
+    margin: auto;
     text-decoration: none;
     cursor: pointer;
 }
 
-a:hover{
+a:hover {
     text-decoration: none;
 }
 
-.form-inline label{
+.form-inline label {
     padding-left: 10px;
-    margin:0;
+    margin: 0;
     cursor: pointer;
 }
 
-.btn{
+.btn {
     margin-top: 20px;
-    border-radius: 15px;;
+    border-radius: 15px;
 }
 
-#googlelogo{
-    border: 2px solid #075585;    
+#googlelogo {
+    border: 2px solid #075585;
     color: #075585;
     border-radius: 30px;
 }
 
-.panel{
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #075585;
+    font-weight: bold;
+    padding: 1px;
+    border-radius: 30px;
+}
+
+.google-btn img {
+    margin-right: 10px;
+}
+
+.google-btn:hover {
+    text-decoration: none;
+    color: rgb(81, 107, 145);
+}
+
+.panel {
     min-height: 380px;
     box-shadow: 20px 20px 80px rgb(218, 218, 218);
     border-radius: 12px;
-    margin-top:100px;
+    margin-top: 100px;
 }
 
-.input-field{
+.input-field {
     border-radius: 5px;
     padding: 5px;
     display: flex;
-    align-items:center;
+    align-items: center;
     cursor: pointer;
-    border:1px solid #ddd;
+    border: 1px solid #ddd;
     color: #4343ff;
 }
 
-.input-field.error{
-    border:1px solid red;
+.input-field.error {
+    border: 1px solid red;
     color: red;
 }
 
-input[type='text'],input[type='password']{
+input[type='text'], input[type='password'] {
     border: none;
     outline: none;
     overflow: unset;
     box-shadow: none;
-    width:100%;
+    width: 100%;
 }
 
-.font-weight-bold{
+.font-weight-bold {
     color: #075585;
 }
 
-
-.fa{
+.fa {
     color: #075585;
 }
-.fa-eye-slash.btn{
+
+.fa-eye-slash.btn {
     border: none;
     outline: none;
     box-shadow: none;
 }
 
-img{
+img {
     width: 40px;
     height: 40px;
     object-fit: cover;
     border-radius: 50%;
     position: relative;
 }
-

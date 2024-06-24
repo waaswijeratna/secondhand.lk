@@ -1,1 +1,26 @@
-<p>users works!</p>
+<div class="users">
+    <div class="users-container">
+
+      <table class="table">
+        <thead>
+          <!-- This section shows a loading message when the result is not loaded -->
+          <h1 *ngIf="!isResultLoaded">Loading.................</h1>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Location</th>
+          </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through userArray to display user data -->
+          <tr *ngFor="let userItem of userArray">
+            <td>{{ userItem.id }}</td>
+            <td>{{ userItem.name }}</td>
+            <td>{{ userItem.email }}</td>
+            <td>{{ userItem.location }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>

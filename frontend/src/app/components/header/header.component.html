@@ -1,9 +1,7 @@
 <header class="header">
     <div class="header-container">
         <div class="logo-container">
-            <a class="homepage" routerLink="/">
-                <span><img routerLink="/" src="../../assets/logo.png" width="162px" height="56px"></span>
-            </a>
+            <img src="../../assets/logo.jpeg" width="162px" height="56px" routerLink="homepage">
         </div>
         <div class="language-selection">
             <select id="language-select">
@@ -13,22 +11,16 @@
             </select>
         </div>
         <div class="user-section">
-            <mat-icon id="acc">account_circle</mat-icon>
-            <a class="profile" routerLink="login">
-                <span >Login</span>
-            </a>
-            <a class="profile" routerLink="users">
-                <span >Users</span>
-            </a>
+            <mat-icon >account-circle</mat-icon>
+            <span *ngIf="!isLoggedIn" class="login" routerLink="/login">Login</span>
+            <span *ngIf="isLoggedIn" routerLink="/my-account">Profile</span>
+            <span  routerLink="users">Users</span>
             <mat-icon id="cart">shopping_cart</mat-icon>
-            <!-- <button class="btn btn-info" routerLink="/users">Users</button> -->
-            <button class="post-ad-btn" (click)="redirectToAdvertisement()">Post an Ad</button>
-            
+            <button class="post-ad-btn" routerLink="/advertisement">Post an Ad</button>
         </div>
     </div>
 
-
-    <form class="search-bar-container" [formGroup]="searchForm">
+    <form class="search-bar-container" [formGroup]="searchForm" *ngIf="searchForm">
         <div class="search-bar">
             <div class="search-selection">
                 <i class="material-icons">location_on</i>

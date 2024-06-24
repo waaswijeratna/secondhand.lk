@@ -9,26 +9,50 @@
                     </div>
                     <div class="panel-body p-3">
                         <form [formGroup]="registerForm">
+
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-user p-2"></span>
-                                    <input type="text" placeholder="User Name" formControlName="email">
+                                    <input type="text" placeholder="First Name" formControlName="firstname">
+                                </div>
+                            </div>
+                            <small *ngIf="registerForm.get('firstname')?.errors?.['required'] && registerForm.get('firstname')?.touched" class="text-danger">* First name is required</small>
+                            <div class="form-group pt-3">
+                                <div class="input-field">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input type="text" placeholder="Last Name" formControlName="lastname">
                                 </div>
                             </div>
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-user p-2"></span>
+                                    <input type="text" placeholder="Location" formControlName="location">
+                                </div>
+                            </div>
+                            <small *ngIf="registerForm.get('location')?.errors?.['required'] && registerForm.get('location')?.touched" class="text-danger">* Location is required</small>
+                            <div class="form-group pt-3">
+                                <div class="input-field">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input type="text" placeholder="Sub Location" formControlName="subLocation">
+                                </div>
+                            </div>
+                            <small *ngIf="registerForm.get('subLocation')?.errors?.['required'] && registerForm.get('subLocation')?.touched" class="text-danger">*Sub Location is required</small>
+                            <div class="form-group pt-3">
+                                <div class="input-field">
+                                    <span class="fa fa-envelope p-2"></span>
                                     <input type="text" placeholder="Email" formControlName="email">
                                 </div>
                             </div>
+                            <small *ngIf="registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched" class="text-danger">*Email is required</small>
+                            <small *ngIf="registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched" class="text-danger">*Invalid email format</small>                  
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-lock p-2"></span>
-                                    <input type="password" placeholder="Password" formControlName="email">
+                                    <input type="password" placeholder="Password" formControlName="password">
                                 </div>
                             </div>
-                            
-                            <button class="submit" class="btn btn-primary btn-block mt-4 w-100">Register</button>
+                            <small *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched" class="text-danger">*Password is required</small> 
+                            <button class="submit" (click)="onRegister()" class="btn btn-primary btn-block mt-4 w-100">Register</button>
                             <div class="text-center pt-4 text-muted"> Already have an account? <a id="forget" routerLink="/login">Login</a></div>
                         </form>
                     </div>

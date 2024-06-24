@@ -16,6 +16,10 @@ a{
      padding: 10px 20px;
  }
  
+.login{
+    cursor: pointer;
+}
+
  .mat-nav-list-container{
      padding-top: 100px;
      
@@ -63,6 +67,10 @@ a{
      font-weight: bold; /* Make the text on the button bold */
  }
  
+ img, .icon {
+    border-radius: 0; /* Ensures no rounded corners */
+}
+
  /* Move user-section to the right corner */
  .user-section {
      margin-left: auto;

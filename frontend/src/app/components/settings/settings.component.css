@@ -1,0 +1,59 @@
+.my-account-container {
+    display: flex;
+}
+
+.content-container {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 50%;
+    background-color: #f5f5f5;
+}
+
+.star-rating {
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.update-details {
+    margin-left: 20px;
+}
+
+.change-password {
+    margin-left: 20px;
+}
+
+.my-account-details {
+    margin-top: 10px;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    width:100%;
+}
+
+label {
+    margin-right: 10px;
+    width: 100px; /* Adjust width as needed */
+    text-align: left;
+}
+
+input {
+    flex: 1;
+    border: 1px solid rgb(1, 117, 172);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(2, 26, 37);
+    width: 50%;
+
+}
+
+button {
+    background-color: rgb(1, 117, 172);
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    color: white;
+    margin-left: 100px;
+}

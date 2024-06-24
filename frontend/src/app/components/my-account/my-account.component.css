@@ -1,0 +1,64 @@
+.my-account-container{
+    display: flex;
+}
+
+.content-container{
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 50%;
+    background-color: #f5f5f5;
+
+}
+
+.my-account-details{
+    margin-left: 40px;
+
+}
+
+.my-account-btn{
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
+button{
+    margin-right: 50px;
+    background-color: #03588d;
+    color: white;
+    border-radius: 10px;
+    padding: 5px 15px;
+}
+
+.name-div{
+    display: flex;
+}
+
+.name-div-content{
+    padding-left: 100px;
+}
+
+.email-div{
+    display: flex;
+}
+
+.email-div-content{
+    padding-left: 100px;
+}
+
+
+.location-div{
+    display: flex;
+}
+
+.location-div-content{
+    padding-left: 85px;
+}
+
+
+.sLocation-div{
+    display: flex;
+}
+
+.sLocation-div-content{
+    padding-left: 60px;
+}

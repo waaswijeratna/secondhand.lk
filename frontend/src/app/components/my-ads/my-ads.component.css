@@ -1,0 +1,58 @@
+.my-ads-container{
+    display: flex;
+}
+
+h5{
+    text-align: center;
+}
+
+.content-container{
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 50%;
+    background-color: #f5f5f5;
+
+}
+
+.ads{
+    display: flex;
+    margin-left: 30px;
+
+}
+
+.ad-details{
+    margin-left: 30px;
+}
+
+.motorbike-img {
+    width: 150px; /* Adjust width as needed */
+    height: 150px; /* Adjust height as needed */
+    object-fit: cover; /* Ensures the image covers the entire space */
+    border-radius: 0; /* Ensure no rounded corners */
+
+}
+
+.buttons{
+    margin-left: 100px;
+    padding:10px;
+}
+
+button{
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #2A7AAD;
+    padding: 5px 25px;
+}
+
+#sold-btn{
+    background-color: rgb(127, 255, 246);
+}
+
+#delete-btn{
+    background-color: rgb(149, 5, 5);
+}
+
+#modify-btn{
+    background-color: #2A7AAD;
+}
