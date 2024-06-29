@@ -1,0 +1,13 @@
+const db = require('../Services/db');
+
+const sendPromotionDetails = async(req, res, next) => {
+  try {
+    const [results] = await db.query('SELECT * FROM promotion_details');
+    res.json(results);
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error fetching categories' });
+}
+}
+
+module.exports = { sendPromotionDetails };
