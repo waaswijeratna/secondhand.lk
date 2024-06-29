@@ -1,0 +1,97 @@
+
+.reportcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
+    margin-bottom: 2rem;
+}
+
+.reason input{
+    width: 20.6vw;
+}
+
+input{
+    margin-top: 1vh;
+    height: 3.5vh;
+    border:0.2vh solid #164a74;
+    border-radius: 0.4vw;
+}
+textarea{
+    margin-top: 1vh;
+    border:0.2vh solid #164a74;
+    border-radius: 0.4vw;
+}
+
+/* paragraph styling */
+#para1{
+    font-weight: bold;
+    color: #164a74;
+}
+#para2{
+    margin: 0;
+    color: #164a74;
+}
+
+
+.labels{
+    color: #164a74;
+    font-weight: bold;  
+}
+
+
+/* button styles */
+button{
+    background-color: #164a74;
+    color: white;
+    padding: 0.5vw 0.7vw;
+    border-radius: 0.5vw;
+    margin-bottom: 10px;
+}
+/* Styles for disabled button */
+button:disabled {
+    background-color: #c7d2ea;
+    border: #c7d2ea;
+    color: #788cb7;
+    padding: 0.5vw 0.7vw;
+    border-radius: 0.5vw;  
+    margin-bottom: 10px;
+}
+
+
+/* custom snack message styling */
+::ng-deep .customSnackbar2 {
+    border-radius: .5vw;
+    outline: 2px solid red;
+    --mdc-snackbar-container-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+    backdrop-filter: blur(1px); /* Apply blur effect */
+    --mdc-snackbar-supporting-text-color:red;
+  }
+  ::ng-deep .customSnackbar2 button{
+    color: white !important;
+    background-color:red;
+  }
+  
+  ::ng-deep .customSnackbar1 {
+    border-radius: .5vw;
+    outline: 2px solid #2a9af3;
+    --mdc-snackbar-container-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+    backdrop-filter: blur(1px); /* Apply blur effect */
+    --mdc-snackbar-supporting-text-color:#2a9af3;
+  }
+  ::ng-deep .customSnackbar1 button{
+    color: white !important;
+    background-color:#2a9af3;
+  }
+
+.img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg{
+    background-color: #f4f4f4;
+    padding: 2rem 4rem;
+  }

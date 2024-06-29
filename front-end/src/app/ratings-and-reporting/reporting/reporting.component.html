@@ -1,0 +1,30 @@
+<div class="bg">
+    <mat-card>
+        <form [formGroup]="report" (ngSubmit)="submitForm()" class="reportcontainer">
+
+            <div class="img">
+                <img src="../../../assets/images/report_man.png" alt="man" width="35%" height="25%">
+            </div>
+
+
+            <p id="para1">Flagging an advertisement is equivalent to reporting the user behind it.</p>
+            <p id="para2">We are dedicated to maintaining the highest standards for our advertisements,
+                and we truly appreciate any <br> feedback from our users as we continually strive to improve.</p>
+            <div class="reason">
+                <label class="labels">Reason</label><br>
+                <input type="text" id="reason" placeholder="Reason" formControlName="reason"><br>
+            </div>
+            <div class="review">
+                <label class="labels">Enter your review(optional)</label><br>
+                <textarea id="review" placeholder="Tell your experience" rows="12" cols="40"
+                    formControlName="reportReview"></textarea>
+            </div>
+
+            <button class="button1" type="submit" [disabled]="!report.valid"> Send Report </button>
+
+
+
+        </form>
+
+    </mat-card>
+</div>

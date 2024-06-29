@@ -1,0 +1,22 @@
+<mat-card class="fixed-header-card">
+    <div class="header-wrapper">
+        <mat-card-header>
+            <div mat-card-avatar class="botImage"></div>
+            <mat-card-title>SecondHander</mat-card-title>
+            <mat-card-subtitle>Chat Bot</mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+    </div>
+    <mat-card-content class="scrollable-content">
+        <div *ngFor="let message of messages" [ngClass]="{'bot-message': !message.reply, 'user-message': message.reply}">
+            <p *ngIf="!message.reply">{{ message.text }}</p>
+            <button *ngIf="message.reply">{{ message.text }}</button>
+            <div *ngIf="message.options">
+                <button *ngFor="let option of message.options" (click)="onOptionSelected(option)">
+                    {{ option.text }}
+                </button>
+            </div>
+            <p class="date" [ngClass]="{'bot-date': !message.reply, 'user-date': message.reply}">{{ message.date | date:'short' }}</p>
+        </div>
+    </mat-card-content>
+</mat-card>

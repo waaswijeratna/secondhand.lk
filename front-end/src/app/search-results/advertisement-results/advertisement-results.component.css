@@ -1,0 +1,213 @@
+.advertisement-container{
+ display: flex;
+ flex-direction: column;
+ background-color: rgb(240, 240, 240);
+ padding: 2rem 4rem;
+ gap: 2rem;
+ color: #304E74;
+}
+.card-container{
+    padding-bottom: 2rem;
+}
+
+h3{
+    margin:1rem;
+}
+
+.bannerTop{
+    height: 20vh;
+    background-color: rgb(194, 194, 194);
+}
+
+/* left side  styles */
+
+.content{
+    display: flex;
+    flex-direction: row;
+}
+.actions{
+    cursor: pointer;
+    color: #2A7AAD;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+.list{
+    font-size:small;
+    margin: 0.3rem 0;
+}
+
+.left-side{
+    width: 65%;
+    margin:1rem;
+    margin-top: 0;
+}
+
+
+.right-side{
+    width: 35%;
+    margin:1rem;
+    margin-top: 0;
+}
+
+.description-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+}
+.details{
+    margin-bottom: 7rem;
+}
+.details-description{
+    width: 50%;
+}
+.description{
+    width: 50%;  
+}
+
+/* right side styles */
+.price{
+    font-weight: bold;
+}
+.contact-numbers{
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+}
+mat-divider{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.chat{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: left;
+    gap:0.3rem;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+.safety-first{
+    border: 0.1rem solid #304E74;
+    border-radius: 1rem;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+}
+.safetyHead{
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: left;
+    gap:0.3rem;
+}
+.safetyGuidance{
+    font-size: small;
+    font-style: italic;
+    text-align: right;
+    color: #2A7AAD;
+}
+.bannerInside{
+    width: 100%;
+    height: 80vh;
+    background-color: rgb(194, 194, 194);
+}
+
+
+
+
+/* image carousal styles */
+.imageCarousal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-image {
+    width: 100%;
+    height: 75vh;
+    background-color: rgb(241, 241, 241);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.main-image img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.thumbnail-controls {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.thumbnail-images {
+    width: 80%;
+    height: 15vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+    gap: 1.2rem;
+    margin-top: 10px;
+}
+
+.thumbnail-wrapper {
+    position: relative;
+    height: 100%;
+    cursor: pointer;
+}
+
+.thumbnail-wrapper img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.thumbnail-wrapper:hover img {
+    transform: scale(1.1);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black overlay with opacity */
+    transition: opacity 0.2s;
+    pointer-events: none; /* Allow clicks to pass through */
+}
+
+.thumbnail-wrapper:hover .overlay {
+    opacity: 0;
+}
+
+.thumbnail-wrapper img.selected + .overlay {
+    opacity: 0; /* Hide overlay for selected image */
+}
+
+.thumbnail-controls button {
+    background: none;
+    color: #304E74;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.thumbnail-controls button:disabled {
+    cursor: not-allowed;
+    background: none;
+    color: #cacaca;
+}
+
