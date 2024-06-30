@@ -283,7 +283,9 @@ export class SearchResultsComponent implements OnInit {
     }
   }
 
-  addToCart(ad_id:any){
+  addToCart(event: Event, ad_id:any){
+    event.stopPropagation(); // This stops the click event from propagating to the parent elements
+
     const userId = localStorage.getItem('userId'); // Retrieve userId from localStorage
     if (!userId) {
       console.error('User is not logged in');
