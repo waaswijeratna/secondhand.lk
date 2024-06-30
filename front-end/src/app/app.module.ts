@@ -41,6 +41,8 @@ import { RatingsAndReportingComponent } from './ratings-and-reporting/ratings-an
 import { RatingsComponent } from './ratings-and-reporting/ratings/ratings.component';
 import { ReportingComponent } from './ratings-and-reporting/reporting/reporting.component';
 import { CartComponent } from './cart/cart.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 
 
@@ -97,7 +99,8 @@ import { CartComponent } from './cart/cart.component';
     MatDividerModule,
     MatButtonModule,
     MessagesModule,
-    CarouselModule
+    CarouselModule,
+    MatTooltipModule
   ],
   providers: [
     provideClientHydration()

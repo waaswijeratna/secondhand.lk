@@ -17,7 +17,7 @@
         [submitForms]="submitForms" [isUpdate]="isUpdate" (form1)="form1test($event)">
       </app-forum-category-selection>
       <div>
-        <button mat-stroked-button matStepperNext [disabled]="!step1Completed" class="next_btn">Next</button>
+        <button matStepperNext [disabled]="!step1Completed" class="next_btn">Next</button>
       </div>
     </mat-step>
   </div>
@@ -29,10 +29,10 @@
         [selectedCategory]="selectedCategoryName" (form2ValidityChanged)="handleValidityChanged2($event)"
         [submitForms]="submitForms" (form2)="form1test($event)" [isUpdate]="isUpdate"></app-forum-unique-details>
       <div>
-        <button mat-stroked-button matStepperNext [disabled]="!step2Completed" class="next_btn">Next</button>
+        <button  matStepperNext [disabled]="!step2Completed" class="next_btn">Next</button>
       </div>
       <div>
-        <button mat-stroked-button matStepperPrevious class="back_btn">Back</button>
+        <button  matStepperPrevious class="back_btn">Back</button>
       </div>
     </mat-step>
   </div>
@@ -43,10 +43,10 @@
       <app-forum-general-details (form3ValidityChanged)="handleValidityChanged3($event)" [submitForms]="submitForms"
         (form3)="form1test($event)" [isUpdate]="isUpdate"></app-forum-general-details>
       <div>
-        <button mat-stroked-button matStepperNext [disabled]="!step3Completed" class="next_btn">Next</button>
+        <button  matStepperNext [disabled]="!step3Completed" class="next_btn">Next</button>
       </div>
       <div>
-        <button mat-stroked-button matStepperPrevious class="back_btn">Back</button>
+        <button  matStepperPrevious class="back_btn">Back</button>
       </div>
     </mat-step>
   </div>

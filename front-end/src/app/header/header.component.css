@@ -32,6 +32,10 @@
     background-color: #2A7AAD;   
 }
 
+.cartIcon{
+    cursor: pointer;
+}
+
 .user-section {
     display: flex;
     align-items: center;

@@ -136,6 +136,7 @@
 .stepper {
   background-color: #f7f7f7; /* Replace with the desired color code */
   padding: 2% 5%;
+  color: #304E74;
 }
 
 .parent-container.disabled {
@@ -153,9 +154,10 @@
   float: right;
   background-color: #2A7AAD;
   border: none;
+  font-size: medium;
   border-radius: 0.7vw;
   color: white;
-  padding: 1.2vw 3vw;
+  padding: 0.8vw 3vw;
   cursor: pointer;
 }
 
@@ -165,11 +167,12 @@
 
 .back_btn {
   float: left;
+  font-size: medium;
   background-color: #2A7AAD;
   border: none;
   border-radius: 0.7vw;
   color: white;
-  padding: 1.2vw 3vw;
+  padding: 0.8vw 3vw;
   cursor: pointer;
 }
 

@@ -4,7 +4,9 @@
     border-radius: 2vh;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 3% 7%;
+    color: #304E74;
 }
+
 
 .formSet {
     display: grid;
@@ -48,5 +50,19 @@
 
 .headline{
     color: #304E74;
+    margin-bottom: 2rem;
 }
+
+mat-radio-button{
+    color: #304E74;
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for transform and box-shadow properties */
+}
+mat-radio-button:hover{
+    transform: scale(1.008);
+}
+
+
+
+
+
 

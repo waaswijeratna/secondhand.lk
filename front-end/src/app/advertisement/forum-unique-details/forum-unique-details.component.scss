@@ -12,10 +12,18 @@ form{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-bottom: 1rem;
 }
 
 
 mat-form-field{
     width: 30vw;
+}
+
+.formTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
 }
 

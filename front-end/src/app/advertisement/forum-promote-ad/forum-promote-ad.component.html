@@ -11,7 +11,7 @@
 
     <!-- Free Checkbox -->
     <div>
-      <mat-checkbox formControlName="free" color="primary">Free</mat-checkbox>
+      <mat-checkbox formControlName="free" color="primary" matTooltip="Free ad posting without the need for promotion" matTooltipPosition="left">Free</mat-checkbox>
     </div>
 
     <mat-divider class="divider"></mat-divider>
@@ -21,9 +21,9 @@
     <div class="promotions"> 
       <div class="promotionCheck">
         <!-- Bump Up Checkbox and Duration Selector -->
-        <mat-checkbox formControlName="bumpUp" color="primary">Bump Up</mat-checkbox>
+        <mat-checkbox formControlName="bumpUp" color="primary" matTooltip="Get more details from our chat bot or click learn more" matTooltipPosition="left">Bump Up</mat-checkbox>
         <mat-form-field>
-          <mat-select [(value)]="selectedAmount1" [disabled]="disableOptionBumpUp">
+          <mat-select [(value)]="selectedAmount1" [disabled]="disableOptionBumpUp" >
             <mat-option [value]="promotionDetails[0].amount">{{promotionDetails[0].days}}
               days(${{promotionDetails[0].amount}})</mat-option>
             <mat-option [value]="promotionDetails[1].amount">{{promotionDetails[1].days}}
@@ -35,7 +35,7 @@
       </div>
       <div class="promotionCheck">
         <!-- Top Ad Checkbox and Duration Selector -->
-        <mat-checkbox formControlName="topAd" color="primary">Top Ad</mat-checkbox>
+        <mat-checkbox formControlName="topAd" color="primary" matTooltip="Get more details from our chat bot or click learn more" matTooltipPosition="left">Top Ad</mat-checkbox>
         <mat-form-field>
           <mat-select [(value)]="selectedAmount2" [disabled]="disableOptionTopAd">
             <mat-option [value]="promotionDetails[3].amount">{{promotionDetails[3].days}}
@@ -49,7 +49,7 @@
       </div>
       <div class="promotionCheck">
         <!-- Urgent Checkbox and Duration Selector -->
-        <mat-checkbox formControlName="urgent" color="primary">Urgent</mat-checkbox>
+        <mat-checkbox formControlName="urgent" color="primary" matTooltip="Get more details from our chat bot or click learn more" matTooltipPosition="left">Urgent</mat-checkbox>
         <mat-form-field>
           <mat-select [(value)]="selectedAmount3" [disabled]="disableOptionUrgent">
             <mat-option [value]="promotionDetails[6].amount">{{promotionDetails[6].days}}

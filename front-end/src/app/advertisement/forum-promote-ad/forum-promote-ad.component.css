@@ -19,6 +19,7 @@
     font-weight: 500;
 }
 #linkExt{
+    cursor: pointer;
     font-size: small;
     font-style: italic;
     color: rgb(120, 155, 210);
