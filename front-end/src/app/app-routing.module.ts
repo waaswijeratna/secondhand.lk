@@ -9,6 +9,7 @@ import { AdvertisementResultsComponent } from './search-results/advertisement-re
 import { RatingsComponent } from './ratings-and-reporting/ratings/ratings.component';
 import { ReportingComponent } from './ratings-and-reporting/reporting/reporting.component';
 import { CartComponent } from './cart/cart.component';
+import { StaySafeComponent } from './footer/stay-safe/stay-safe.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'Ratings/:id', component: RatingsComponent },
   { path: 'reporting/:id', component: ReportingComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'staySafe', component: StaySafeComponent },
 ];
 
 @NgModule({

@@ -102,6 +102,7 @@ mat-divider{
     gap:0.3rem;
 }
 .safetyGuidance{
+    cursor: pointer;
     font-size: small;
     font-style: italic;
     text-align: right;

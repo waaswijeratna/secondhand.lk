@@ -42,6 +42,7 @@ import { RatingsComponent } from './ratings-and-reporting/ratings/ratings.compon
 import { ReportingComponent } from './ratings-and-reporting/reporting/reporting.component';
 import { CartComponent } from './cart/cart.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { StaySafeComponent } from './footer/stay-safe/stay-safe.component';
 
 
 
@@ -76,6 +77,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     RatingsComponent,
     ReportingComponent,
     CartComponent,
+    StaySafeComponent,
 
   ],
   imports: [
