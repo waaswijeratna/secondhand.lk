@@ -11,10 +11,9 @@
             </select>
         </div>
         <div class="user-section">
-            <mat-icon >account-circle</mat-icon>
+            <mat-icon >account_circle </mat-icon>
             <span *ngIf="!isLoggedIn" class="login" routerLink="/login">Login</span>
             <span *ngIf="isLoggedIn" routerLink="/my-account">Profile</span>
-            <span  routerLink="users">Users</span>
             <mat-icon id="cart">shopping_cart</mat-icon>
             <button class="post-ad-btn" routerLink="/advertisement">Post an Ad</button>
         </div>

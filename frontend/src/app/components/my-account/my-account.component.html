@@ -1,33 +1,48 @@
 <!-- my-account.component.html -->
 <div class="my-account-container">
     <div class="nav-bar-container">
-        <app-profile></app-profile> <!-- Your profile component -->
+      <app-profile></app-profile> <!-- Your profile component -->
     </div>
-
+  
     <div class="content-container">
-        <!-- Display user details -->
+      <!-- Display user details -->
+      <form #updateCompanyDetailsForm="ngForm">
         <div class="my-account-details">
-            <div class="name-div">
-                <p>Name</p>
-                <p class="name-div-content">{{ user?.firstname }} {{ user?.lastname }}</p>
-            </div>
-            <div class="email-div">
-                <p>E-mail</p>
-                <p class="email-div-content">{{ user?.email }}</p>
-            </div>
-            <div class="location-div">
-                <p>Location</p>
-                <p class="location-div-content">{{ user?.location }}</p>
-            </div>
-            <div class="sLocation-div">
-                <p>Sub Location</p>
-                <p class="sLocation-div-content">{{ user?.subLocation }}</p>
-            </div>
+          <div class="name-div">
+            <label for="firstName">First Name</label>
+            <input matInput type="text" class="form-control"
+                   name="firstName" [(ngModel)]="userData.firstName" id="firstName" required>
+          </div>
+  
+          <div class="name-div">
+            <label for="lastName">Last Name</label>
+            <input matInput type="text" class="form-control"
+                   name="lastName" [(ngModel)]="userData.lastName" id="lastName" required>
+          </div>
+  
+          <div class="email-div">
+            <label for="email">E-Mail</label>
+            <input matInput type="email" class="form-control"
+                   name="email" [(ngModel)]="userData.email" id="email">
+          </div>
+          <div class="location-div">
+            <label for="location">Location</label>
+            <input matInput type="text" class="form-control"
+                   name="location" [(ngModel)]="userData.location" id="location">
+          </div>
+          <div class="sLocation-div">
+            <label for="subLocation">Sub Location</label>
+            <input matInput type="text" class="form-control"
+                   name="subLocation" [(ngModel)]="userData.subLocation" id="subLocation">
+          </div>
         </div>
-        <hr>
-        <div class="my-account-btn">
-            <button>Delete Account</button>
-            <button (click)="logout()">Log Out</button>
-        </div>
+      </form>
+      <hr>
+      
+      <div class="my-account-btn">
+        <button (click)="update()">Update</button>
+        <button (click)="logout()">Log Out</button>
+      </div>
     </div>
-</div>
+  </div>
+  

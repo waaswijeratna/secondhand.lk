@@ -4,6 +4,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const { findUserByEmail, createUserInDb } = require('../models/user');
 
+
 // Configure Google OAuth
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -11,7 +12,8 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3000/auth/google/callback",
     scope: ['profile', 'email']
 },
-    async (accessToken, refreshToken, profile, done) => {
+    async (_accessToken, _refreshToken, profile, done) => {
+        console.log("googleUser", profile);
         try {
             // Check for existing user or create new
             const existingUser = await findUserByEmail(profile.emails[0].value);
@@ -25,8 +27,10 @@ passport.use(new GoogleStrategy({
                 lastName: profile.name.familyName,
                 provider: profile.provider
             };
+            console.log("Creating user with body:", body); // Debug statement
             const newUser = await createUserInDb(body);
-            return done(null, newUser);
+            const token = generateAccessToken({ id: newUser.id, email: newUser.email });
+            res.json(null, { token, user: newUser }); // Return the token and user
         } catch (error) {
             console.error('Error during Google authentication:', error);
             return done(error);
@@ -45,3 +49,4 @@ passport.deserializeUser((obj, done) => {
 });
 
 module.exports = passport;
+

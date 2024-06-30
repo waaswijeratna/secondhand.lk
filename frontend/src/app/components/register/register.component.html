@@ -44,8 +44,7 @@
                                 </div>
                             </div>
                             <small *ngIf="registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched" class="text-danger">*Email is required</small>
-                            <small *ngIf="registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched" class="text-danger">*Invalid email format</small>                  
-                            <div class="form-group pt-3">
+                            <small *ngIf="registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched" class="text-danger">*Invalid email format</small>                            <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-lock p-2"></span>
                                     <input type="password" placeholder="Password" formControlName="password">

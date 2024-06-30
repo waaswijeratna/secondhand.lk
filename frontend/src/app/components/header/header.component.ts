@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
+  
   publicRouter: any;
   navigateToLogin() {
     throw new Error('Method not implemented.');
@@ -18,7 +18,7 @@ export class HeaderComponent {
     throw new Error('Method not implemented.');
   }
 
-  isLoggedIn: boolean = false;
+  isLoggedIn: boolean = this.authService.isLoggedIn();
   searchForm: FormGroup;
   isLocationIconClicked: boolean = false;
   user: any = null; 
@@ -60,10 +60,19 @@ export class HeaderComponent {
 
   ngOnInit():void{
     this.isLoggedIn = this.authService.isLoggedIn();
-    if (this.isLoggedIn) {
-      this.loadUserProfile(); // Load user profile if logged in
-    }
+    console.log("tokennn2", this.isLoggedIn)
+    console.log("userid?", localStorage.getItem('userId'));
+    console.log(localStorage);
+    // if (this.isLoggedIn) {
+    //   // this.loadUserProfile(); 
+    // }
+
+    // this.authService.isLoggedIn().subscribe(status => {
+    //   this.isLoggedIn = status;
+    //   console.log('Header component updated: Logged in status is', this.isLoggedIn);
+    // });
   }
+
 
   loadUserProfile() {
     this.authService.getUserProfile().subscribe({
@@ -72,15 +81,15 @@ export class HeaderComponent {
       },
       error: (err) => {
         console.error('Error fetching user profile:', err);
-        // Handle error accordingly
       }
     });
   }
 
-  logout():void{
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
+  // logout():void{
+  //   console.log("Logout");
+  //   this.authService.signOut();
+  //   this.router.navigate(['/login']);
+  // }
   search() {
     // Perform any search-related logic here
     console.log('Search initiated');

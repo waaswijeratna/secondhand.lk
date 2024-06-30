@@ -11,6 +11,7 @@ const createUser = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    console.log("Hashed Password:", hashedPassword); // Log the hashed password
 
     db.getConnection(async (err, connection) => {
         if (err) throw err;
@@ -19,7 +20,7 @@ const createUser = async (req, res) => {
         const sqlInsert = "INSERT INTO userTable (firstname, lastname, email, password, location, subLocation) VALUES (?, ?, ?, ?, ?, ?)";
         const insert_query = connection.format(sqlInsert, [firstname, lastname, email, hashedPassword, location, subLocation]);
 
-        await connection.query(search_query, async (err, result) => {
+        connection.query(search_query, async (err, result) => {
             if (err) {
                 connection.release();
                 return res.status(500).json({ message: 'Database query error' });
@@ -29,12 +30,11 @@ const createUser = async (req, res) => {
                 console.log("------> Email already exists");
                 return res.status(409).json({ message: 'Email already exists' });
             } else {
-                await connection.query(insert_query, (err, result) => {
+                connection.query(insert_query, (err, result) => {
                     if (err) {
                         connection.release();
                         return res.status(500).json({ message: 'Database insert error' });
                     }
-
                     connection.release();
                     console.log("--------> Created new User");
                     return res.status(201).json({ message: 'User created successfully', user: { firstname, lastname, email, location, subLocation } });
@@ -57,7 +57,7 @@ const loginUser = async (req, res) => {
         const sqlSearch = "SELECT * FROM userTable WHERE email = ?";
         const search_query = connection.format(sqlSearch, [email]);
 
-        await connection.query(search_query, async (err, result) => {
+        connection.query(search_query, async (err, result) => {
             connection.release();
             if (err) throw err;
             if (result.length == 0) {
@@ -65,13 +65,18 @@ const loginUser = async (req, res) => {
                 return res.sendStatus(404);
             } else {
                 const hashedPassword = result[0].password;
-                const userId = result[0].id; 
+                const userId = result[0].userId;
+                console.log("Retrieved hashed password from database:", hashedPassword);
+                console.log("Password provided by user:", password);
+                if (!hashedPassword || !password) {
+                    return res.status(400).json({ message: 'Invalid email or password' });
+                }
+                
                 if (await bcrypt.compare(password, hashedPassword)) {
                     console.log("---------> Login Successful");
-                    console.log("---------> Generating accessToken");
                     const token = generateAccessToken({ id: userId, email });
-                    console.log(token);
-                    return res.json({ accessToken: token });
+                    
+                    return res.json({ accessToken: token, userId });
                 } else {
                     console.log("---------> Password Incorrect");
                     return res.status(401).json({ message: 'Password incorrect' });
@@ -81,17 +86,5 @@ const loginUser = async (req, res) => {
     });
 };
 
-const ThirdPartyAuth = async (req, res, next) => {
-    // Successful authentication, generate JWT
-    // Handle the Auth and create user object
-    // res.json(user) //send user to client....
-    const user = req.user;
-    const token = generateAccessToken({ id: user.id, email: user.email });
-     // Set the token as a cookie
-     res.cookie('accessToken', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-
-     // Redirect to the homepage
-     res.redirect('http://localhost:4200/homepage');
-    };
-
-module.exports = { createUser, loginUser, ThirdPartyAuth };
+    
+module.exports = { createUser, loginUser };

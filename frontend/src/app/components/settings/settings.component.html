@@ -1,41 +1,15 @@
 <div class="my-account-container">
     <div class="nav-bar-container">
-        <app-profile></app-profile>
+        <app-profile></app-profile> 
     </div>
-
-    <div class="content-container">
-        <div class="star-rating">
-            <!-- <app-star-rating [rating]="5"></app-star-rating> -->
-        </div>
-
-        <div class="update-details">
-            <!-- <hr> -->
-            <div class="my-account-details">
-                <div class="input-row">
-                    <label for="Name">Name</label>
-                    <input class="Name" type="text">
-                </div>
-                <div class="input-row">
-                    <label for="location">Location</label>
-                    <input class="location" type="text">
-                </div>
-                <div class="input-row">
-                    <label for="subLocation">Sub Location</label>
-                    <input class="subLocation" type="text">
-                </div>
-            </div>
-            <button>Update Details</button>
-            <hr>
-        </div>
-
-        <div class="change-password">
-            <h6 style="color: rgb(1, 117, 172);">Change Password</h6>
-            <div class="passwords">
-                <input class="old-password" type="text" placeholder="Enter your old password">
-                <input class="new-password" type="password" placeholder="Enter a new password">
-                <input class="confirm-password" type="password" placeholder="Confirm password">
-            </div>            
-            <button>Change Password</button>
-        </div>
+    <div class="change-password">
+      <h6 style="color: rgb(1, 117, 172);">Change Password</h6>
+      <div class="passwords">
+          <input class="newPassword" [(ngModel)]="newPassword" type="password" placeholder="Enter a new password">
+          <input class="confirmPassword"  [(ngModel)]="confirmPassword" type="password" placeholder="Confirm password">
+      </div>            
+      <button (click)="changePassword()">Change Password</button>
     </div>
+      
 </div>
+

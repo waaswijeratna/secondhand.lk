@@ -1,0 +1,28 @@
+.container{
+    margin: 40px 100px 40px 100px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #114686;
+}
+
+.content-container{
+    padding:50px;
+}
+
+img{
+    width: 200px;
+    height: 200px;
+    margin-left: 520px;
+}
+
+h4{
+    margin-top: 20px;
+    text-align: center;
+}
+
+h5{
+    color: #093468;
+}

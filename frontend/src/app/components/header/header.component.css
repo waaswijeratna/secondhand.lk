@@ -27,7 +27,7 @@ a{
  
  .logo-container {
      margin-right: 20px; /* Adjust as needed to create spacing between logo and language selection */
-     
+     cursor: pointer;
  }
  
  .language-selection select {
@@ -46,7 +46,7 @@ a{
  .user-section {
      display: flex;
      align-items: center;
-     
+     cursor: pointer;
  }
  
  .user-section span {
@@ -67,9 +67,9 @@ a{
      font-weight: bold; /* Make the text on the button bold */
  }
  
- img, .icon {
+ img, .icon { 
     border-radius: 0; /* Ensures no rounded corners */
-}
+} 
 
  /* Move user-section to the right corner */
  .user-section {

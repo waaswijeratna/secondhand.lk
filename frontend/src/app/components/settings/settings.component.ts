@@ -1,47 +1,71 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component} from '@angular/core';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import axios from 'axios';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'] // Note the plural 'styleUrls'
 })
-export class SettingsComponent implements OnInit {
-  accountForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.accountForm = this.fb.group({
-      name: [''],
-      location: [''],
-      subLocation: ['']
-    });
-  }
+export class SettingsComponent {
 
-  ngOnInit(): void {
-    // Fetch user details and populate the form
-    this.getUserDetails();
-  }
+  newPassword: string = '';
+  confirmPassword: string = '';
+  userId: string | null = localStorage.getItem('userId');
+  //    this.userId = this.authService.getUserId();
 
-  getUserDetails(): void {
-    // Simulating fetching user details from an API
-    const userDetails = {
-      name: 'John Doe',
-      location: 'New York',
-      subLocation: 'Manhattan'
-    };
-
-    this.accountForm.setValue({
-      name: userDetails.name,
-      location: userDetails.location,
-      subLocation: userDetails.subLocation
-    });
-  }
-
-  onSubmit(): void {
-    if (this.accountForm.valid) {
-      const updatedDetails = this.accountForm.value;
-      console.log('Updated Details:', updatedDetails);
-      // Here you can handle the form submission, e.g., s
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
+    this.userId = localStorage.getItem('userId');
+    if (!this.userId) {
+      console.log('User ID not found in localStorage');
     }
   }
+  
+  async changePassword(){
+    console.log('Current userId:', this.userId);
+    console.log('New Password:', this.newPassword);
+    console.log('Confirm Password:', this.confirmPassword);
+    if (this.newPassword !== this.confirmPassword) {
+      this.snackBar.open('Passwords do not match.', 'Close', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
+      return;
+    }
+
+    if (!this.userId) {
+      this.snackBar.open('Invalid user ID.', 'Close', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
+      return;
+    }
+
+    try {
+      const response = await axios.put(`http://localhost:3000/passwordUpdate/${this.userId}`, {
+        userId: this.userId,
+        password: this.newPassword
+      });
+      console.log('Password updated successfully');
+      this.snackBar.open('Password changed successfully.', 'Close', {
+        duration: 3000,
+        panelClass: ['success-snackbar']
+      });
+
+      localStorage.removeItem('userId');
+      // this.router.navigate(['/']);
+    } catch (error) {
+      console.error('Failed to change password:', error);
+      this.snackBar.open('Failed to change password. Please try again.', 'Close', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
+    }  
+  }
 }
+
+  
+

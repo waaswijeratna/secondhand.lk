@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -17,20 +19,31 @@ export class RegisterComponent {
     subLocation: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
+  isLoggedIn: boolean = false;
 
   async onRegister() {
-  
-      (this.authService.registerUser(this.registerForm.value))
-        .subscribe({
-          next: async (res: { accessToken: any; }) => {
-  
-          },
-          error: (err: { status: string; }) => {
-            //this.snackBar.open("Login Error! Error Code " + err.status, "", { panelClass: ['app-notification-error'] })._dismissAfter(3000);
+
+    (this.authService.registerUser(this.registerForm.value))
+      .subscribe({
+        next: async (res: { accessToken: any; }) => {
+          this.authService.login();
+          this.router.navigate(['/homepage']);
+          window.location.href = '/login';
+
+        },
+        error: (err: { error: string; status: number; }) => {
+          if (err.status === 409) { // assuming 409 is the error code for "User already exists"
+            this.snackBar.open('User already exists', 'Close', {
+              duration: 5000
+            });
+          } else {
+            this.snackBar.open(`Error: ${err.status}`, 'Close', {
+              duration: 5000
+            });
           }
-        });
-  
-    }
+        }
+    });
+  }
 
 }

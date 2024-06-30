@@ -1,122 +1,101 @@
 const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const bcrypt = require("bcrypt");
-const db = require("../models/db");
+const user = require("../models/user");
 
 
-// Set up Nodemailer transporter
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASSWORD
-    }
-});
-
-// REQUEST PASSWORD RESET
-const requestPasswordReset = async (req, res) => {
+const forgotPassword = async (req, res) => {
     const { email } = req.body;
 
-    if (!email) {
-        return res.status(400).json({ message: 'Email is required' });
-    }
+    try {
+        const foundUser = await user.findOne({ email });
 
-    db.getConnection(async (err, connection) => {
-        if (err) throw err;
-        const sqlSearch = "SELECT * FROM userTable WHERE email = ?";
-        const search_query = connection.format(sqlSearch, [email]);
+        if (!foundUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        
+        // Generate and save reset token
+        const resetToken = jwt.sign({ id: foundUser.userId }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+        const resetTokenExpiry = Date.now() + 3600000; // 1 hour
 
-        await connection.query(search_query, async (err, result) => {
-            if (err) {
-                connection.release();
-                return res.status(500).json({ message: 'Database query error' });
-            }
-
-            if (result.length === 0) {
-                connection.release();
-                return res.status(404).json({ message: 'Email not found' });
-            }
-
-            const resetToken = crypto.randomBytes(32).toString('hex');
-            const hashedToken = await bcrypt.hash(resetToken, 10);
-            const resetTokenExpiry = Date.now() + 3600000; // 1 hour from now
-
-            const sqlUpdate = "UPDATE userTable SET resetToken = ?, resetTokenExpiry = ? WHERE email = ?";
-            const update_query = connection.format(sqlUpdate, [hashedToken, resetTokenExpiry, email]);
-
-            await connection.query(update_query, (err, result) => {
-                connection.release();
-                if (err) {
-                    return res.status(500).json({ message: 'Database update error' });
-                }
-
-                const resetUrl = `http://localhost:4200/resetPassword?token=${resetToken}`;
-
-                const mailOptions = {
-                    from: process.env.EMAIL,
-                    to: email,
-                    subject: 'Password Reset',
-                    text: `You requested a password reset. Please click on the following link to reset your password: ${resetUrl}`
-                };
-
-                transporter.sendMail(mailOptions, (err, info) => {
-                    if (err) {
-                        return res.status(500).json({ message: 'Error sending email' });
-                    }
-
-                    res.status(200).json({ message: 'Password reset email sent' });
-                });
-            });
+        await user.updateUserById(foundUser.userId, {
+            resetPasswordToken: resetToken,
+            resetPasswordExpiry: resetTokenExpiry
         });
-    });
+
+        // Send reset password email
+        const transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'secondhandbybytegenius@gmail.com',
+                pass: 'ungc cuek vubn pacw' // Replace with your actual Gmail app password
+            }
+        });
+
+        const mailOptions = {
+            from: 'secondhandbybytegenius@gmail.com',
+            to: email,
+            subject: 'Password Reset',
+            text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
+        Please click on the following link, or paste this into your browser to complete the process:\n\n
+        http://localhost:4200/reset-password/${resetToken}\n\n
+        If you did not request this, please ignore this email and your password will remain unchanged.\n`
+        };
+
+        await transporter.sendMail(mailOptions);
+        res.json({ message: 'Password reset email sent successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error sending password reset email' });
+    }
 };
 
-// RESET PASSWORD
+
+// router.post('/resetPassword/:token', async (req, res) => {
 const resetPassword = async (req, res) => {
-    const { token, newPassword } = req.body;
+    const { token } = req.params;
+    const { password } = req.body;
 
-    if (!token || !newPassword) {
-        return res.status(400).json({ message: 'Token and new password are required' });
-    }
+    try {
+        // Verify the token
+        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        console.log('Decoded token:', decoded);
 
-    db.getConnection(async (err, connection) => {
-        if (err) throw err;
-
-        const sqlSearch = "SELECT * FROM userTable WHERE resetToken IS NOT NULL";
-        await connection.query(sqlSearch, async (err, result) => {
-            if (err) {
-                connection.release();
-                return res.status(500).json({ message: 'Database query error' });
-            }
-
-            const user = result.find(u => bcrypt.compareSync(token, u.resetToken));
-
-            if (!user) {
-                connection.release();
-                return res.status(400).json({ message: 'Invalid or expired token' });
-            }
-
-            if (user.resetTokenExpiry < Date.now()) {
-                connection.release();
-                return res.status(400).json({ message: 'Token has expired' });
-            }
-
-            const hashedPassword = await bcrypt.hash(newPassword, 10);
-            const sqlUpdate = "UPDATE userTable SET password = ?, resetToken = NULL, resetTokenExpiry = NULL WHERE id = ?";
-            const update_query = connection.format(sqlUpdate, [hashedPassword, user.id]);
-
-            await connection.query(update_query, (err, result) => {
-                connection.release();
-                if (err) {
-                    return res.status(500).json({ message: 'Database update error' });
-                }
-
-                res.status(200).json({ message: 'Password has been reset successfully' });
-            });
+        // Find user by reset token and ensure the token has not expired
+        const foundUser = await user.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: new Date() },
         });
-    });
+
+        if (!foundUser) {
+            console.log('Invalid or expired token');
+            return res.status(400).json({ error: 'Invalid or expired token' });
+        }
+
+        // Hash the new password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        // Update user's password and clear reset token fields
+        await user.updateUserById(foundUser.userId, {
+            password: hashedPassword,
+            resetToken: null,
+            resetTokenExpiry: null
+        });
+
+        res.status(200).json({ message: 'Password successfully reset' });
+    } catch (error) {
+        console.error('Error resetting password:', error);
+        if (error.name === 'TokenExpiredError') {
+            return res.status(400).json({ error: 'Token expired' });
+        }
+        if (error.name === 'JsonWebTokenError') {
+            return res.status(400).json({ error: 'Invalid token' });
+        }
+        res.status(500).json({ error: 'Error resetting password' });
+    }
 };
 
+module.exports = { forgotPassword, resetPassword };
 
-
-module.exports = { requestPasswordReset, resetPassword };

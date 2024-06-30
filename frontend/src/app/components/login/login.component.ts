@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +9,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
   email: string = '';
   password: string = '';
   message: string = '';
-  router: any;
-  hide: any;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private route: Router) { }
 
   loginForm = new FormGroup({
     password: new FormControl('', [Validators.required]),
@@ -35,38 +35,50 @@ export class LoginComponent {
       next: (res: { accessToken: string; }) => {
         console.log('Login successful', res);
         this.message = 'Login successful!';
-        localStorage.setItem('accessToken', res.accessToken); // Store the token in local storage
-        this.router.navigate(['/homepage']); // Redirect to homepage
-
+        this.authService.storeToken(res.accessToken);
+        // localStorage.setItem('accessToken', res.accessToken); // Store the token in local storage
+        this.route.navigate(['/homepage']); // Redirect to homepage
+        window.location.href = '/homepage';
       },
       error: (err: any) => {
         console.error('Login error', err);
         this.message = 'Invalid email or password.';
       }
     });
-
-
   }
 
+  // console.log('About to send login request...');
+  //   this.authService.loginWithGoogle('token').subscribe({
+  //     next: (res: { token: string, user: any }) => {
+  //       console.log('Google Login successful', res);
+  //       this.authService.storeToken(res.token);
+  //       localStorage.setItem('accessToken', res.token); // Store the token in local storage
+  //       this.route.navigate(['/homepage']);
+  //       window.location.href = '/homepage';
+  //     },
+  //     error: (err: any) => {
+  //       console.error('Google Login error', err);
+  //       this.message = 'Failed to login with Google.';
+  //     }
+  //   });
 
-  // onSubmit() {
-  //   // Ensure that email and password are not undefined
-  //   if (!this.email || !this.password) {
-  //     this.message = 'Email and password are required.';
-  //     return;
-  //   }
-
-  //   this.authService.login(this.email, this.password)
-  //     .subscribe(
-  //       (data: { accessToken: string }) => { // Specify the type for data
-  //         console.log(data);
-  //         this.message = 'Login successful!';
-  //       },
-  //       (error: any) => { // Specify the type for error
-  //         console.log(error);
-  //         this.message = 'Invalid email or password.';
-  //       }
-  //     );
+  // googleLogin() {
+  //   const url = `${this.authService.getBaseURL()}/auth/google`;
+  //   window.location.href = url;
   // }
+
+  // handleGoogleCallback() {
+  //   const accessToken = this.authService.getToken();
+  //   if (accessToken) {
+  //     // Token exists, store it in local storage
+  //     localStorage.setItem('accessToken', accessToken);
+  //     // Redirect to homepage
+  //     this.route.navigate(['/homepage']);
+  //     window.location.href = '/homepage';
+  //   } else {
+  //     console.error('Google authentication failed: no access token received.');
+  //   }
+  // }
+
 
 }

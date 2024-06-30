@@ -9,9 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ForgotpasswordComponent {
   forgotPasswordForm: FormGroup;
-submitted: any;
-f: any;
-message: any;
+  submitted: any;
+  f: any;
+  message: any;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.forgotPasswordForm = this.fb.group({
@@ -21,7 +21,7 @@ message: any;
 
   onSubmit() {
     if (this.forgotPasswordForm.valid) {
-      this.http.post('/api/requestPasswordReset', this.forgotPasswordForm.value)
+      this.http.post('/ResetPassword:token', this.forgotPasswordForm.value)
         .subscribe(response => {
           console.log('Password reset email sent', response);
         }, error => {

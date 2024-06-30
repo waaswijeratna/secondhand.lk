@@ -10,8 +10,10 @@ const db = mysql.createPool({
 });
 
 db.getConnection((err, connection) => {
-    if (err) throw err;
+    if (err) {
+        console.error('Error connecting to database:', err);
+        throw err; // Handle error appropriately in your application
+    }
     console.log("DB connected successful: " + connection.threadId);
 });
-
 module.exports = db;
