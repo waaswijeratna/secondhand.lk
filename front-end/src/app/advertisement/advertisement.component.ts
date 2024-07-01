@@ -23,9 +23,9 @@ export class AdvertisementComponent implements OnInit{
   isLinear = true;
 
   // Stepper restrict next step
-  step1Completed: boolean = true;
-  step2Completed: boolean = true;
-  step3Completed: boolean = true;
+  step1Completed: boolean = false;
+  step2Completed: boolean = false;
+  step3Completed: boolean = false;
   step4Completed: boolean = false;
 
   //selected category and subcategory by user

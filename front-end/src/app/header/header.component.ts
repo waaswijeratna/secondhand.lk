@@ -110,4 +110,9 @@ export class HeaderComponent implements OnInit{
     }
   }
 
+  navigateToAdvertisement() {
+    // this.router.navigate(['/advertisement']);
+    window.location.href = '/advertisement';
+  }
+
 }

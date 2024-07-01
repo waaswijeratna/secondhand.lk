@@ -61,6 +61,10 @@ export class HomepageComponent implements OnInit{
   }
 
   selectCategory(categoryName: string) {
-    this.router.navigate(['/searchResults'], { queryParams: { category: categoryName } });
+    window.location.href = `/searchResults?category=${categoryName}`;
+  }
+  navigateToAdvertisement() {
+    // this.router.navigate(['/advertisement']);
+    window.location.href = '/advertisement';
   }
 }
