@@ -3,13 +3,17 @@
         <app-profile></app-profile> 
     </div>
     <div class="change-password">
-      <h6 style="color: rgb(1, 117, 172);">Change Password</h6>
-      <div class="passwords">
-          <input class="newPassword" [(ngModel)]="newPassword" type="password" placeholder="Enter a new password">
-          <input class="confirmPassword"  [(ngModel)]="confirmPassword" type="password" placeholder="Confirm password">
-      </div>            
-      <button (click)="changePassword()">Change Password</button>
-    </div>
+        <h6 style="color: rgb(1, 117, 172);">Change Password</h6>
+        <div class="passwords">
+          <input class="newPassword" [(ngModel)]="newPassword" [type]="showNewPassword ? 'text' : 'password'" placeholder="Enter a new password">
+          <i class="fas" [ngClass]="showNewPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="toggleNewPasswordVisibility()"></i>
+      
+          <input class="confirmPassword" [(ngModel)]="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm password">
+          <i class="fas" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="toggleConfirmPasswordVisibility()"></i>
+        </div>
+        <button (click)="changePassword()">Change Password</button>
+      </div>
+      
       
 </div>
 

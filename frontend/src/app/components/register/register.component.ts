@@ -29,7 +29,7 @@ export class RegisterComponent {
         next: async (res: { accessToken: any; }) => {
           this.authService.login();
           this.router.navigate(['/homepage']);
-          window.location.href = '/login';
+          window.location.href = '/homepage';
 
         },
         error: (err: { error: string; status: number; }) => {

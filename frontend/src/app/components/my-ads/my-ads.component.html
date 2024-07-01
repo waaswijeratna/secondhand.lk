@@ -1,28 +1,28 @@
 <div class="my-ads-container">
-    <div class="nav-bar-container">
-      <app-profile></app-profile>
-    </div>
-  
-    <div class="content-container">
-      <div class="my-ads" *ngFor="let ad of ads">
-        <div class="ads">
-          <div class="ad">
-            <img [src]="ad.image || 'assets/motorbike.jpg'" class="motorbike-img" alt="Ad Image">
-          </div>
-          <div class="ad-details">
-            <p>{{ ad.title }}</p>
-            <p>Rs. {{ ad.price }}</p>
-            <p>{{ ad.location }}</p>
-          </div>
+  <div class="nav-bar-container">
+    <app-profile></app-profile>
+  </div>
+
+  <div class="content-container">
+    <div class="my-ads" *ngFor="let ad of ads">
+      <div class="ads">
+        <div class="ad">
+          <img [src]="ad.image || 'assets/motorbike.jpg'" class="motorbike-img" alt="Ad Image">
         </div>
-        <div class="buttons">
-          <button id="sold-btn">Sold</button>
-          <button id="delete-btn">Delete</button>
-          <button id="modify-btn">Modify</button>
+        <div class="ad-details">
+          <p>{{ ad.title }}</p>
+          <p>Rs.{{ ad.price }}</p>
+          <p>{{ ad.location }}</p>
+          <p>{{ ad.description }}</p>
         </div>
       </div>
-      <hr>
-      <p style="text-align: center;">Page 1 of 1</p>
+      <div class="buttons">
+        <button id="sold-btn">Sold</button>
+        <button id="delete-btn" (click)="deleteAd(ad.id)">Delete</button>
+        <button id="modify-btn" (click)="modifyAd(ad.id)">Modify</button>
+      </div>
     </div>
+    <hr>
+    <p style="text-align: center;">Page 1 of 1</p>
   </div>
-  
+</div>

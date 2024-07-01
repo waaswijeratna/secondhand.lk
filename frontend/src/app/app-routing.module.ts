@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
+import { ForgotPasswordComponent } from './components/forgotPassword/forgotPassword.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -22,8 +22,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'forgotpassword', component: ForgotpasswordComponent },
-  { path: 'reset-password/:token', component: ResetPasswordComponent },
+  { path: 'forgotPassword', component: ForgotPasswordComponent },
+  { path: 'resetPassword/:token', component: ResetPasswordComponent },
   {
     path: '',
     component: LayoutComponent,

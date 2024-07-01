@@ -64,6 +64,19 @@ export class MyAccountComponent implements OnInit {
         const response = await axios.put(`${ApiPathsService.updateProfile}/${this.userId}`, this.userData);
         this.userData = response.data;
         console.log(this.userData);
+
+        if (response.data.message === 'Email cannot be updated') {
+          this.snackBar.open('Cannot update email.', 'Close', {
+            duration: 3000,
+            panelClass: ['error-snackbar']
+          });
+        } else {
+          this.snackBar.open('Profile updated successfully.', 'Close', {
+            duration: 3000,
+            panelClass: ['success-snackbar']
+          });
+        }
+
       } catch (error) {
         console.log("Error Occured: " + error);
       }
@@ -72,47 +85,47 @@ export class MyAccountComponent implements OnInit {
     }
   }
 
-  async changePassword(): Promise<void> {
-    console.log('Current userId:', this.userId);
-    console.log('New Password:', this.newPassword);
-    console.log('Confirm Password:', this.confirmPassword);
-    if (this.newPassword !== this.confirmPassword) {
-      this.snackBar.open('Passwords do not match.', 'Close', {
-        duration: 3000,
-        panelClass: ['error-snackbar']
-      });
-      return;
-    }
+  // async changePassword(): Promise<void> {
+  //   console.log('Current userId:', this.userId);
+  //   console.log('New Password:', this.newPassword);
+  //   console.log('Confirm Password:', this.confirmPassword);
+  //   if (this.newPassword !== this.confirmPassword) {
+  //     this.snackBar.open('Passwords do not match.', 'Close', {
+  //       duration: 3000,
+  //       panelClass: ['error-snackbar']
+  //     });
+  //     return;
+  //   }
 
-    if (!this.userId) {
-      this.snackBar.open('Invalid user ID.', 'Close', {
-        duration: 3000,
-        panelClass: ['error-snackbar']
-      });
-      return;
-    }
+  //   if (!this.userId) {
+  //     this.snackBar.open('Invalid user ID.', 'Close', {
+  //       duration: 3000,
+  //       panelClass: ['error-snackbar']
+  //     });
+  //     return;
+  //   }
 
-    try {
-      const response = await axios.put(`http://localhost:3000/passwordUpdate/${this.userId}`, {
-        userId: this.userId,
-        password: this.newPassword
-      });
-      console.log('Password updated successfully');
-      this.snackBar.open('Password changed successfully.', 'Close', {
-        duration: 3000,
-        panelClass: ['success-snackbar']
-      });
+  //   try {
+  //     const response = await axios.put(`http://localhost:3000/passwordUpdate/${this.userId}`, {
+  //       userId: this.userId,
+  //       password: this.newPassword
+  //     });
+  //     console.log('Password updated successfully');
+  //     this.snackBar.open('Password changed successfully.', 'Close', {
+  //       duration: 3000,
+  //       panelClass: ['success-snackbar']
+  //     });
 
-      localStorage.removeItem('userId');
-      // this.router.navigate(['/']);
-    } catch (error) {
-      console.error('Failed to change password:', error);
-      this.snackBar.open('Failed to change password. Please try again.', 'Close', {
-        duration: 3000,
-        panelClass: ['error-snackbar']
-      });
-    }
-  }
+  //     localStorage.removeItem('userId');
+  //     // this.router.navigate(['/']);
+  //   } catch (error) {
+  //     console.error('Failed to change password:', error);
+  //     this.snackBar.open('Failed to change password. Please try again.', 'Close', {
+  //       duration: 3000,
+  //       panelClass: ['error-snackbar']
+  //     });
+  //   }
+  // }
 
   update(): void {
     this.updateProfile();

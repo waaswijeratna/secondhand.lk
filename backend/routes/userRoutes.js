@@ -7,7 +7,7 @@ const getProfile = require("../controllers/getProfileController");
 const updateProfile = require("../controllers/updateProfileController");
 const { findUserByEmail } = require("../models/user");
 const { forgotPassword, resetPassword } = require('../controllers/passwordController');
-const { getAdsByUserId } = require('../controllers/adsController');
+const { getAdsByUserId, modifyAd,  deleteAd} = require('../controllers/adsController');
 const { passwordUpdate } = require('../controllers/passwordUpdate')
 
 // router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
@@ -36,8 +36,11 @@ router.post("/ThirdPartyAuth",ThirdPartyAuth);
 router.post('/getProfile', getProfile);
 router.put('/updateProfile/:userId',updateProfile);
 router.post('/resetPassword/:token', resetPassword);
-router.get('/forgotPassword', forgotPassword);
+router.post('/forgotPassword', forgotPassword);
 router.get('/user/:userId', getAdsByUserId);
+router.delete('/ad/:adId', deleteAd);
+router.put('/ad/:adId', modifyAd);
+
 router.put('/passwordUpdate/:userId',passwordUpdate);
 
 module.exports = router;

@@ -25,7 +25,7 @@
                 </div>
                   <small *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched" class="text-danger">*Password is required</small>
                   <div class="form-inline fr mt-4">
-                    <a routerLink="/forgotpassword" id="forget" class="font-weight-bold">Forgot password?</a>
+                    <a routerLink="/forgotPassword" id="forget" class="font-weight-bold">Forgot password?</a>
                   </div>
                 <button type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
                 <div class="text-center pt-4 text-muted"> Don't have an account? <a id="forget" routerLink="/register">Sign up</a></div>

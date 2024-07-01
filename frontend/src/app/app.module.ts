@@ -11,7 +11,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
+import { ForgotPasswordComponent } from './components/forgotPassword/forgotPassword.component';
 
 import { SettingsComponent } from './components/settings/settings.component';
 import { MyAdsComponent } from './components/my-ads/my-ads.component';
@@ -48,7 +48,7 @@ import { SellFastComponent } from './components/sell-fast/sell-fast.component';
     HomepageComponent,
     HeaderComponent,
     FooterComponent,
-    ForgotpasswordComponent,
+    ForgotPasswordComponent,
     SettingsComponent,
     MyAdsComponent,
     MyReviewsComponent,

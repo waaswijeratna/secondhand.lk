@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import axios from 'axios';
@@ -10,21 +10,40 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./settings.component.css'] // Note the plural 'styleUrls'
 })
 
-export class SettingsComponent {
+export class SettingsComponent implements OnInit{
 
   newPassword: string = '';
   confirmPassword: string = '';
-  userId: string | null = localStorage.getItem('userId');
+  showNewPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+  userId: string | null;
   //    this.userId = this.authService.getUserId();
 
   constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
-    this.userId = localStorage.getItem('userId');
+    // Check if userId is set in localStorage
+    this.userId = this.authService.getUserId();
+    // console.log('Retrieved userId from localStorage:', this.userId);
+
     if (!this.userId) {
       console.log('User ID not found in localStorage');
     }
   }
-  
-  async changePassword(){
+
+  ngOnInit(): void {
+    this.userId = this.authService.getUserId();
+    // console.log('Retrieved userId in ngOnInit:', this.userId);
+  }
+
+  toggleNewPasswordVisibility(): void {
+    this.showNewPassword = !this.showNewPassword;
+  }
+
+  toggleConfirmPasswordVisibility(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
+
+  async changePassword() {
     console.log('Current userId:', this.userId);
     console.log('New Password:', this.newPassword);
     console.log('Confirm Password:', this.confirmPassword);
@@ -63,9 +82,9 @@ export class SettingsComponent {
         duration: 3000,
         panelClass: ['error-snackbar']
       });
-    }  
+    }
   }
 }
 
-  
+
 

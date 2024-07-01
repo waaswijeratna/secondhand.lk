@@ -60,17 +60,7 @@ export class HeaderComponent {
 
   ngOnInit():void{
     this.isLoggedIn = this.authService.isLoggedIn();
-    console.log("tokennn2", this.isLoggedIn)
-    console.log("userid?", localStorage.getItem('userId'));
     console.log(localStorage);
-    // if (this.isLoggedIn) {
-    //   // this.loadUserProfile(); 
-    // }
-
-    // this.authService.isLoggedIn().subscribe(status => {
-    //   this.isLoggedIn = status;
-    //   console.log('Header component updated: Logged in status is', this.isLoggedIn);
-    // });
   }
 
 

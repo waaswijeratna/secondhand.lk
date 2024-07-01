@@ -9,19 +9,20 @@ const forgotPassword = async (req, res) => {
     const { email } = req.body;
 
     try {
-        const foundUser = await user.findOne({ email });
+        console.log(`Email received: ${email}`);
+        const foundUser = await user.findUserByEmail(email);
 
         if (!foundUser) {
             return res.status(404).json({ error: 'User not found' });
         }
-        
+
         // Generate and save reset token
         const resetToken = jwt.sign({ id: foundUser.userId }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
         const resetTokenExpiry = Date.now() + 3600000; // 1 hour
 
         await user.updateUserById(foundUser.userId, {
-            resetPasswordToken: resetToken,
-            resetPasswordExpiry: resetTokenExpiry
+            resetToken: resetToken,
+            resetTokenExpiry: resetTokenExpiry
         });
 
         // Send reset password email
@@ -39,7 +40,7 @@ const forgotPassword = async (req, res) => {
             subject: 'Password Reset',
             text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
         Please click on the following link, or paste this into your browser to complete the process:\n\n
-        http://localhost:4200/reset-password/${resetToken}\n\n
+        http://localhost:4200/resetPassword/${resetToken}\n\n
         If you did not request this, please ignore this email and your password will remain unchanged.\n`
         };
 
@@ -56,6 +57,7 @@ const forgotPassword = async (req, res) => {
 const resetPassword = async (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
+    console.log('Received password:', password); 
 
     try {
         // Verify the token
@@ -64,8 +66,8 @@ const resetPassword = async (req, res) => {
 
         // Find user by reset token and ensure the token has not expired
         const foundUser = await user.findOne({
-            resetPasswordToken: token,
-            resetPasswordExpires: { $gt: new Date() },
+            resetToken: token,
+            resetTokenExpiry: Date.now()
         });
 
         if (!foundUser) {
@@ -73,16 +75,30 @@ const resetPassword = async (req, res) => {
             return res.status(400).json({ error: 'Invalid or expired token' });
         }
 
+        // Ensure password is provided
+        if (!password) {
+            console.log('Password is required');
+            return res.status(400).json({ error: 'Password is required' });
+        }
+
         // Hash the new password
         const salt = await bcrypt.genSalt(10);
+        console.log('Generated salt:', salt); // Log the salt generated
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Update user's password and clear reset token fields
-        await user.updateUserById(foundUser.userId, {
+        const updateResult = await user.updateUserById(foundUser.userId, {
             password: hashedPassword,
-            resetToken: null,
+            resetToken: null, // Clear reset token after successful password reset
             resetTokenExpiry: null
         });
+
+        if (!updateResult) {
+            console.log('Error updating user password');
+            return res.status(500).json({ error: 'Error updating password' });
+        }
+
+        console.log('Password successfully reset for user:', foundUser.userId);
 
         res.status(200).json({ message: 'Password successfully reset' });
     } catch (error) {

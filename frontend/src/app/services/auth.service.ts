@@ -71,12 +71,6 @@ export class AuthService {
   getUserProfile(): Observable<any> {
     return this.http.get<any>(`${this.baseURL}/profile`);
   }  
-  // decodedToken() {
-  //   const jwtHelper = new JwtHelperService();
-  //   const token = this.getToken()!;
-  //   this.userPayload = jwtHelper.decodeToken(token);
-  //   return jwtHelper.decodeToken(token)
-  // }
 
   decodedToken() {
     const token = this.getToken();
@@ -90,33 +84,15 @@ export class AuthService {
     return null;
   }
 
-  // getEmail() {//Get Email from token
-  //   this.decodedToken();
-  //   //return this.userPayload.email
-  //   if(this.userPayload){
-  //     console.log(this.userPayload.email);
-  //     return this.userPayload.email;
-  //   }
-  //   //console.log(this.userPayload.email);
-  // }
-
   getEmail() {
     const payload = this.decodedToken();
     return payload ? payload.email : null;
   }
 
-  // getUserId() {
-  //   const payload = this.decodedToken();
-  //   return payload ? payload.userId : null;
-  // }
-
   getUserId() {
-    const token = this.getToken();
-    if (token) {
-      const payload = this.jwtHelper.decodeToken(token);
-      return payload.userId;
-    }
-    return null;
+    const payload = this.decodedToken();
+      return payload ? payload.userId : null;
   }
 
+  
 }

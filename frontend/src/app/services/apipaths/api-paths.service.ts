@@ -8,6 +8,8 @@ export class ApiPathsService {
   static readonly getProfile:string=this.baseURL+'/getProfile';
   static readonly updateProfile:string=this.baseURL+'/updateProfile';
   static readonly passwordUpdate:string=this.baseURL+'/passwordUpdate/:userId';
+  static readonly forgotPassword: string=this.baseURL+'/forgotPassword';
+  static readonly resetPassword: string=this.baseURL+'/resetPassword/:token';
 
   
 }
