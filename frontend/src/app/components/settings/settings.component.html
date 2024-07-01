@@ -1,19 +1,28 @@
 <div class="my-account-container">
-    <div class="nav-bar-container">
-        <app-profile></app-profile> 
-    </div>
-    <div class="change-password">
-        <h6 style="color: rgb(1, 117, 172);">Change Password</h6>
-        <div class="passwords">
-          <input class="newPassword" [(ngModel)]="newPassword" [type]="showNewPassword ? 'text' : 'password'" placeholder="Enter a new password">
-          <i class="fas" [ngClass]="showNewPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="toggleNewPasswordVisibility()"></i>
-      
-          <input class="confirmPassword" [(ngModel)]="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm password">
-          <i class="fas" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="toggleConfirmPasswordVisibility()"></i>
-        </div>
-        <button (click)="changePassword()">Change Password</button>
-      </div>
-      
-      
-</div>
+  <div class="nav-bar-container">
+    <app-profile></app-profile>
+  </div>
+  <div class="change-password">
+    <h6 style="color: rgb(1, 117, 172);">Change Password</h6>
+    <div class="passwords">
+      <!-- New Password Input -->
+      <input class="newPassword" [(ngModel)]="newPassword" [type]="showNewPassword ? 'text' : 'password'"
+        placeholder="Enter a new password" [disabled]="isGoogleAuthenticated">
 
+      <!-- Toggle Visibility Button for New Password -->
+      <i class="fas" [ngClass]="showNewPassword ? 'fa-eye-slash' : 'fa-eye'"
+        (click)="toggleNewPasswordVisibility()" [hidden]="isGoogleAuthenticated"></i>
+
+      <!-- Confirm Password Input -->
+      <input class="confirmPassword" [(ngModel)]="confirmPassword"
+        [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm password"
+        [disabled]="isGoogleAuthenticated">
+
+      <!-- Toggle Visibility Button for Confirm Password -->
+      <i class="fas" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
+        (click)="toggleConfirmPasswordVisibility()" [hidden]="isGoogleAuthenticated"></i>
+    </div>
+    <!-- Change Password Button -->
+    <button (click)="changePassword()" [disabled]="isGoogleAuthenticated">Change Password</button>
+  </div>
+</div>

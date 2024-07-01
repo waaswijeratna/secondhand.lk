@@ -14,20 +14,33 @@ const findUserByEmail = (email) => {
     });
 };
 
-// const createUserInDb = (user) => {
-//     return new Promise((resolve, reject) => {
-//       const { email, firstName, lastName, provider } = user;
-//       const query = 'INSERT INTO userTable (email, firstname, lastname, provider) VALUES (?, ?, ?, ?)';
-//       console.log("Inserting user into DB with values:", email, firstName, lastName, provider); // Debug statement
-//       db.query(query, [email, firstName, lastName, provider], (error, results) => {
-//         if (error) {
-//           return reject(error);
-//         }
-//         const newUser = { id: results.insertId, ...user };
-//         resolve(newUser);
-//       });
-//     });
+const createUserInDb = (user) => {
+    return new Promise((resolve, reject) => {
+      db.query('INSERT INTO userTable SET ?', user, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          const newUser = { id: results.insertId, ...user };
+          resolve(newUser);
+        }
+      });
+    });
+  };
+
+//   // Example correction in your user.js or where createUserInDb function is defined
+// const createUserInDb = async (userData) => {
+//     const { userId, email, firstName, lastName, provider } = userData;
+//     const query = `INSERT INTO usertable (userId, email, firstName, lastName, provider) 
+//                    VALUES (?, ?, ?, ?, ?)`;
+//     try {
+//       const result = await db.query(query, [userId, email, firstName, lastName, provider]);
+//       return result;
+//     } catch (error) {
+//       console.error('Error creating user in database:', error);
+//       throw error;
+//     }
 //   };
+  
 
   const findOne = ({ resetToken, resetTokenExpiry }) => {
     console.log(`Finding user with token: ${resetToken} and expiry: ${resetTokenExpiry}`);
@@ -93,4 +106,4 @@ const updateUserProfileById = (userId, updateFields) => {
 
 
 
-module.exports = { findUserByEmail, findOne, updateUserById, findUserById, updateUserProfileById};
+module.exports = { findUserByEmail, createUserInDb, findOne, updateUserById, findUserById, updateUserProfileById};

@@ -1,35 +1,37 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiPathsService } from './apipaths/api-paths.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthService {
 
   private baseURL = 'http://localhost:3000';
-
-  getBaseURL(): string {
-    return this.baseURL;
-  }
-  
   private userPayload: any;
 
-  constructor(private http: HttpClient,private router:Router, private jwtHelper: JwtHelperService) { }
-
-  isLoggedIn() {
-    return !!localStorage.getItem('accessToken');
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private jwtHelper: JwtHelperService) {
+    // Subscribe to route changes to handle query params
+    this.route.queryParams.subscribe(params => {
+      const token = params['token'];
+      if (token) {
+        this.googleLogin(token);
+      }
+    });
   }
 
   login(): void {
     console.log("Logged in");
   }
-  
-  logOut(){
+
+  isLoggedIn() {
+    return !!localStorage.getItem('accessToken');
+  }
+
+  logOut() {
     this.signOut();
   }
 
@@ -37,51 +39,47 @@ export class AuthService {
     localStorage.clear();
   }
 
-  storeToken(accessToken: string) {
-    // this.setCookie('accessToken', token);
-    console.log('Storing token:', accessToken); // Add this line
-    localStorage.setItem('accessToken', accessToken);
-    const decodedToken = this.jwtHelper.decodeToken(accessToken);
+  storeToken(token: string) {
+    console.log('Storing token:', token);
+    localStorage.setItem('accessToken', token);
+    const decodedToken = this.jwtHelper.decodeToken(token);
     if (decodedToken && decodedToken.userId) {
       localStorage.setItem('userId', decodedToken.userId);
     }
   }
 
-  getToken(){
-    // return this.getCookie('accessToken')!;
-    return localStorage.getItem('accessToken');
+  decodedToken() {
+    const token = this.getToken();
+    if (token) {
+      this.userPayload = this.jwtHelper.decodeToken(token);
+      return this.userPayload;
+    }
+    return null;
   }
 
   loginNew(credentials: { email: string; password: string }): Observable<{ accessToken: string }> {
     return this.http.post<any>(ApiPathsService.login, credentials);
   }
 
-  loginWithGoogle(accessToken: string): Observable<any> {
-    return this.http.get(`${this.baseURL}/auth/google`, { params: { accessToken } });
-  }
-
   registerUser(user: any): Observable<any> {
     return this.http.post<any>(ApiPathsService.register, user);
   }
 
-  googleLogin() {
-    window.location.href = `${this.baseURL}/auth/google`;
+  googleLogin(token: string) {
+    this.storeToken(token);
+    this.router.navigate(['/homepage']);
   }
 
   getUserProfile(): Observable<any> {
     return this.http.get<any>(`${this.baseURL}/profile`);
-  }  
+  }
 
-  decodedToken() {
-    const token = this.getToken();
-    console.log('Token:', token); // Log token
+  getToken() {
+    return localStorage.getItem('accessToken');
+  }
 
-    if (token) {
-      this.userPayload = this.jwtHelper.decodeToken(token);
-      console.log('Decoded Payload:', this.userPayload); // Log decoded payload
-      return this.userPayload;
-    }
-    return null;
+  getBaseURL(): string {
+    return this.baseURL;
   }
 
   getEmail() {
@@ -90,9 +88,19 @@ export class AuthService {
   }
 
   getUserId() {
-    const payload = this.decodedToken();
-      return payload ? payload.userId : null;
+    const token = this.getToken(); // Ensure token is retrieved first
+  if (token) {
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    if (decodedToken && decodedToken.userId) {
+      return decodedToken.userId; // Return userId from decoded token
+    }
+  }
+  return null;
   }
 
-  
+  isGoogleAuthenticated(): boolean {
+    // Assuming 'authProvider' is stored in local storage or any other persistent storage after login
+    const authProvider = localStorage.getItem('authProvider');
+    return authProvider === 'google';
+  }
 }

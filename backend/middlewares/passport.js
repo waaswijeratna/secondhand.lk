@@ -1,52 +1,60 @@
-// middlewares/passport.js
-require('dotenv').config();
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { findUserByEmail, createUserInDb } = require('../models/user');
+const generateAccessToken = require('../generateAccessToken');
 
-
-// Configure Google OAuth
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback",
-    scope: ['profile', 'email']
-},
-    async (_accessToken, _refreshToken, profile, done) => {
-        console.log("googleUser", profile);
-        try {
-            // Check for existing user or create new
-            const existingUser = await findUserByEmail(profile.emails[0].value);
-            if (existingUser) {
-                return done(null, existingUser);
-            }
-            console.log(profile);
-            const body = {
-                email: profile.emails[0].value,
-                firstName: profile.name.givenName,
-                lastName: profile.name.familyName,
-                provider: profile.provider
-            };
-            console.log("Creating user with body:", body); // Debug statement
-            const newUser = await createUserInDb(body);
-            const token = generateAccessToken({ id: newUser.id, email: newUser.email });
-            res.json(null, { token, user: newUser }); // Return the token and user
-        } catch (error) {
-            console.error('Error during Google authentication:', error);
-            return done(error);
+    callbackURL: "/auth/google/callback"
+  },  
+  async (_accessToken, _refreshToken, profile, done) => {
+    try {
+      // Check for existing user or create a new user
+      const existingUser = await findUserByEmail(profile.emails[0].value);
+      console.log(profile);
+      if (existingUser) {
+        const token = generateAccessToken({
+          userId: existingUser.userId,
+          email: existingUser.email
+        });
+        return done(null, { user: existingUser, token });
+        
+    } else{
+        // If user doesn't exist, create a new user in your database
+        const newUser = await createUserInDb({
+            userId: profile.id,
+            email: profile.emails[0].value,
+            firstName: profile.name.givenName,
+            lastName: profile.name.familyName,
+            provider: profile.provider
+          });
+          const token = generateAccessToken({
+            userId: newUser.userId,
+            email: newUser.email
+          });
+           // Return the user and token
+            return done(null, { user: newUser, token });
         }
-    }
+    
+
+    //   const newUser = await createUserInDb(body);
+    //   const token = generateAccessToken({ userId: newUser.userId, email: newUser.email });
+    //   return done(null, { user: newUser, token });
+    } catch (error) {
+        console.error('Error during Google authentication:', error);
+        return done(error);
+      }
+  }
 ));
 
-// Serialize user into session
 passport.serializeUser((user, done) => {
-    done(null, user);
+  done(null,  user);
 });
 
-// Deserialize user from session
-passport.deserializeUser((obj, done) => {
-    done(null, obj);
-});
+passport.deserializeUser(function (user, done) {
+    done(null, user);
+})
+
 
 module.exports = passport;
-

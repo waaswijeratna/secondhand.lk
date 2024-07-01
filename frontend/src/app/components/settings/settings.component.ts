@@ -9,21 +9,17 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'] // Note the plural 'styleUrls'
 })
-
-export class SettingsComponent implements OnInit{
+export class SettingsComponent implements OnInit {
 
   newPassword: string = '';
   confirmPassword: string = '';
   showNewPassword: boolean = false;
   showConfirmPassword: boolean = false;
   userId: string | null;
-  //    this.userId = this.authService.getUserId();
+  isGoogleAuthenticated: boolean = false;
 
   constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
-    // Check if userId is set in localStorage
     this.userId = this.authService.getUserId();
-    // console.log('Retrieved userId from localStorage:', this.userId);
-
     if (!this.userId) {
       console.log('User ID not found in localStorage');
     }
@@ -31,7 +27,8 @@ export class SettingsComponent implements OnInit{
 
   ngOnInit(): void {
     this.userId = this.authService.getUserId();
-    // console.log('Retrieved userId in ngOnInit:', this.userId);
+    this.isGoogleAuthenticated = this.authService.isGoogleAuthenticated();
+    console.log('Is Google Authenticated:', this.isGoogleAuthenticated);
   }
 
   toggleNewPasswordVisibility(): void {
@@ -42,11 +39,7 @@ export class SettingsComponent implements OnInit{
     this.showConfirmPassword = !this.showConfirmPassword;
   }
 
-
   async changePassword() {
-    console.log('Current userId:', this.userId);
-    console.log('New Password:', this.newPassword);
-    console.log('Confirm Password:', this.confirmPassword);
     if (this.newPassword !== this.confirmPassword) {
       this.snackBar.open('Passwords do not match.', 'Close', {
         duration: 3000,
@@ -57,6 +50,14 @@ export class SettingsComponent implements OnInit{
 
     if (!this.userId) {
       this.snackBar.open('Invalid user ID.', 'Close', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
+      return;
+    }
+
+    if (this.isGoogleAuthenticated) {
+      this.snackBar.open('Password change not allowed for Google authenticated users.', 'Close', {
         duration: 3000,
         panelClass: ['error-snackbar']
       });
@@ -85,6 +86,3 @@ export class SettingsComponent implements OnInit{
     }
   }
 }
-
-
-
