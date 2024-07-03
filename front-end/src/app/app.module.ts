@@ -49,6 +49,7 @@ import { SettingsComponent } from './user-profile/settings/settings.component';
 import { MyAdsComponent } from './user-profile/my-ads/my-ads.component';
 import { MyReviewsComponent } from './user-profile/my-reviews/my-reviews.component';
 import { BannerAdComponent } from './search-results/banner-ad/banner-ad.component';
+import { SellFastComponent } from './footer/sell-fast/sell-fast.component';
 
 
 
@@ -90,6 +91,7 @@ import { BannerAdComponent } from './search-results/banner-ad/banner-ad.componen
     MyAdsComponent,
     MyReviewsComponent,
     BannerAdComponent,
+    SellFastComponent,
 
   ],
   imports: [

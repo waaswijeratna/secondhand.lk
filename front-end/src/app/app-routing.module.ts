@@ -11,6 +11,7 @@ import { ReportingComponent } from './ratings-and-reporting/reporting/reporting.
 import { CartComponent } from './cart/cart.component';
 import { StaySafeComponent } from './footer/stay-safe/stay-safe.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { SellFastComponent } from './footer/sell-fast/sell-fast.component';
 
 
 
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'staySafe', component: StaySafeComponent },
   { path: 'profile', component: UserProfileComponent },
+  { path: 'sellFast', component: SellFastComponent },
 ];
 
 @NgModule({

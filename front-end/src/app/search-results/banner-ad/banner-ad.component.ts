@@ -34,8 +34,9 @@ export class BannerAdComponent implements OnInit, OnChanges {
 
     this.bannerService.getFilteredImages(payloadWithId).subscribe(images => {
       const img = images;
+      console.log("images", img);
       this.images = img[0];
-      this.image = this.images.imagePath
+      // this.image = this.images.imagePath;
       console.log("images", this.images)
     });
   }
