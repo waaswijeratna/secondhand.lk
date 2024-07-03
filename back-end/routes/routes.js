@@ -23,6 +23,9 @@ const {getUserReviews} = require('../Functions/getUserReviews');
 const {deleteAd} = require('../Functions/deleteAd');
 const {getUserData} = require('../Functions/getUserData');
 const { updateUserData } = require('../Functions/updateUserData');
+const { bannerAd } = require('../Functions/bannerAds');
+
+
 
 
 
@@ -52,6 +55,8 @@ router.post('/deleteAd', deleteAd);
 router.post('/userData', getUserData);
 // Define route for updating user data
 router.put('/updateUserData', updateUserData);
+// Define route for getting banner ad images
+router.post('/bannerImages', bannerAd);
 
 // Define routes to fetch categories and subcategories
 router.get('/categories', sendCategories);

@@ -48,6 +48,7 @@ import { MyAccountComponent } from './user-profile/my-account/my-account.compone
 import { SettingsComponent } from './user-profile/settings/settings.component';
 import { MyAdsComponent } from './user-profile/my-ads/my-ads.component';
 import { MyReviewsComponent } from './user-profile/my-reviews/my-reviews.component';
+import { BannerAdComponent } from './search-results/banner-ad/banner-ad.component';
 
 
 
@@ -88,6 +89,7 @@ import { MyReviewsComponent } from './user-profile/my-reviews/my-reviews.compone
     SettingsComponent,
     MyAdsComponent,
     MyReviewsComponent,
+    BannerAdComponent,
 
   ],
   imports: [

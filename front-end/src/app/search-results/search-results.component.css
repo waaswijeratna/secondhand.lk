@@ -214,9 +214,10 @@
 
 
 /* Banner ads feed */
-.bannerTop{
+.bannerTop {
     height: 40vh;
     background-color: rgb(205, 205, 205);
+    position: relative; /* Ensure positioning context for child elements */
 }
 
 .bannerRight{

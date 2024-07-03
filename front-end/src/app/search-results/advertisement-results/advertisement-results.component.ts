@@ -19,6 +19,7 @@ export class AdvertisementResultsComponent implements OnInit {
   firstArray!: { key: string, value: any }[];
   currentIndex: number = 0; // Added for carousel navigation
   ad_id:any;
+  filters:any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
@@ -31,6 +32,35 @@ export class AdvertisementResultsComponent implements OnInit {
         this.detailsInitialization();
       }
     });
+    const payload = this.buildPayload();
+    this.filters = payload;
+  }
+
+  private buildPayload() {
+    let payload: any = {};
+
+    if (this.adDetails.adType) {
+      payload.adType = 'sell';
+    }
+    if (this.adDetails.adType) {
+      payload.adType = 'rent';
+    }
+    if ( this.adDetails.urgent) {
+      payload.urgent = 'true';
+    }
+    if ( this.adDetails.top) {
+      payload.top = 'true';
+    }
+    if (this.adDetails.category) {
+      payload.category = this.adDetails.category;
+    }
+    if (this.adDetails.location) {
+      payload.location = this.adDetails.location;
+    }
+    if (this.adDetails.sublocation) {
+      payload.sublocation = this.adDetails.sublocation;
+    }
+
   }
 
   detailsInitialization() {

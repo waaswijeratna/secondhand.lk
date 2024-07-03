@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserLocationService } from '../app-services/app-get-user-location';
 
 
+
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
@@ -27,6 +28,9 @@ export class SearchResultsComponent implements OnInit {
   TopAdSelected!: boolean;
   displayNoresults: boolean = false;
   userLocation:any;
+  filters:any;
+
+
 
 
   constructor(private http: HttpClient, private fb: FormBuilder, private categoryService: CategoryService, private locationService: LocationService, private route: ActivatedRoute, private UserLocationService: UserLocationService) {
@@ -41,6 +45,7 @@ export class SearchResultsComponent implements OnInit {
       sublocation: [''],
       nearMe : ['']
     });
+
   }
 
   ngOnInit(): void {
@@ -172,6 +177,8 @@ export class SearchResultsComponent implements OnInit {
   retrievingResults() {
     let urlApi = "http://localhost:3000/api/search";
     const payload = this.buildPayload();
+    this.filters = payload;
+    // this.BannerService.setFilterPayload(payload)
     console.log("payloadd", payload);
 
     this.http.post<any[]>(urlApi, payload)

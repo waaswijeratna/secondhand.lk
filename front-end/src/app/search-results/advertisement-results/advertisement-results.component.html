@@ -1,5 +1,7 @@
 <div class="advertisement-container">
-    <div class="bannerTop"></div>
+    <div class="bannerTop">
+        <app-banner-ad [formPayload]="filters" [banner_type_id]="3"></app-banner-ad>
+    </div>
     <mat-card class="card-container">
         <h3>{{adDetails.title}}</h3>
         <div class="content">
@@ -59,7 +61,11 @@
                         messages, etc.) with 3rd parties.</p>
                     <div class="safetyGuidance" routerLink="/staySafe">See our safety guidance</div>
                 </div>
-                <div class="bannerInside"></div>
+
+                <div class="bannerInside">
+                    <app-banner-ad [formPayload]="filters" [banner_type_id]="4"></app-banner-ad>
+                </div>
+                
             </div>
         </div>
     </mat-card>

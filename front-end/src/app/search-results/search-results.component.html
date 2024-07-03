@@ -1,6 +1,11 @@
 <div class="bg">
     <div class="grid-container">
-        <div class="bannerTop"></div>
+
+        <div class="bannerTop">
+            <app-banner-ad [formPayload]="filters" [banner_type_id]="1"></app-banner-ad>
+        </div>
+        
+
         <div class="gridColumns">
             <mat-card>
                 <div class="search-bar-container">
@@ -125,7 +130,9 @@
                     </div>
                 </div>
             </mat-card>
-            <div class="bannerRight"></div>
+            <div class="bannerRight">
+                <app-banner-ad [formPayload]="filters" [banner_type_id]="2"></app-banner-ad>
+            </div>
         </div>
     </div>
 </div>
