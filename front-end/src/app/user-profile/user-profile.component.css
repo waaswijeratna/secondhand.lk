@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar div {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .sidebar div:hover {
+    background-color: #ddd;
+  }
+  
+  .sidebar div.active {
+    background-color: #ccc;
+    font-weight: bold;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 1rem;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+  }
+  

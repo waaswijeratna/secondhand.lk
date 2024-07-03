@@ -12,7 +12,11 @@
         </div> -->
         <div class="user-section">
             <mat-icon id="acc">account_circle</mat-icon>
-            <span>Login/SignIn</span>
+            @if(togLogin){
+                <span routerLink="/profile">Profile</span>
+            }@else{
+                <span>Login</span>
+            }
             <div class="cartIcon" (click)="navigateToCart()">
                 <mat-icon id="cart">shopping_cart</mat-icon>
             </div>

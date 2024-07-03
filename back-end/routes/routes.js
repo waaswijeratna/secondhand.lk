@@ -19,6 +19,11 @@ const {insertReporting } = require('../Functions/reportingcontroller');
 const {insertToCart} = require('../Functions/insertToCart');
 const { getCartData } = require('../Functions/getCartData');
 const {deleteCart} = require('../Functions/deleteCart');
+const {getUserReviews} = require('../Functions/getUserReviews');
+const {deleteAd} = require('../Functions/deleteAd');
+const {getUserData} = require('../Functions/getUserData');
+const { updateUserData } = require('../Functions/updateUserData');
+
 
 
 ///////////////////// Defining Routes ////////////////////////
@@ -39,6 +44,14 @@ router.post('/insert_cart',insertToCart);
 router.post('/getCart', getCartData);
 // Define route for delete cart item
 router.post('/deleteCart', deleteCart);
+// Define route for get user reviews
+router.post('/user_reviews', getUserReviews);
+// Define route for delete ad 
+router.post('/deleteAd', deleteAd);
+// Define route for delete ad 
+router.post('/userData', getUserData);
+// Define route for updating user data
+router.put('/updateUserData', updateUserData);
 
 // Define routes to fetch categories and subcategories
 router.get('/categories', sendCategories);

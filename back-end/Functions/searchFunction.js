@@ -2,7 +2,7 @@ const db = require('../Services/db');
 
 const searchFunction = async (req, res, next) => {
 
-    async function searchAds(defaultFlag, keywords, adType, urgent, top, category, subcategory, location, sublocation, nearMe) {
+    async function searchAds(defaultFlag, keywords, adType, urgent, top, category, subcategory, location, sublocation, nearMe, userId) {
         console.log("m2", category);
 
         const params = [];
@@ -50,7 +50,8 @@ const searchFunction = async (req, res, next) => {
             LEFT JOIN category c ON a.category_id = c.category_id
             LEFT JOIN subcategory sc ON a.subcategory_id = sc.subcategory_id
             LEFT JOIN location l ON a.location_id = l.location_id
-            LEFT JOIN sublocation sl ON a.sublocation_id = sl.sublocation_id            
+            LEFT JOIN sublocation sl ON a.sublocation_id = sl.sublocation_id
+            LEFT JOIN usertable utt ON a.created_by = utt.userId             
             WHERE 1=1
         `;
 
@@ -86,6 +87,11 @@ const searchFunction = async (req, res, next) => {
             query += ` AND pc.isTop = 1`;
         }
 
+        if (userId) {
+            query += ` AND utt.userId = ?`;
+            params.push(userId);
+        }
+
         query += ` ORDER BY a.bump_up_date DESC`
 
         if (defaultFlag) {
@@ -101,9 +107,9 @@ const searchFunction = async (req, res, next) => {
     console.log("triggered");
     try {
         console.log("h1");
-        const { defaultFlag, keywords, adType, urgent, top, category, subcategory, location, sublocation, nearMe } = req.body;
-        console.log("h2", adType);
-        const results = await searchAds(defaultFlag, keywords, adType, urgent, top, category, subcategory, location, sublocation, nearMe);
+        const { defaultFlag, keywords, adType, urgent, top, category, subcategory, location, sublocation, nearMe, userId } = req.body;
+        console.log("h2", userId);
+        const results = await searchAds(defaultFlag, keywords, adType, urgent, top, category, subcategory, location, sublocation, nearMe, userId);
         console.log("result");
         res.json(results);
     } catch (error) {

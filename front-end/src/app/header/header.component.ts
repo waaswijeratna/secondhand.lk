@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit{
   showFullHeader: boolean = false;
   userLocation:any;
   userId: string | null = null;
+  togLogin:boolean = false;
 
 
 
@@ -71,6 +72,19 @@ export class HeaderComponent implements OnInit{
         console.log("asdas",this.showFullHeader )
       }
     });
+
+    this.userId = this.localStorageService.getItem('userId'); // Retrieve the user ID from localStorage
+    this.toggleLogin();
+
+  }
+
+  toggleLogin(){
+    if(this.userId){
+      this.togLogin = true;
+    }
+    else{
+      this.togLogin = false;   
+    }
   }
 
   search() {
@@ -94,7 +108,6 @@ export class HeaderComponent implements OnInit{
 
   navigateToCart() {
     // this.userId = localStorage.getItem("userId");
-    this.userId = this.localStorageService.getItem('userId'); // Retrieve the user ID from localStorage
     console.log("gsfs", this.userId);
     if (this.userId) {
       this.router.navigate(['/cart'], { queryParams: { userId: this.userId } });

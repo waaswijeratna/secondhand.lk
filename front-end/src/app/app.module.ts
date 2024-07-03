@@ -43,6 +43,11 @@ import { ReportingComponent } from './ratings-and-reporting/reporting/reporting.
 import { CartComponent } from './cart/cart.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { StaySafeComponent } from './footer/stay-safe/stay-safe.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MyAccountComponent } from './user-profile/my-account/my-account.component';
+import { SettingsComponent } from './user-profile/settings/settings.component';
+import { MyAdsComponent } from './user-profile/my-ads/my-ads.component';
+import { MyReviewsComponent } from './user-profile/my-reviews/my-reviews.component';
 
 
 
@@ -78,6 +83,11 @@ import { StaySafeComponent } from './footer/stay-safe/stay-safe.component';
     ReportingComponent,
     CartComponent,
     StaySafeComponent,
+    UserProfileComponent,
+    MyAccountComponent,
+    SettingsComponent,
+    MyAdsComponent,
+    MyReviewsComponent,
 
   ],
   imports: [

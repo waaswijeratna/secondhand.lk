@@ -1,0 +1,27 @@
+<div class="content-container">
+    <div class="my-ads">
+        <div class="ads">
+            <mat-card class="ad-details" *ngFor="let details of paginatedResults">
+                <div class="info">
+                    <div class="image">
+                        <img [src]="details.imagePaths[0]" width="100px" height="100px">
+                    </div>
+                    <div class="text">
+                        <div>{{details.title}}</div>
+                        <div>{{details.price}}</div>
+                    </div>
+                    <div class="actions">
+                        <button id="modify-btn" (click)="sendAdId(details.ad_id)">Modify</button>
+                        <button id="delete-btn" (click)="deleteAd(details.ad_id)">Delete</button>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <hr>
+    <div class="pagination-controls">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{currentPage}} of {{totalPages}}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+</div>
