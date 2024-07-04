@@ -4,8 +4,7 @@ import {
   OverlayContainer,
   OverlayModule,
   OverlayRef
-} from "./chunk-JMXGHVWO.js";
-import "./chunk-YUVFHFK5.js";
+} from "./chunk-XPGSEZ3D.js";
 import {
   BasePortalOutlet,
   CdkPortalOutlet,
@@ -23,6 +22,7 @@ import {
   transition,
   trigger
 } from "./chunk-Z4CHOQV4.js";
+import "./chunk-YUVFHFK5.js";
 import {
   A11yModule,
   Directionality,

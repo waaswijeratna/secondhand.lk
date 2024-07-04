@@ -61,6 +61,7 @@ export class SearchResultsComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['location']) {
         this.setLocationByName(params['location']);
+        console.log("came??/", this.filterForm.get('location')?.value);
       }
       if (params['keywords']) {
         this.filterForm.get('keywords')?.setValue(params['keywords']);
@@ -109,7 +110,11 @@ export class SearchResultsComponent implements OnInit {
   setLocationByName(locationName: string) {
     const location = this.locations.find(loc => loc.location === locationName);
     if (location) {
-      this.filterForm.get('location')?.setValue(location.location_id);
+      const locationControl = this.filterForm.get('location')
+      locationControl?.setValue(location.location_id);
+      locationControl?.markAsUntouched();
+      locationControl?.updateValueAndValidity();
+      
     }
   }
 
@@ -130,7 +135,7 @@ export class SearchResultsComponent implements OnInit {
 
     const filtersSelected = formValues.keywords || formValues.sell || formValues.rent || formValues.urgent ||
       formValues.top || formValues.category || formValues.subcategory ||
-      formValues.location || formValues.sublocation || formValues.topAds || formValues.nearMe;
+      formValues.location || formValues.sublocation || formValues.top || formValues.nearMe;
 
 
     console.log("filterssmnmn",filtersSelected);
@@ -244,6 +249,7 @@ export class SearchResultsComponent implements OnInit {
       sublocation: '',
       nearMe:''
     });
+    this.filterForm.updateValueAndValidity();
   }
 
   toggleLocationIcon() {

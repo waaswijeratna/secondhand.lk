@@ -50,6 +50,14 @@ import { MyAdsComponent } from './user-profile/my-ads/my-ads.component';
 import { MyReviewsComponent } from './user-profile/my-reviews/my-reviews.component';
 import { BannerAdComponent } from './search-results/banner-ad/banner-ad.component';
 import { SellFastComponent } from './footer/sell-fast/sell-fast.component';
+import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
+import { FaqComponent } from './footer/faq/faq.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { AboutUsComponent } from './footer/about-us/about-us.component';
+import { ContactUsComponent } from './footer/contact-us/contact-us.component';
+import { TermsComponent } from './footer/terms/terms.component';
+import { FeedebackComponent } from './footer/feedeback/feedeback.component';
+import { BannerAdFooterComponent } from './footer/banner-ad-footer/banner-ad-footer.component';
 
 
 
@@ -92,6 +100,13 @@ import { SellFastComponent } from './footer/sell-fast/sell-fast.component';
     MyReviewsComponent,
     BannerAdComponent,
     SellFastComponent,
+    PrivacyPolicyComponent,
+    FaqComponent,
+    AboutUsComponent,
+    ContactUsComponent,
+    TermsComponent,
+    FeedebackComponent,
+    BannerAdFooterComponent,
 
   ],
   imports: [
@@ -116,7 +131,8 @@ import { SellFastComponent } from './footer/sell-fast/sell-fast.component';
     MatButtonModule,
     MessagesModule,
     CarouselModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
   ],
   providers: [
     provideClientHydration()

@@ -27,7 +27,7 @@
       <mat-radio-group formControlName="subcategory">
         <!-- Iterate over subcategories for the selected category -->
         <mat-radio-button *ngFor="let subcategory of subcategories[selectedCategory]" [value]="subcategory.subcategory_id" (change)="onNext()" color="primary">
-          <span class="icon" [style.backgroundImage]="'url(assets/icons/' + encodeCategoryName(subcategory.subcategory) + '.png)'"></span>
+          <span class="icon" [style.backgroundImage]="'url(../../../assets/icons/' + encodeCategoryName(subcategory.subcategory) + '.png)'"></span>
           {{ subcategory.subcategory }}
         </mat-radio-button>
       </mat-radio-group>

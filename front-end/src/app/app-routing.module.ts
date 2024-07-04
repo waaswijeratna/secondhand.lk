@@ -12,7 +12,13 @@ import { CartComponent } from './cart/cart.component';
 import { StaySafeComponent } from './footer/stay-safe/stay-safe.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SellFastComponent } from './footer/sell-fast/sell-fast.component';
-
+import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
+import { FaqComponent } from './footer/faq/faq.component';
+import { AboutUsComponent } from './footer/about-us/about-us.component';
+import { ContactUsComponent } from './footer/contact-us/contact-us.component';
+import { TermsComponent } from './footer/terms/terms.component';
+import { FeedebackComponent } from './footer/feedeback/feedeback.component';
+import { BannerAdFooterComponent } from './footer/banner-ad-footer/banner-ad-footer.component';
 
 
 const routes: Routes = [
@@ -29,6 +35,16 @@ const routes: Routes = [
   { path: 'staySafe', component: StaySafeComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'sellFast', component: SellFastComponent },
+  { path: 'privacyPolicy', component: PrivacyPolicyComponent },
+  { path: 'faq', component: FaqComponent },
+  { path: 'aboutUs', component: AboutUsComponent },
+  { path: 'contactUs', component: ContactUsComponent },
+  { path: 'terms', component: TermsComponent },
+  { path: 'feedback', component: FeedebackComponent },
+  { path: 'banner_footer', component: BannerAdFooterComponent },
+
+
+
 ];
 
 @NgModule({

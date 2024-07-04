@@ -96,14 +96,21 @@ export class HeaderComponent implements OnInit{
 
   submitForm() {
     const selectedLocation = this.searchForm.get('district')?.value;
+    console.log("asasaccc", selectedLocation);
     const searchText = this.searchForm.get('searchText')?.value;
     const user_location = this.searchForm.get('nearMe')?.value;
-
-    this.router.navigate(['/searchResults'], {
-      queryParams: { location: selectedLocation, keywords: searchText , nearMe:user_location}
+  
+    const queryParams = new URLSearchParams({
+      location: selectedLocation,
+      keywords: searchText,
+      nearMe: user_location
     });
+  
+    location.href = `/searchResults?${queryParams.toString()}`;
+  
     this.searchForm.get('searchText')?.setValue('');
   }
+  
 
 
   navigateToCart() {

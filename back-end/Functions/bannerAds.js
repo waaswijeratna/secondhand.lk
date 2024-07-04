@@ -4,52 +4,44 @@ const bannerAd = async (req, res, next) => {
     console.log("triggered");
     try {
         const { adType, urgent, top, category, subcategory, location, sublocation, banner_type_id, defaultFlag } = req.body;
+        console.log("id", banner_type_id);
 
-        // Base SQL query and values array
-        let sql = 'SELECT imagePath, url FROM banner_ad_images WHERE banner_type_id = ?';
-        let values = [banner_type_id];
+        // Define the base SQL query and values array
+        let baseSql = 'SELECT imagePath, url FROM banner_ad_images WHERE banner_type_id = ?';
+        let baseValues = [banner_type_id];
 
-        // Add additional filters if present
-        if (adType) {
-            sql += ' AND adType = ?';
-            values.push(adType);
-        }
-        if (urgent) {
-            sql += ' AND Urgent = ?';
-            values.push(1);
-        }
-        if (top) {
-            sql += ' AND topAd = ?';
-            values.push(1);
-        }
-        if (category) {
-            sql += ' AND category_id = ?';
-            values.push(category);
-        }
-        if (subcategory) {
-            sql += ' AND subcategory_id = ?';
-            values.push(subcategory);
-        }
-        if (location) {
-            sql += ' AND location_id = ?';
-            values.push(location);
-        }
-        if (sublocation) {
-            sql += ' AND sublocation_id = ?';
-            values.push(sublocation);
-        }
+        // Create an array of filter conditions and corresponding values
+        const filters = [
+            { condition: adType, query: ' AND adType = ?', value: adType },
+            { condition: urgent, query: ' AND Urgent = ?', value: 1 },
+            { condition: top, query: ' AND topAd = ?', value: 1 },
+            { condition: category, query: ' AND category_id = ?', value: category },
+            { condition: subcategory, query: ' AND subcategory_id = ?', value: subcategory },
+            { condition: location, query: ' AND location_id = ?', value: location },
+            { condition: sublocation, query: ' AND sublocation_id = ?', value: sublocation },
+        ];
 
-        // Add the order by random and limit clause to select one random result
-        sql += ' ORDER BY RAND() LIMIT 1';
+        let results = [];
 
-        // Query the database
-        let results = await db.query(sql, values);
+        // Iterate through all combinations of filters, starting with the most specific
+        for (let i = 0; i < (1 << filters.length); i++) {
+            let sql = baseSql;
+            let values = [...baseValues];
+            for (let j = 0; j < filters.length; j++) {
+                if (i & (1 << j)) {
+                    sql += filters[j].query;
+                    values.push(filters[j].value);
+                }
+            }
+            sql += ' ORDER BY RAND() LIMIT 1';
+            results = await db.query(sql, values);
+            if (results.length > 0) break;
+        }
 
         // If no results found and defaultFlag is present, retrieve a random image
         if (results.length === 0 && defaultFlag) {
-            sql = 'SELECT imagePath FROM banner_ad_images WHERE banner_type_id = ? ORDER BY RAND() LIMIT 1';
-            values = [banner_type_id];
-            results = await db.query(sql, values);
+            const defaultSql = 'SELECT imagePath, url FROM banner_ad_images WHERE banner_type_id = ? ORDER BY RAND() LIMIT 1';
+            results = await db.query(defaultSql, [banner_type_id]);
         }
 
         res.status(200).json(results[0] || {}); // Return the first (random) result or an empty object if no result
