@@ -1,26 +1,44 @@
 .content-container {
     width: 100%;
     margin: 0 auto;
+    color: #304E74;
+}
+
+.title {
+    font-weight: bold;
+    margin-bottom: 0.6rem;
+}
+
+.price {
+    margin-bottom: 0.6rem;
+}
+
+.category {
+    color: rgb(117, 166, 207);
 }
 
 .my-ads .ads {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin: 3rem 6rem;
 }
 
 .ad-details {
     display: flex;
-    align-items: center;
+    flex-direction: column; /* Make the card content vertical */
+    align-items: flex-start;
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 8px;
+    position: relative; /* To position approved status at top right */
 }
 
 .info {
     display: flex;
     align-items: center;
     width: 100%;
+    cursor: pointer;
 }
 
 .image {
@@ -32,14 +50,23 @@
     margin-left: 1rem;
 }
 
+.tags {
+    display: flex;
+    flex-direction: row; /* Ensure tags are in a row */
+    gap: 0.5rem; /* Space between tags */
+    flex-wrap: wrap; /* Wrap tags if they don't fit in a row */
+    margin-top: 0.5rem;
+}
+
 .actions {
-    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    margin-left: auto;
     gap: 0.5rem;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
 }
 
 .actions button {
@@ -47,16 +74,31 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s; /* Add transition for smooth effect */
+}
+
+.actions button:hover {
+    background-color: #1a73e8; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+    transform: scale(1.05); /* Slightly increase the size on hover */
 }
 
 #modify-btn {
-    background-color: #4CAF50;
+    background-color: #228cd7;
     color: white;
+}
+
+#modify-btn:hover {
+    background-color: #1a73e8; /* New background color for modify button on hover */
 }
 
 #delete-btn {
     background-color: #f44336;
     color: white;
+}
+
+#delete-btn:hover {
+    background-color: #d32f2f; /* New background color for delete button on hover */
 }
 
 .pagination-controls {
@@ -77,7 +119,6 @@
     cursor: not-allowed;
 }
 
-
 /* snackbar styles */
 ::ng-deep .customSnackbar2 {
     border-radius: .5vw;
@@ -85,22 +126,92 @@
     --mdc-snackbar-container-color: rgba(255, 255, 255, 0.8); /* Transparent white */
     backdrop-filter: blur(1px); /* Apply blur effect */
     --mdc-snackbar-supporting-text-color: red;
-  }
+}
   
-  ::ng-deep .customSnackbar2 button {
+::ng-deep .customSnackbar2 button {
     color: white !important;
     background-color: red;
-  }
+}
   
-  ::ng-deep .customSnackbar1 {
+::ng-deep .customSnackbar1 {
     border-radius: .5vw;
     outline: 2px solid #2a9af3;
     --mdc-snackbar-container-color: rgba(255, 255, 255, 0.8); /* Transparent white */
     backdrop-filter: blur(1px); /* Apply blur effect */
     --mdc-snackbar-supporting-text-color: #2a9af3;
-  }
+}
   
-  ::ng-deep .customSnackbar1 button {
+::ng-deep .customSnackbar1 button {
     color: white !important;
     background-color: #2a9af3;
-  }
+}
+
+.freeTag {
+    background-color: #c5e2fa;
+    color: #0f66ad;
+    border-radius: 0.2rem;
+    border: 0.05rem solid #0f66ad;
+}
+
+.topTag {
+    background-color: #f5fac5;
+    color: #b5990e;
+    border-radius: 0.2rem;
+    border: 0.05rem solid #b5990e;
+}
+
+.urgentTag {
+    background-color: #fac5c5;
+    color: #f13131;
+    border-radius: 0.2rem;
+    border: 0.05rem solid #f13131;
+}
+
+.bumpUpTag {
+    background-color: #c9fac5;
+    color: #239a0c;
+    border-radius: 0.2rem;
+    border: 0.05rem solid #239a0c;
+}
+
+::ng-deep .custom-tooltip {
+    --mdc-plain-tooltip-container-color: #c5e2fa;
+    --mdc-plain-tooltip-supporting-text-color: #094d85;
+    --mdc-plain-tooltip-supporting-text-size: small;
+}
+
+.promoteTags {
+    display: flex;
+    flex-direction: row; /* Ensure promotion tags are in a row */
+    gap: 0.5rem; /* Space between promotion tags */
+}
+
+.ad-details .approved-statusP {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    background-color: #faedb1; /* Adjust as needed */
+    border: 0.2rem solid #d1a000;
+    color: #d1a000;
+    padding: 0.5rem 3rem;
+    border-radius: 0.5rem 0 0.5rem 0.5rem;
+    /* border-radius: 0.3rem; */
+    font-weight: bold;
+}
+
+.approved-statusA {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    background-color: #acf5e3; /* Adjust as needed */
+    border: 0.2rem solid #038684;
+    color: #038684;
+    padding: 0.5rem 3rem;
+    border-radius: 0.5rem 0 0.5rem 0.5rem;
+    /* border-radius: 0.3rem; */
+    font-weight: bold;
+}
+
+.ad-details {
+    margin-bottom: 2rem;
+}

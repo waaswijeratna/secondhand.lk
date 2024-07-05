@@ -1,15 +1,17 @@
 import {
   BaseIcon,
   DomHandler,
+  Ripple,
+  RippleModule
+} from "./chunk-CMAX37ZR.js";
+import {
   Footer,
   Header,
   PrimeNGConfig,
   PrimeTemplate,
-  Ripple,
-  RippleModule,
   SharedModule,
   UniqueComponentId
-} from "./chunk-N4HQDJTT.js";
+} from "./chunk-ZQ2IR4HA.js";
 import {
   CommonModule,
   DOCUMENT,

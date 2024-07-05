@@ -1,19 +1,37 @@
 <div class="content-container">
     <div class="my-ads">
         <div class="ads">
-            <mat-card class="ad-details" *ngFor="let details of paginatedResults">
-                <div class="info">
+            <mat-card class="ad-details" *ngFor="let details of paginatedResults" >
+                <div class="info" [routerLink]="['/advertisementResults']"
+                [queryParams]="{ ad: details | json }">
                     <div class="image">
-                        <img [src]="details.imagePaths[0]" width="100px" height="100px">
+                        <img [src]="details.imagePaths[0]" width="140rem" height="110rem">
                     </div>
                     <div class="text">
-                        <div>{{details.title}}</div>
-                        <div>{{details.price}}</div>
+                        <div class="title">{{details.title}}</div>
+                        <div class="price">Rs. {{details.price}}</div>
+                        <div class="category">{{details.category}}, {{details.subcategory}}</div>
+                        <div class="tags">
+                            @if(!details.promotionDetails){
+                            <button class="freeTag">Free</button>
+                            }@else{
+                            <div *ngFor="let promotion of details.promotionDetails" class="promoteTags">
+                                <button *ngIf="promotion.promotion_ID.startsWith('T')" class="topTag" matTooltip="Expires on: {{promotion.expiration_date | date:'yyyy-MM-dd'}}" matTooltipClass="custom-tooltip">Top Ad</button>
+                                <button *ngIf="promotion.promotion_ID.startsWith('U')" class="urgentTag" matTooltip="Expires on: {{promotion.expiration_date | date:'yyyy-MM-dd'}}" matTooltipClass="custom-tooltip">Urgent</button>
+                                <button *ngIf="promotion.promotion_ID.startsWith('B')" class="bumpUpTag" matTooltip="Expires on: {{promotion.expiration_date | date:'yyyy-MM-dd'}}" matTooltipClass="custom-tooltip">Bump Up</button>
+                            </div>
+                            }
+                        </div>
                     </div>
-                    <div class="actions">
-                        <button id="modify-btn" (click)="sendAdId(details.ad_id)">Modify</button>
-                        <button id="delete-btn" (click)="deleteAd(details.ad_id)">Delete</button>
-                    </div>
+                    @if(details.approved_status == 'pending'){
+                    <div class="approved-statusP">{{details.approved_status}}</div>
+                    }@else {
+                        <div class="approved-statusA">{{details.approved_status}}</div>
+                    }
+                </div>
+                <div class="actions">
+                    <button id="modify-btn" (click)="sendAdId(details.ad_id)">Modify</button>
+                    <button id="delete-btn" (click)="deleteAd(details.ad_id)">Delete</button>
                 </div>
             </mat-card>
         </div>

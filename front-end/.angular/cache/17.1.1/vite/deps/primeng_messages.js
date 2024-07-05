@@ -1,18 +1,20 @@
 import {
   BaseIcon,
-  MessageService,
-  PrimeNGConfig,
-  PrimeTemplate,
   Ripple,
-  RippleModule,
-  UniqueComponentId
-} from "./chunk-N4HQDJTT.js";
+  RippleModule
+} from "./chunk-CMAX37ZR.js";
 import {
   animate,
   style,
   transition,
   trigger
 } from "./chunk-Z4CHOQV4.js";
+import {
+  MessageService,
+  PrimeNGConfig,
+  PrimeTemplate,
+  UniqueComponentId
+} from "./chunk-ZQ2IR4HA.js";
 import {
   CommonModule,
   NgClass,

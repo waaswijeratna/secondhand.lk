@@ -1,3 +1,4 @@
+
 <mat-card class="chatbotPanel">
   <div *ngIf="chatbotVisible" class="chatbot-container">
     <app-chat-bot></app-chat-bot>
@@ -7,7 +8,7 @@
   </div>
 </mat-card>
 
-<mat-horizontal-stepper [linear]="isLinear" #stepper class="stepper">
+<mat-horizontal-stepper [linear]="isLinear" #stepper class="stepper" >
 
   <div>
     <mat-step [completed]="step1Completed" class="custom-step">
@@ -62,6 +63,10 @@
 
 </mat-horizontal-stepper>
 
-<!-- <div>
-  <app-chat-bot></app-chat-bot>
-</div> -->
+<!-- Overlay and spinner -->
+<div *ngIf="loading" class="loading-blur"></div>
+<div *ngIf="loading" class="loading-overlay">
+  <mat-spinner class="loading-spinner"></mat-spinner>
+  <div class="spinnerMsg">Your Advertisement is posting..</div>
+</div>
+

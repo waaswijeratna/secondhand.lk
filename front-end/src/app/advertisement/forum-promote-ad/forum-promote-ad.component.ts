@@ -38,6 +38,7 @@ export class ForumPromoteAdComponent implements OnInit {
   disableOptionBumpUp = false;
   disableOptionTopAd = false;
   disableOptionUrgent = false;
+  loading:boolean=false;
 
   promotionDetails: promotion_details[] = [
     { promotion_ID: "B1", days: 4, amount: 10 },
@@ -204,7 +205,8 @@ export class ForumPromoteAdComponent implements OnInit {
           // Push an object with both promotion_ID and days to selected_Promotions
           selected_Promotions.push({
             promotion_ID: promotion.promotion_ID,
-            days: promotion.days
+            days: promotion.days,
+            amount: promotion.amount
           });
         }
       }
@@ -228,7 +230,7 @@ export class ForumPromoteAdComponent implements OnInit {
 
       const dialogRef = this.dialog.open(PaymentGatewayDialogComponent, {
         width: '800px',
-        data: { clientSecret: this.clientSecret, total_amount: this.total_amount }
+        data: { clientSecret: this.clientSecret, total_amount: this.total_amount, selectedPromotions:this.selectedPromotions }
       });
 
       dialogRef.afterClosed().subscribe(result => {
@@ -247,6 +249,7 @@ export class ForumPromoteAdComponent implements OnInit {
   }
 
   handleError(error: any) {
+    this.loading=true;
     // Display the snackbar message
     const snackBarRef = this.snackBar.open(error, 'OK', {
       duration: 7000,
@@ -256,9 +259,10 @@ export class ForumPromoteAdComponent implements OnInit {
   }
 
   handleSuccess(status: any) {
+    this.loading=true;
     this.promoteChecked = true;
     // Display the snackbar message
-    const snackBarRef = this.snackBar.open(status, 'OK', {
+    const snackBarRef = this.snackBar.open('Payement succeeded', 'OK', {
       duration: 7000,
       verticalPosition: 'top',
       panelClass: ['customSnackbar1']
@@ -266,6 +270,7 @@ export class ForumPromoteAdComponent implements OnInit {
 
     // Subscribe to the afterDismissed() Observable of the snackbar reference
     snackBarRef.afterDismissed().subscribe(() => {
+      this.loading=false;
       this.submitForm();
     });
 

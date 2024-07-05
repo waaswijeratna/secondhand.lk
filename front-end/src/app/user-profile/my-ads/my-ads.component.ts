@@ -16,15 +16,21 @@ export class MyAdsComponent implements OnInit {
   user_id: string | null = null;
   myAdsData: any[] = [];
   searchResults: any[] = [];
-  ad_id:any;
+  ad_id: any;
 
   // Pagination properties
   currentPage: number = 1;
   itemsPerPage: number = 4;
   totalPages: number = 1;
   paginatedResults: any[] = [];
+  isFree: boolean = true;
+  isTop: boolean = true;
+  isUrgent: boolean = true;
+  isBumpUp: boolean = true;
 
-  constructor(private http: HttpClient, private advertisementService:AdvertisementService, private router: Router,private snackBar: MatSnackBar, private LocalStorageService:LocalStorageService) {}
+
+
+  constructor(private http: HttpClient, private advertisementService: AdvertisementService, private router: Router, private snackBar: MatSnackBar, private LocalStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
     this.retrievingResults();
@@ -51,12 +57,30 @@ export class MyAdsComponent implements OnInit {
       .subscribe(
         (data) => {
           this.searchResults = data;
+          console.log("wssas", this.searchResults);
           this.updatePagination();
         },
         (error) => {
           console.error('Error in search request:', error);
         }
       );
+  }
+
+  promotionDetermine() {
+    if (this.searchResults[0].promotionDetails.length == 0) {
+      this.isFree = true;
+    }
+    else {
+      if (this.searchResults[0].promotionDetails.promotion_ID.startsWith('T')) {
+        this.isTop = true;
+      }
+      if (this.searchResults[0].promotionDetails.promotion_ID.startsWith('U')) {
+        this.isTop = true;
+      }
+      if (this.searchResults[0].promotionDetails.promotion_ID.startsWith('B')) {
+        this.isTop = true;
+      }
+    }
   }
 
   updatePagination() {
@@ -84,7 +108,7 @@ export class MyAdsComponent implements OnInit {
     }
   }
 
-  sendAdId(ad_id:any) {   
+  sendAdId(ad_id: any) {
     this.advertisementService.getAdvertisement(ad_id)
       .subscribe(
         data => {
@@ -99,30 +123,30 @@ export class MyAdsComponent implements OnInit {
 
   deleteAd(ad_id: any) {
     console.log("id?", ad_id);
-      this.http.post('http://localhost:3000/api/deleteAd', { ad_id })
-        .subscribe(
-          (response) => {
-                      // Display the snackbar message
-                      const snackBarRef = this.snackBar.open('Advertisement deleted Successfully', 'OK', {
-                        duration: 7000,
-                        verticalPosition: 'top',
-                        panelClass: ['customSnackbar1']
-                      });
-  
-            console.log('Ad deleted:', response);
-            // Refresh the cart data after deletion
-            this.retrievingResults();
-          },
-          (error) => {
-            console.error('Error deleting ad:', error);
-                      // Display the snackbar message
-                      this.snackBar.open('Error deleting advertisement, Try again', 'OK', {
-                        duration: 7000,
-                        verticalPosition: 'top',
-                        panelClass:['customSnackbar2'] 
-                      });
-          }
-        );
-    }
+    this.http.post('http://localhost:3000/api/deleteAd', { ad_id })
+      .subscribe(
+        (response) => {
+          // Display the snackbar message
+          const snackBarRef = this.snackBar.open('Advertisement deleted Successfully', 'OK', {
+            duration: 7000,
+            verticalPosition: 'top',
+            panelClass: ['customSnackbar1']
+          });
+
+          console.log('Ad deleted:', response);
+          // Refresh the cart data after deletion
+          this.retrievingResults();
+        },
+        (error) => {
+          console.error('Error deleting ad:', error);
+          // Display the snackbar message
+          this.snackBar.open('Error deleting advertisement, Try again', 'OK', {
+            duration: 7000,
+            verticalPosition: 'top',
+            panelClass: ['customSnackbar2']
+          });
+        }
+      );
+  }
 
 }

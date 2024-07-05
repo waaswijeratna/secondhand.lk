@@ -1,18 +1,49 @@
 <!-- payment-gateway-dialog.component.html -->
 
 <div class="dialog-container">
-  <div class="dialog-header">
-    Complete Your Payment
+  <div class="left">
+    <div class="cardS">
+      <div class="amount-display">
+        <div class="amoutheading">Your payment amount</div>
+        <div class="amount">$ {{total_amount}}</div>
+      </div>
+      <div class="totCal" *ngFor="let promotion of selectedPromotions">
+        <div>
+          <ng-container *ngIf="promotion.promotion_ID.startsWith('B');">
+            Bump up <span class="daysP">(Days: {{promotion.days}})</span>
+          </ng-container>
+          <ng-container *ngIf="promotion.promotion_ID.startsWith('T');">
+            Top ad <span class="daysP">(Days: {{promotion.days}})</span>
+          </ng-container>
+          <ng-container *ngIf="promotion.promotion_ID.startsWith('U');">
+            Urgent <span class="daysP">(Days: {{promotion.days}})</span>
+          </ng-container>
+        </div>
+        <div>{{promotion.amount}}</div>
+      </div>
+      
+      <mat-divider></mat-divider>
+      <div class="calTot">
+        <div>Total amount</div>
+        <div>{{ total_amount}}</div>
+      </div>
+    </div>
+    <div class="security">
+      <p class="secText">Your security is our top priority. We ensure that all transactions are highly secure. For your safety, please complete the payment within <b>5 minutes</b>. Happy advertising!</p>
+    </div>
   </div>
-  <div class="amount-display">
-    Amount: {{ total_amount | currency }}
-  </div>
-  <mat-divider></mat-divider>
-  <div mat-dialog-content>
-    <div id="payment-element" class="payment-element-container"></div>
-  </div>
-  <div mat-dialog-actions class="dialog-actions">
-    <button mat-raised-button id="cancel_btn" (click)="dialogRef.close()">Cancel</button>
-    <button mat-raised-button color="primary" (click)="handlePayment()">Pay</button>
+  <div class="right">
+    <div class="dialog-header">
+      <div>Complete Your Payment</div>
+      <app-countdown class="timerStyles"></app-countdown>
+    </div>
+    <mat-divider></mat-divider>
+    <div mat-dialog-content>
+      <div id="payment-element" class="payment-element-container"></div>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-raised-button id="cancel_btn" (click)="dialogRef.close()">Cancel</button>
+      <button mat-raised-button color="primary" (click)="handlePayment()">Pay</button>
+    </div>
   </div>
 </div>

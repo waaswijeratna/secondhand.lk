@@ -58,6 +58,8 @@ import { ContactUsComponent } from './footer/contact-us/contact-us.component';
 import { TermsComponent } from './footer/terms/terms.component';
 import { FeedebackComponent } from './footer/feedeback/feedeback.component';
 import { BannerAdFooterComponent } from './footer/banner-ad-footer/banner-ad-footer.component';
+import { TagModule } from 'primeng/tag';
+import { CountdownComponent } from './advertisement/forum-promote-ad/payment-gateway-dialog/countdown/countdown.component';
 
 
 
@@ -107,6 +109,8 @@ import { BannerAdFooterComponent } from './footer/banner-ad-footer/banner-ad-foo
     TermsComponent,
     FeedebackComponent,
     BannerAdFooterComponent,
+    CountdownComponent,
+
 
   ],
   imports: [
@@ -132,7 +136,8 @@ import { BannerAdFooterComponent } from './footer/banner-ad-footer/banner-ad-foo
     MessagesModule,
     CarouselModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    TagModule
   ],
   providers: [
     provideClientHydration()

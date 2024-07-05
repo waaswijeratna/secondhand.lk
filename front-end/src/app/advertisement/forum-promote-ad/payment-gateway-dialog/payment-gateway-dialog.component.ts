@@ -16,6 +16,7 @@ export class PaymentGatewayDialogComponent implements OnInit {
   elements!: StripeElements;
   clientSecret: string;
   total_amount!: number;
+  selectedPromotions:any;
 
   constructor(
     public dialogRef: MatDialogRef<PaymentGatewayDialogComponent>,
@@ -24,6 +25,8 @@ export class PaymentGatewayDialogComponent implements OnInit {
   ) {
     this.clientSecret = data.clientSecret;
     this.total_amount = data.total_amount;
+    this.selectedPromotions = this.data.selectedPromotions
+    console.log("asdasdccc", this.data.selectedPromotions);
   }
 
   ngOnInit() {

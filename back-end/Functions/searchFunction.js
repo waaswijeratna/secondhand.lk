@@ -42,7 +42,8 @@ const searchFunction = async (req, res, next) => {
                 c.category, 
                 sc.subcategory, 
                 l.location, 
-                sl.sublocation
+                sl.sublocation,
+                a.approved_status
             FROM ads a
             LEFT JOIN ImageCTE ic ON a.ad_id = ic.ad_id
             LEFT JOIN telephonenumbers t ON a.ad_id = t.ad_id
@@ -54,6 +55,13 @@ const searchFunction = async (req, res, next) => {
             LEFT JOIN usertable utt ON a.created_by = utt.userId             
             WHERE 1=1
         `;
+
+        if (!userId) {
+            query += ` AND a.approved_status = 'approved'`;
+        }
+        else{
+            query += ` AND a.approved_status <> 'rejected'`;
+        }
 
         if (keywords) {
             query += ` AND MATCH(a.title, a.description) AGAINST(? IN NATURAL LANGUAGE MODE)`;
@@ -90,9 +98,14 @@ const searchFunction = async (req, res, next) => {
         if (userId) {
             query += ` AND utt.userId = ?`;
             params.push(userId);
+            query += ` ORDER BY a.bump_up_date DESC, a.approved_status`
+        }
+        else{
+            query += ` ORDER BY a.bump_up_date DESC`
         }
 
-        query += ` ORDER BY a.bump_up_date DESC`
+
+
 
         if (defaultFlag) {
             query += '  LIMIT 20';

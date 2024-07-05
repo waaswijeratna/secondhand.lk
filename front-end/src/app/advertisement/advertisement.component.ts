@@ -21,16 +21,18 @@ export class AdvertisementComponent implements OnInit{
 
   // Stepper linear mode
   isLinear = true;
+  loading :boolean =false;
 
   // Stepper restrict next step
-  step1Completed: boolean = false;
-  step2Completed: boolean = false;
-  step3Completed: boolean = false;
+  step1Completed: boolean = true;
+  step2Completed: boolean = true;
+  step3Completed: boolean = true;
   step4Completed: boolean = false;
 
   //selected category and subcategory by user
   selectedSubcategoryName!: string;
   selectedCategoryName!: string;
+  
 
   //input of child components to submit their forms back
   submitForms: boolean = false;
@@ -127,6 +129,8 @@ export class AdvertisementComponent implements OnInit{
     // this.allForms.forEach((value, key) => {
     //   console.log(`${key}: ${value}`);
     // });
+    this.loading = true;
+
     setTimeout(() => {
 
       this.allForms.forEach((value: FormDataEntryValue, key: string) => {
@@ -139,6 +143,7 @@ export class AdvertisementComponent implements OnInit{
 
       this.http.post(urlApi, this.allForms).subscribe(
         response => {
+          this.loading = false;
           // Display the snackbar message
           const snackBarRef = this.snackBar.open(successfullMsg, 'OK', {
             duration: 7000,
@@ -154,6 +159,7 @@ export class AdvertisementComponent implements OnInit{
           },
 
         error => {
+          this.loading = false;
           console.error('Error submitting advertisement:', error);
           // Display the snackbar message
           this.snackBar.open(errorMsg, 'OK', {
