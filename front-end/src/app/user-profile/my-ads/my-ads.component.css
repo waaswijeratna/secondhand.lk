@@ -190,8 +190,7 @@
     position: absolute;
     top: -0.5rem;
     right: -0.5rem;
-    background-color: #faedb1; /* Adjust as needed */
-    border: 0.2rem solid #d1a000;
+    background-color: #faedb1; 
     color: #d1a000;
     padding: 0.5rem 3rem;
     border-radius: 0.5rem 0 0.5rem 0.5rem;

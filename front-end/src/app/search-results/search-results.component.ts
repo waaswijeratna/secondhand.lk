@@ -7,6 +7,7 @@ import { LocationService } from '../app-services/app-services-locations';
 import { Location, Sublocation } from '../app-services/app-services-locations';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserLocationService } from '../app-services/app-get-user-location';
+import { PageEvent } from '@angular/material/paginator';
 
 
 
@@ -30,7 +31,11 @@ export class SearchResultsComponent implements OnInit {
   userLocation:any;
   filters:any;
 
-
+  paginatedSearchResults: any[] = [];
+  paginatedTopAds: any[] = [];
+  totalResults = 0;
+  pageSize = 5;
+  currentPage = 0;
 
 
   constructor(private http: HttpClient, private fb: FormBuilder, private categoryService: CategoryService, private locationService: LocationService, private route: ActivatedRoute, private UserLocationService: UserLocationService) {
@@ -190,12 +195,15 @@ export class SearchResultsComponent implements OnInit {
       .subscribe(
         (data) => {
           this.searchResults = data;  // Assign fetched data to searchResults array
+          this.totalResults = data.length; // Set total results
+
           if(this.searchResults.length===0){
             this.displayNoresults = true;
           }
           else{
             this.displayNoresults = false;
             this.sortAds(this.searchResults);
+            this.updatePaginatedResults();
           }
           console.log('Search results:', this.searchResults);
         },
@@ -203,6 +211,19 @@ export class SearchResultsComponent implements OnInit {
           console.error('Error in search request:', error);
         }
       );
+  }
+
+  onPageChange(event: PageEvent) {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.updatePaginatedResults();
+  }
+
+  updatePaginatedResults() {
+    const startIndex = this.currentPage * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedSearchResults = this.searchResults.slice(startIndex, endIndex);
+    this.paginatedTopAds = this.isTopFilterSelected() ? this.topAds.slice(startIndex, endIndex) : this.randomTopAds.slice(startIndex, endIndex);
   }
 
   toggleTopad() {

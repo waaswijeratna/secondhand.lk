@@ -4574,6 +4574,7 @@ export {
   ConnectableObservable,
   Subject,
   BehaviorSubject,
+  ReplaySubject,
   AsyncAction,
   AsyncScheduler,
   EMPTY,
@@ -4705,4 +4706,4 @@ export {
   partition,
   race
 };
-//# sourceMappingURL=chunk-CICD3YWD.js.map
+//# sourceMappingURL=chunk-Y6HLD53L.js.map

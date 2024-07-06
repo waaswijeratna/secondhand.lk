@@ -246,3 +246,13 @@ color: #2A7AAD;
 }
 
 
+::ng-deep .pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    color: #304E74;
+  }
+
+
+  
+

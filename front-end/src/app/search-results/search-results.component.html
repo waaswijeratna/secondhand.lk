@@ -109,7 +109,7 @@
 
 
                         @if(!TopAdSelected){
-                        <div *ngFor="let ad of searchResults">
+                        <div *ngFor="let ad of paginatedSearchResults">
                             <mat-card class="ad-card" [routerLink]="['/advertisementResults']"
                                 [queryParams]="{ ad: ad | json }">
                                 <div class="ad-content">
@@ -127,12 +127,16 @@
                             </mat-card>
                         </div>
                         }
+                        <div class="pagination-container">
+                            <mat-paginator [length]="totalResults" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15, 20]" (page)="onPageChange($event)" class="paginator">
+                            </mat-paginator>
+                        </div>
                     </div>
                 </div>
             </mat-card>
             <div class="bannerRight">
                 <app-banner-ad [formPayload]="filters" [banner_type_id]="2"></app-banner-ad>
             </div>
-        </div>
+        </div>          
     </div>
 </div>

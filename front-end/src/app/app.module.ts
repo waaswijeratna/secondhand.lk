@@ -60,7 +60,7 @@ import { FeedebackComponent } from './footer/feedeback/feedeback.component';
 import { BannerAdFooterComponent } from './footer/banner-ad-footer/banner-ad-footer.component';
 import { TagModule } from 'primeng/tag';
 import { CountdownComponent } from './advertisement/forum-promote-ad/payment-gateway-dialog/countdown/countdown.component';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -137,7 +137,8 @@ import { CountdownComponent } from './advertisement/forum-promote-ad/payment-gat
     CarouselModule,
     MatTooltipModule,
     MatExpansionModule,
-    TagModule
+    TagModule,
+    MatPaginatorModule
   ],
   providers: [
     provideClientHydration()

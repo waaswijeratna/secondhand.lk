@@ -1,11 +1,11 @@
 import {
   ObjectUtils,
   PrimeNGConfig
-} from "./chunk-ZQ2IR4HA.js";
+} from "./chunk-H46A4TQA.js";
 import {
   DOCUMENT,
   isPlatformBrowser
-} from "./chunk-BHX6PC2Y.js";
+} from "./chunk-3L44YHXZ.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -31,7 +31,7 @@ import {
   ɵɵdirectiveInject,
   ɵɵprojection,
   ɵɵprojectionDef
-} from "./chunk-LNEI2XG3.js";
+} from "./chunk-3GFV3L6V.js";
 
 // node_modules/primeng/fesm2022/primeng-dom.mjs
 var DomHandler = class _DomHandler {
@@ -956,4 +956,4 @@ export {
   Ripple,
   RippleModule
 };
-//# sourceMappingURL=chunk-CMAX37ZR.js.map
+//# sourceMappingURL=chunk-FIOL3J4L.js.map
