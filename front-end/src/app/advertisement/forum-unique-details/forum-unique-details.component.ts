@@ -1,9 +1,10 @@
-import { Component, Input, SimpleChanges, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, Input, SimpleChanges, OnChanges, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../app-services/app-service-categories';
 import { Category, Subcategory } from '../../app-services/app-service-categories';
 import { AdvertisementService } from '../../app-services/app-service-getAdvertisementData';
-
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-forum-unique-details',
@@ -12,7 +13,7 @@ import { AdvertisementService } from '../../app-services/app-service-getAdvertis
 })
 export class ForumUniqueDetailsComponent implements OnChanges {
 
-  @Input() selectedSubcategory: string = ''; 
+  @Input() selectedSubcategory: string = '';
   @Input() selectedCategory: string = '';
   @Input() submitForms: boolean = false;
   @Input() isUpdate: boolean = true;
@@ -22,6 +23,37 @@ export class ForumUniqueDetailsComponent implements OnChanges {
 
   selectedSubcategoryName: string = '';
   selectedCategoryName: string = '';
+
+  //autocomplete
+  brandOptions: string[] = [];
+  // Define brand options for different subcategories
+  brandOptionsMap: { [key: string]: string[] } = {
+    '1': ['Aston Martin', 'Audi', 'BMW', 'Chevrolet', 'Dacia', 'Daihatsu', 'Ford', 'Honda', 'Hyundai', 'Jaguar', 'Jeep', 'Kia', 'Land Rover', 'Lexus', 'Mazda', 'McLaren', 'Mercedes-Benz', 'Mitsubishi', 'Nissan', 'Peugeot', 'Porsche', 'Rolls-Royce', 'Subaru', 'Suzuki', 'Toyota', 'Volkswagen', 'Volvo'],
+    '2': ['Aprilia', 'Bajaj', 'BMW', 'Ducati', 'Harley-Davidson', 'Hero', 'Honda', 'Kawasaki', 'KTM', 'Mahindra', 'Royal Enfield', 'Suzuki', 'Triumph', 'TVS', 'Yamaha'],
+    '3': ['Bajaj', 'Mahindra', 'Piaggio', 'TVS'],
+    '4': ['Chevrolet', 'Citroën', 'Dodge', 'Fiat', 'Ford', 'Mahindra', 'Maruti Suzuki', 'Mazda', 'Nissan', 'Peugeot', 'Renault', 'Tata', 'Toyota', 'Volkswagen', 'Volvo'],
+    '5': ['Ashok Leyland', 'Blue Bird', 'Eicher', 'Hino', 'Isuzu', 'Mahindra', 'Scania', 'Tata', 'Volvo'],
+    '6': ['Ashok Leyland', 'Daimler', 'Hino', 'Isuzu', 'Mahindra', 'Tata', 'Volvo'],
+    '7': ['Atlas', 'Avon', 'Btwin', 'Cannondale', 'Giant', 'Hero', 'Kona', 'Lumala', 'Merida', 'Montra', 'Rockrider', 'Schwinn', 'Scott', 'Specialized', 'Trek', 'Urban Terrain'],
+    '14': ['Apple', 'Asus', 'Lava', 'Micromax', 'Motorola', 'Nokia', 'OnePlus', 'Oppo', 'Poco', 'Realme', 'Samsung', 'Sony', 'Vivo', 'Xiaomi'],
+    '15': ['Acer', 'Apple', 'Asus', 'Dell', 'HP', 'Lenovo', 'Microsoft', 'Samsung', 'Sony'],
+    '16': ['Apple', 'Asus', 'Huawei', 'Lenovo', 'Microsoft', 'Samsung'],
+    '17': ['LG', 'Panasonic', 'Samsung', 'Sony', 'TCL', 'Toshiba', 'Vu', 'Xiaomi'],
+    '18': ['Canon', 'Fujifilm', 'GoPro', 'Nikon', 'Olympus', 'Panasonic', 'Pentax', 'Sony'],
+    '19': ['Acer', 'Asus', 'Dell', 'HP', 'Lenovo', 'Logitech', 'Microsoft', 'Razer', 'Samsung', 'Sony'],
+    '21': ['Allen Solly', 'Biba', 'Fabindia', 'Levi\'s', 'Pantaloons', 'Peter England', 'Raymond', 'Van Heusen', 'W', 'Westside'],
+    '22': ['Adidas', 'Bata', 'Campus', 'Converse', 'Crocs', 'Nike', 'Puma', 'Reebok', 'Skechers', 'Woodland'],
+    '23': ['American Tourister', 'Delsey', 'HP', 'Samsonite', 'Skybags', 'VIP'],
+    '25': ['Fastrack', 'Ray-Ban', 'Titan', 'Vincent Chase'],
+    '26': ['Casio', 'Fastrack', 'Fossil', 'Titan'],
+    '44': ['Gibson', 'Ibanez', 'Jackson', 'PRS', 'Schecter', 'Yamaha'],
+    '45': ['Buffet Crampon', 'Jupiter', 'Selmer', 'Yamaha'],
+
+
+  };
+
+
+  filteredBrandOptions!: Observable<string[]>;
 
   // Declare properties for form groups
   vehiclesForm: FormGroup;
@@ -145,6 +177,11 @@ export class ForumUniqueDetailsComponent implements OnChanges {
 
   }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.brandOptions.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['isUpdate'] && changes['isUpdate'].currentValue) {
       this.initializeIfUpdate();
@@ -154,6 +191,32 @@ export class ForumUniqueDetailsComponent implements OnChanges {
     }
     if (changes['selectedSubcategory']) {
       this.selectedSubcategoryName = changes['selectedSubcategory'].currentValue;//assign changed value to selectedsubCsategoryName
+
+      this.brandOptions = this.brandOptionsMap[this.selectedSubcategory] || [];
+      if (this.selectedCategory == '1') {
+        this.filteredBrandOptions = this.vehiclesForm.get('brand')!.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value || ''))
+        );
+      }
+      if (this.selectedCategory == '3') {
+        this.filteredBrandOptions = this.electronicsForm.get('brand')!.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value || ''))
+        );
+      }
+      if (this.selectedCategory == '4') {
+        this.filteredBrandOptions = this.fashionForm.get('brand')!.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value || ''))
+        );
+      }
+      if (this.selectedCategory == '8') {
+        this.filteredBrandOptions = this.musicalInstrumentForm.get('brand')!.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value || ''))
+        );
+      }
       //To prevent data binding after checked setTimeout is used.
       setTimeout(() => {
         if (!this.firstTry) {
@@ -221,9 +284,9 @@ export class ForumUniqueDetailsComponent implements OnChanges {
     if (this.selectedCategoryName === '1') {
       //setvalidators
       this.vehiclesForm.get('brand')?.setValidators([Validators.required]);
-      if (this.selectedSubcategoryName !== '7' && this.selectedSubcategoryName !== '8') { this.vehiclesForm.get('yearOfManufacture')?.setValidators([Validators.required, Validators.pattern("^[0-9]{4}$")]) };
+      if (this.selectedSubcategoryName !== '7' && this.selectedSubcategoryName !== '8') { this.vehiclesForm.get('yearOfManufacture')?.setValidators([Validators.required, Validators.pattern("^[0-9]{4}$"), Validators.max(this.getCurrentYear()), Validators.min(1900)]) };
       if (this.selectedSubcategoryName !== '7' && this.selectedSubcategoryName !== '8' && this.selectedSubcategoryName !== '9') { this.vehiclesForm.get('transmission')?.setValidators([Validators.required]) };
-      if (this.selectedSubcategoryName !== '7' && this.selectedSubcategoryName !== '8' && this.selectedSubcategoryName !== '9') { this.vehiclesForm.get('mileage')?.setValidators([Validators.required, Validators.pattern("^[0-9]*\\.?[0-9]+$")]) };
+      if (this.selectedSubcategoryName !== '7' && this.selectedSubcategoryName !== '8' && this.selectedSubcategoryName !== '9') { this.vehiclesForm.get('mileage')?.setValidators([Validators.required, Validators.pattern("^[0-9]*\\.?[0-9]+$"), Validators.max(300000), Validators.min(10)]) };
       if (this.selectedSubcategoryName === '8') { this.vehiclesForm.get('Part_or_Accessory')?.setValidators([Validators.required]) };
       if (this.selectedSubcategoryName === '7') { this.vehiclesForm.get('BicycleType')?.setValidators([Validators.required]) };
       //update validators
@@ -363,6 +426,10 @@ export class ForumUniqueDetailsComponent implements OnChanges {
       }
     }
 
+  }
+
+  getCurrentYear(): number {
+    return new Date().getFullYear();
   }
 
   // Listen to form validity changes of selected category form

@@ -169,7 +169,7 @@ export class ForumGeneralDetailsComponent implements OnChanges, OnInit {
                 } else {
                   this.uploadingImages = false;
                   // Display error message for images larger than 10MB
-                  this.errorMessage = "Image size cannot exceed 5MB. Please upload a different image.";
+                  this.errorMessage = "Image size cannot exceed 50MB. Please upload a different image.";
                 }
               }
             );

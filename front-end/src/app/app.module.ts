@@ -61,6 +61,9 @@ import { BannerAdFooterComponent } from './footer/banner-ad-footer/banner-ad-foo
 import { TagModule } from 'primeng/tag';
 import { CountdownComponent } from './advertisement/forum-promote-ad/payment-gateway-dialog/countdown/countdown.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {AsyncPipe} from '@angular/common';
+
 
 
 
@@ -110,6 +113,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     FeedebackComponent,
     BannerAdFooterComponent,
     CountdownComponent,
+    
 
 
   ],
@@ -138,7 +142,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatTooltipModule,
     MatExpansionModule,
     TagModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatAutocompleteModule,
+    AsyncPipe
   ],
   providers: [
     provideClientHydration()

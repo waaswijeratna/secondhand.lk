@@ -27,7 +27,7 @@ export class AdvertisementComponent implements OnInit{
   step1Completed: boolean = true;
   step2Completed: boolean = true;
   step3Completed: boolean = true;
-  step4Completed: boolean = false;
+  step4Completed: boolean = true;
 
   //selected category and subcategory by user
   selectedSubcategoryName!: string;

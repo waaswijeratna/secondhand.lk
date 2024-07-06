@@ -5183,6 +5183,7 @@ export {
   _getFocusedElementPierceShadowDom,
   _getEventTarget,
   _isTestEnvironment,
+  TAB,
   ENTER,
   ESCAPE,
   SPACE,
@@ -5259,4 +5260,4 @@ export {
   MatRippleLoader,
   _MatInternalFormField
 };
-//# sourceMappingURL=chunk-AZ6K242J.js.map
+//# sourceMappingURL=chunk-ER6EEJFY.js.map

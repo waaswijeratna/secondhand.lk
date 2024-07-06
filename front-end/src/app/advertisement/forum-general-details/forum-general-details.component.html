@@ -13,17 +13,18 @@
     </div>
 
     <!-- Description Textarea -->
-    <div>
+    <div class="hintLimit">
       <mat-form-field>
         <mat-label>Description:</mat-label>
-        <textarea matInput formControlName="description"></textarea>
+        <textarea matInput formControlName="description" #message maxlength="256" placeholder="Describe your advertisement..."></textarea>
+        <mat-hint class="hint" align="end">{{message.value.length}} / 256</mat-hint>
       </mat-form-field>
     </div>
 
     <!-- Price Input -->
     <div>
       <mat-form-field>
-        <mat-label>Price:</mat-label>
+        <mat-label>Price:<br>Rs.</mat-label>
         <input matInput type="number" formControlName="price">
       </mat-form-field>
     </div>
@@ -33,7 +34,7 @@
       <div>
         <mat-form-field>
           <mat-label>Location:</mat-label>
-          <mat-select formControlName="location" (change)="updateSublocations()" matTooltip="Enter your District">
+          <mat-select formControlName="location" (change)="updateSublocations()" matTooltip="Enter your District" matTooltipClass="custom-tooltip">
             <mat-option *ngFor="let location of locations" [value]="location.location_id">{{ location.location }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -43,7 +44,7 @@
       <div>
         <mat-form-field>
           <mat-label>Sublocation:</mat-label>
-          <mat-select formControlName="sublocation" matTooltip="Enter your city, If city is not found choose All">
+          <mat-select formControlName="sublocation" matTooltip="Enter your city, If city is not found choose All" matTooltipClass="custom-tooltip">
             <mat-option *ngFor="let sublocation of sublocations[generalDetailsForm.get('location')?.value]" [value]="sublocation.sublocation_id">{{ sublocation.sublocation }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -55,7 +56,7 @@
     <!-- Phone Number Input -->
     <div class="gridTelephone">
       <div class="addTelephone">
-        <mat-form-field matTooltip="maximum 3 telephone numbers">
+        <mat-form-field matTooltip="maximum 3 telephone numbers" matTooltipClass="custom-tooltip" matTooltipPosition="above">
             <mat-label>Phone Number:</mat-label>
             <input matInput type="tel" formControlName="phone" placeholder="You can add maximum 3 numbers">
         </mat-form-field>
@@ -79,11 +80,12 @@
 
     <!-- Add Images -->
     <div>
-      <div class="addImages" matTooltip="We compress your images to less than 5MB while keeping their quality!">
+      <div class="addImages" matTooltip="50MB Maximum" matTooltipClass="custom-tooltip">
         <button mat-flat-button color="primary" class="customUploader" [disabled]="disableAddImageButton">
           <input type="file" id="file" (change)="addImage($event)" accept="image/*" multiple [disabled]="disableAddImageButton">
           <label for="file" class="imageUploadbtn">Upload your images(Maximum 6 images)*<mat-icon class="imageIcon">add_a_photo</mat-icon></label>
         </button>
+        <mat-hint class="hint">Worry about image quality? We accept high-res images up to 50MB !</mat-hint>
         <div *ngIf="errorMessage" class="error-message">
           {{ errorMessage }}
         </div>
@@ -94,7 +96,7 @@
       <div class="addedImages"> 
         <div *ngFor="let image of imageFiles; let i = index" class="imagesList">
           <img [src]="imagePreviews[i]" alt="Preview" width="100" height="100">
-          <mat-icon (click)="removeImage(i)" class="imageRemoveicon" matTooltip="Remove" matTooltipPosition="right">highlight_off</mat-icon>
+          <mat-icon (click)="removeImage(i)" class="imageRemoveicon" matTooltip="Remove" matTooltipPosition="right" matTooltipClass="custom-tooltip">highlight_off</mat-icon>
         </div>
         <div *ngIf="uploadingImages" class="loaderAnimation">
           <mat-spinner diameter="30" color="primary"></mat-spinner>

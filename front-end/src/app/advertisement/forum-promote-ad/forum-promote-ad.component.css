@@ -77,3 +77,9 @@ form{
     backdrop-filter:blur(4px); 
     -webkit-backdrop-filter:blur(4px) ;
   }
+
+  ::ng-deep .custom-tooltip {
+    --mdc-plain-tooltip-container-color: #d9ecfc;
+    --mdc-plain-tooltip-supporting-text-color: #094d85;
+    --mdc-plain-tooltip-supporting-text-size: small;
+}

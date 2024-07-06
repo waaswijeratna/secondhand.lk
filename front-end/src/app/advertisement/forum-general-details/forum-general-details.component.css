@@ -124,5 +124,15 @@ input[type="file"]{
     margin-bottom: 3rem;
 }
 
+::ng-deep .custom-tooltip {
+    --mdc-plain-tooltip-container-color: #d9ecfc;
+    --mdc-plain-tooltip-supporting-text-color: #094d85;
+    --mdc-plain-tooltip-supporting-text-size: small;
+}
 
-
+.hint{
+    font-size: small;
+}
+.hintLimit{
+    padding-bottom: 1rem;
+}

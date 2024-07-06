@@ -175,7 +175,7 @@
 }
 
 ::ng-deep .custom-tooltip {
-    --mdc-plain-tooltip-container-color: #c5e2fa;
+    --mdc-plain-tooltip-container-color: #d9ecfc;
     --mdc-plain-tooltip-supporting-text-color: #094d85;
     --mdc-plain-tooltip-supporting-text-size: small;
 }
@@ -214,3 +214,4 @@
 .ad-details {
     margin-bottom: 2rem;
 }
+
