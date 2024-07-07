@@ -1,4 +1,8 @@
 import {
+  MatButton,
+  MatButtonModule
+} from "./chunk-J5GEQVOS.js";
+import {
   Overlay,
   OverlayConfig,
   OverlayModule
@@ -10,6 +14,7 @@ import {
   PortalModule,
   TemplatePortal
 } from "./chunk-RLSDAIEB.js";
+import "./chunk-NBHPWTJQ.js";
 import {
   animate,
   state,
@@ -17,11 +22,6 @@ import {
   transition,
   trigger
 } from "./chunk-6M7PMGDN.js";
-import "./chunk-NBHPWTJQ.js";
-import {
-  MatButton,
-  MatButtonModule
-} from "./chunk-J5GEQVOS.js";
 import {
   BreakpointObserver,
   Breakpoints,

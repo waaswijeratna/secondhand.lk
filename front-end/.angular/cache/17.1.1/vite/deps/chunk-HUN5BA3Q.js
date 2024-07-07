@@ -7,6 +7,9 @@ import {
   ViewportRuler
 } from "./chunk-XQWGW67P.js";
 import {
+  SelectionModel
+} from "./chunk-NBHPWTJQ.js";
+import {
   MAT_FORM_FIELD,
   MatFormField,
   MatFormFieldControl,
@@ -21,9 +24,6 @@ import {
   transition,
   trigger
 } from "./chunk-6M7PMGDN.js";
-import {
-  SelectionModel
-} from "./chunk-NBHPWTJQ.js";
 import {
   FormGroupDirective,
   NgControl,
@@ -1500,4 +1500,4 @@ export {
   MatSelectTrigger,
   MatSelectModule
 };
-//# sourceMappingURL=chunk-HE36CTGT.js.map
+//# sourceMappingURL=chunk-HUN5BA3Q.js.map

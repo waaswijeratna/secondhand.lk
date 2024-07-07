@@ -2,8 +2,8 @@ const db = require('../Services/db');
 
 const sendCategoryDetails = async (req, res, next) => {
   try {
-    const ad_id = req.body.ad_id; // Assuming ad_id is sent in the request body
-    const category_id = req.body.category_id; // Assuming category_id is sent in the request body
+    const ad_id = req.body.ad_id; 
+    const category_id = req.body.category_id; 
 
     // Determine table name based on category_id
     let tableName;
