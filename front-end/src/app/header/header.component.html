@@ -33,7 +33,7 @@
                     <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
                 </select>
             </div>
-            <input type="text" placeholder="Search..." formControlName="searchText">
+            <input type="text" placeholder="Search..." formControlName="searchText" (keyup.enter)="search()">
             <div class="search-icon">
                 <div class="search-icon-circle" (click)="search()">
                     <i class="material-icons">search</i>

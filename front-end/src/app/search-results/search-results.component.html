@@ -4,13 +4,13 @@
         <div class="bannerTop">
             <app-banner-ad [formPayload]="filters" [banner_type_id]="1"></app-banner-ad>
         </div>
-        
+
 
         <div class="gridColumns">
             <mat-card>
                 <div class="search-bar-container">
                     <div class="search_bar">
-                        <input matInput #searchInput placeholder="Search ads...">
+                        <input matInput #searchInput placeholder="Search ads..." (keyup.enter)="setKeyword(searchInput.value)">
                         <div class="search-icon-circle" (click)="setKeyword(searchInput.value)"><i
                                 class="material-icons">search</i></div>
                     </div>
@@ -82,61 +82,66 @@
                             <img src="../../assets/images/noResults.jpg">
                             <h4>Ooops ! no any results</h4>
                         </div>
-                        }@else{
-                        <div *ngIf="isTopFilterSelected() ? topAds.length > 0 : randomTopAds.length > 0">
-                            <div *ngFor="let topAd of isTopFilterSelected() ? topAds : randomTopAds">
-                                <mat-card class="top-ad-card" >
-                                    <div [routerLink]="['/advertisementResults']"
-                                    [queryParams]="{ ad: topAd | json }">
-                                        <div class="ad-content">
-                                            <img [src]="topAd.imagePaths[0]" class="ad-image" alt="Top Ad Image">
-                                            <div class="ad-details">
-                                                <div class="ad-title">{{ topAd.title }}</div>
-                                                <div class="ad-location">{{ topAd.location }}, {{ topAd.sublocation }}
+                        }@else if(!displayNoresults){
+                            <div *ngIf="isTopFilterSelected() ? topAds.length > 0 : randomTopAds.length > 0">
+                                <div *ngFor="let topAd of isTopFilterSelected() ? topAds : randomTopAds">
+                                    <mat-card class="top-ad-card">
+                                        <div [routerLink]="['/advertisementResults']"
+                                            [queryParams]="{ ad: topAd | json }">
+                                            <div class="ad-content">
+                                                <img [src]="topAd.imagePaths[0]" class="ad-image" alt="Top Ad Image">
+                                                <div class="ad-details">
+                                                    <div class="ad-title">{{ topAd.title }}</div>
+                                                    <div class="ad-location">{{ topAd.location }}, {{ topAd.sublocation
+                                                        }}
+                                                    </div>
+                                                    <div class="ad-price">Rs {{ topAd.price }}</div>
                                                 </div>
-                                                <div class="ad-price">Rs {{ topAd.price }}</div>
                                             </div>
+                                            <div class="ad-time">{{ calculateTimeAgo(topAd.created_at) }}</div>
                                         </div>
-                                        <div class="ad-time">{{ calculateTimeAgo(topAd.created_at) }}</div>
+                                        <div class="addToCart" (click)="addToCart($event, topAd.ad_id)"
+                                            matTooltip="Add to advertisement cart" matTooltipPosition="right">
+                                            <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                                fontIcon="add_shopping_cart"></mat-icon>
+                                        </div>
+                                    </mat-card>
+                                </div>
+                            </div>
+
+
+                            <div *ngFor="let ad of paginatedSearchResults">
+                                <mat-card class="ad-card" [routerLink]="['/advertisementResults']"
+                                    [queryParams]="{ ad: ad | json }">
+                                    <div class="ad-content">
+                                        <img [src]="ad.imagePaths[0]" class="ad-image" alt="Ad Image">
+                                        <div class="ad-details">
+                                            <div class="ad-title">{{ ad.title }}</div>
+                                            <div class="ad-location">{{ ad.location }}, {{ ad.sublocation }}</div>
+                                            <div class="ad-price">Rs {{ ad.price }}</div>
+                                        </div>
                                     </div>
-                                    <div class="addToCart" (click)="addToCart($event, topAd.ad_id)" matTooltip="Add to advertisement cart" matTooltipPosition="right">
-                                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="add_shopping_cart"></mat-icon>
+                                    <div class="ad-time">{{ calculateTimeAgo(ad.created_at) }}</div>
+                                    <div class="addToCart" (click)="addToCart($event, ad.ad_id)"
+                                        matTooltip="Add to advertisement cart" matTooltipPosition="right">
+                                        <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                            fontIcon="add_shopping_cart"></mat-icon>
                                     </div>
                                 </mat-card>
                             </div>
-                        </div>
-                        }
 
-
-                        @if(!TopAdSelected){
-                        <div *ngFor="let ad of paginatedSearchResults">
-                            <mat-card class="ad-card" [routerLink]="['/advertisementResults']"
-                                [queryParams]="{ ad: ad | json }">
-                                <div class="ad-content">
-                                    <img [src]="ad.imagePaths[0]" class="ad-image" alt="Ad Image">
-                                    <div class="ad-details">
-                                        <div class="ad-title">{{ ad.title }}</div>
-                                        <div class="ad-location">{{ ad.location }}, {{ ad.sublocation }}</div>
-                                        <div class="ad-price">Rs {{ ad.price }}</div>
-                                    </div>
-                                </div>
-                                <div class="ad-time">{{ calculateTimeAgo(ad.created_at) }}</div>
-                                <div class="addToCart" (click)="addToCart($event, ad.ad_id)" matTooltip="Add to advertisement cart" matTooltipPosition="right">
-                                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="add_shopping_cart" ></mat-icon>
-                                </div>
-                            </mat-card>
-                        </div>
-                        }
                         <div class="pagination-container">
-                            <mat-paginator [length]="totalResults" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15, 20]" (page)="onPageChange($event)" class="paginator">
+                            <mat-paginator [length]="totalResults" [pageSize]="pageSize"
+                                [pageSizeOptions]="[5, 10, 15, 20]" (page)="onPageChange($event)" class="paginator">
                             </mat-paginator>
                         </div>
+                        }
                     </div>
                 </div>
             </mat-card>
             <div class="bannerRight">
                 <app-banner-ad [formPayload]="filters" [banner_type_id]="2"></app-banner-ad>
             </div>
-        </div>          
+        </div>
     </div>
 </div>

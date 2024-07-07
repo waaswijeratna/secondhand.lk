@@ -8,6 +8,8 @@ import { Location, Sublocation } from '../app-services/app-services-locations';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserLocationService } from '../app-services/app-get-user-location';
 import { PageEvent } from '@angular/material/paginator';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 
 
@@ -38,7 +40,7 @@ export class SearchResultsComponent implements OnInit {
   currentPage = 0;
 
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private categoryService: CategoryService, private locationService: LocationService, private route: ActivatedRoute, private UserLocationService: UserLocationService) {
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef, private fb: FormBuilder, private categoryService: CategoryService, private locationService: LocationService, private route: ActivatedRoute, private UserLocationService: UserLocationService) {
     this.filterForm = this.fb.group({
       keywords: [''],
       sell: [false],
@@ -140,7 +142,7 @@ export class SearchResultsComponent implements OnInit {
 
     const filtersSelected = formValues.keywords || formValues.sell || formValues.rent || formValues.urgent ||
       formValues.top || formValues.category || formValues.subcategory ||
-      formValues.location || formValues.sublocation || formValues.top || formValues.nearMe;
+      formValues.location || formValues.sublocation || formValues.nearMe;
 
 
     console.log("filterssmnmn",filtersSelected);
@@ -199,6 +201,8 @@ export class SearchResultsComponent implements OnInit {
 
           if(this.searchResults.length===0){
             this.displayNoresults = true;
+            this.paginatedSearchResults = [];
+            this.paginatedTopAds = [];
           }
           else{
             this.displayNoresults = false;
@@ -206,6 +210,9 @@ export class SearchResultsComponent implements OnInit {
             this.updatePaginatedResults();
           }
           console.log('Search results:', this.searchResults);
+
+          this.cd.detectChanges();
+
         },
         (error) => {
           console.error('Error in search request:', error);
