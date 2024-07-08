@@ -10,7 +10,8 @@
             <mat-card>
                 <div class="search-bar-container">
                     <div class="search_bar">
-                        <input matInput #searchInput placeholder="Search ads..." (keyup.enter)="setKeyword(searchInput.value)">
+                        <input matInput #searchInput placeholder="Search ads..."
+                            (keyup.enter)="setKeyword(searchInput.value)">
                         <div class="search-icon-circle" (click)="setKeyword(searchInput.value)"><i
                                 class="material-icons">search</i></div>
                     </div>
@@ -82,7 +83,8 @@
                             <img src="../../assets/images/noResults.jpg">
                             <h4>Ooops ! no any results</h4>
                         </div>
-                        }@else if(!displayNoresults){
+                        }
+                        <div *ngIf="!displayNoresults">
                             <div *ngIf="isTopFilterSelected() ? topAds.length > 0 : randomTopAds.length > 0">
                                 <div *ngFor="let topAd of isTopFilterSelected() ? topAds : randomTopAds">
                                     <mat-card class="top-ad-card">
@@ -96,6 +98,11 @@
                                                         }}
                                                     </div>
                                                     <div class="ad-price">Rs {{ topAd.price }}</div>
+                                                    <div class="promotionsBadge">
+                                                        <button *ngIf="isUrgent(topAd)"
+                                                            class="badge-urgent">Urgent</button>
+                                                        <button *ngIf="isTopAd(topAd)" class="badge-top">Top Ad</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="ad-time">{{ calculateTimeAgo(topAd.created_at) }}</div>
@@ -109,33 +116,40 @@
                                 </div>
                             </div>
 
-
-                            <div *ngFor="let ad of paginatedSearchResults">
-                                <mat-card class="ad-card" [routerLink]="['/advertisementResults']"
-                                    [queryParams]="{ ad: ad | json }">
-                                    <div class="ad-content">
-                                        <img [src]="ad.imagePaths[0]" class="ad-image" alt="Ad Image">
-                                        <div class="ad-details">
-                                            <div class="ad-title">{{ ad.title }}</div>
-                                            <div class="ad-location">{{ ad.location }}, {{ ad.sublocation }}</div>
-                                            <div class="ad-price">Rs {{ ad.price }}</div>
+                            <div *ngIf="!isTopFilterSelected()">
+                                <div *ngFor="let ad of paginatedSearchResults">
+                                    <mat-card class="ad-card" [routerLink]="['/advertisementResults']"
+                                        [queryParams]="{ ad: ad | json }">
+                                        <div class="ad-content">
+                                            <img [src]="ad.imagePaths[0]" class="ad-image" alt="Ad Image">
+                                            <div class="ad-details">
+                                                <div class="ad-title">{{ ad.title }}</div>
+                                                <div class="ad-location">{{ ad.location }}, {{ ad.sublocation }}</div>
+                                                <div class="ad-price">Rs {{ ad.price }}</div>
+                                                <div class="promotionsBadge">
+                                                    <button *ngIf="isUrgent(ad)" class="badge-urgent">Urgent</button>
+                                                    <button *ngIf="isTopAd(ad)" class="badge-top">Top Ad</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="ad-time">{{ calculateTimeAgo(ad.created_at) }}</div>
-                                    <div class="addToCart" (click)="addToCart($event, ad.ad_id)"
-                                        matTooltip="Add to advertisement cart" matTooltipPosition="right">
-                                        <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                            fontIcon="add_shopping_cart"></mat-icon>
-                                    </div>
-                                </mat-card>
+                                        <div class="ad-time">{{ calculateTimeAgo(ad.created_at) }}</div>
+                                        <div class="addToCart" (click)="addToCart($event, ad.ad_id)"
+                                            matTooltip="Add to advertisement cart" matTooltipPosition="right">
+                                            <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                                fontIcon="add_shopping_cart"></mat-icon>
+                                        </div>
+                                    </mat-card>
+                                </div>
                             </div>
 
-                        <div class="pagination-container">
-                            <mat-paginator [length]="totalResults" [pageSize]="pageSize"
-                                [pageSizeOptions]="[5, 10, 15, 20]" (page)="onPageChange($event)" class="paginator">
-                            </mat-paginator>
+
+                            <div class="pagination-container">
+                                <mat-paginator [length]="totalResults" [pageSize]="pageSize"
+                                    [pageSizeOptions]="[5, 10, 15, 20]" (page)="onPageChange($event)" class="paginator">
+                                </mat-paginator>
+                            </div>
                         </div>
-                        }
+
                     </div>
                 </div>
             </mat-card>

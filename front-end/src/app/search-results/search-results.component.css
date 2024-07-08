@@ -253,6 +253,29 @@ color: #2A7AAD;
     color: #304E74;
   }
 
+.promotionsBadge{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 0.7rem;
+}
+  
+.badge-urgent {
+    background-color: #f72727;
+    color: #ffffff;
+    border-radius: 0.2rem;
+    border: none;
+    padding: 0.2rem 0.3rem;
+}
+
+.badge-top {
+    background-color: #ffc412;
+    color: #ffffff;
+    border-radius: 0.2rem;
+    border: none;
+    padding: 0.2rem 0.3rem;
+}
+
 
   
 

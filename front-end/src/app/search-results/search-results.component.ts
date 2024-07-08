@@ -347,4 +347,11 @@ export class SearchResultsComponent implements OnInit {
     );
   }
 
+  isUrgent(ad: any): boolean {
+    return Array.isArray(ad.promotionDetails) && ad.promotionDetails.some((detail: any) => detail.promotion_ID.startsWith('U'));
+  }
+  isTopAd(ad: any): boolean {
+    return Array.isArray(ad.promotionDetails) && ad.promotionDetails.some((detail: any) => detail.promotion_ID.startsWith('T'));
+  }
+
 }
