@@ -20,7 +20,7 @@
       <td>{{ complaint.complaint_type }}</td>
       <td>{{ complaint.complaint_description }}</td>
       <td>{{ complaint.earliest_complaint_date }}</td>
-      <td><button (click)="showPopup()">View</button></td>
+      <td><button (click)="showPopup(complaint.advertisement_id)">View</button></td>
     </tr>
   </tbody>
 </table>
@@ -28,6 +28,6 @@
 <div class="popup-overlay" [ngClass]="{'show': isPopupVisible}" (click)="closePopup()"></div>
 <div class="popup" [ngClass]="{'show': isPopupVisible}">
   <p>Are you sure you want to ban this AD?</p>
-  <button class="ban-user" (click)="banUser()">Ban AD</button>
+  <button class="ban-user" (click)="banAd()">Ban AD</button>
   <button class="cancel" (click)="closePopup()">Cancel</button>
 </div>

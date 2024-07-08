@@ -21,6 +21,7 @@ export class AdminAdReviewComponent implements OnInit {
   }
 
   async fetchPendingAds() {
+    this.loading = true;
     try {
       const response = await axios.get('http://localhost:8000/admin/get-pending-ads');
       this.ads = response.data;
@@ -75,7 +76,7 @@ export class AdminAdReviewComponent implements OnInit {
     try {
       await axios.put(`http://localhost:8000/admin/update-ad-status/${adId}`, { status: 'approved' });
       this.closePopup();
-      this.fetchPendingAds();
+      this.fetchPendingAds(); // Refresh the list of ads
     } catch (error) {
       console.error('Error accepting ad:', error);
     }
@@ -85,7 +86,7 @@ export class AdminAdReviewComponent implements OnInit {
     try {
       await axios.put(`http://localhost:8000/admin/update-ad-status/${adId}`, { status: 'rejected' });
       this.closePopup();
-      this.fetchPendingAds();
+      this.fetchPendingAds(); // Refresh the list of ads
     } catch (error) {
       console.error('Error rejecting ad:', error);
     }

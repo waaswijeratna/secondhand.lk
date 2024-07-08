@@ -1,10 +1,10 @@
-
 <div *ngIf="loading" class="loading-overlay">
   <div class="spinner-container">
     <div class="spinner"></div>
     <div class="loading-text">Loading...</div>
   </div>
-</div><div class="ad-container">
+</div>
+<div class="ad-container" *ngIf="!loading">
   <div class="ad-card" *ngFor="let ad of displayedAds">
     <div class="ad-header">
       <h3>{{ ad.title }}</h3>
@@ -25,11 +25,12 @@
   </div>
 </div>
 
-<div class="pagination">
+<div class="pagination" *ngIf="!loading">
   <button 
     class="btn btn-secondary" 
     [disabled]="currentPage === 1" 
-    (click)="goToPage(currentPage - 1)"><i class="fa-solid fa-chevron-left"></i>
+    (click)="goToPage(currentPage - 1)">
+    <i class="fa-solid fa-chevron-left"></i>
     Previous
   </button>
   <span>Page {{ currentPage }}</span>

@@ -22,7 +22,43 @@ const resetPassword = require("../Functions/resetPassword/resetPassword.js");
 const getAdminData = require("../Functions/getAdminData/getAdminData.js");
 const changePassword = require("../Functions/changePassword/changePassword.js");
 const adminDataChange = require("../Functions/adminDataChange/adminDataChange.js");
+const banedAds = require("../Functions/banedAds/banedAds.js");
+const chat = require("../Functions/chat/chat.js");
+const getChat = require("../Functions/chat/getChat.js");
+const getUserId = require("../Functions/chat/getUserId.js");
+const getAllChat = require("../Functions/chat/getAllChat.js");
+const getAdCount = require("../Functions/getAdCount/getAdCount.js");
+const getUserCount = require("../Functions/getUserCount/getUserCount.js");
+const getRevenue = require("../Functions/getRevenue/getRevenue.js");
 
+
+
+
+router.get('/get-revenue', (req, res) => {
+    getRevenue(req, res);
+});
+
+
+router.get('/get-user-count', (req, res) => {
+    getUserCount(req, res);
+});
+
+
+router.get('/getAllChat', (req, res) => {
+    getAllChat(req, res);
+});
+
+router.get('/getUserId', (req, res) => {
+    getUserId(req, res);
+})
+
+router.get('/getChat/:userId', (req, res) => {
+    getChat(req ,res);
+});
+
+router.post('/chat', (req, res) => {
+    chat(req, res);
+})
 
 router.post('/admin/login', (req, res)=>{
     adminLogin(req, res);
@@ -99,5 +135,12 @@ router.put('/change-password', (req, res)=>{
 })
 router.put('/admin-data-credentials',(req,res)=>{
     adminDataChange(req,res)
+})
+router.post('/baned-ads',(req,res)=>{
+    banedAds(req,res)
+})
+router.get('/get-ad-count', (req, res)=>{
+  getAdCount(req,res)
+
 })
 module.exports = router

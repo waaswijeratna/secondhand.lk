@@ -4,19 +4,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f8ff;
+  background: linear-gradient(135deg, #b0c9e2 0%, #b0c9e2 30%, #c1b4d4 100%);
 }
 
 .login-card {
-  width: 60%;
-  height: 70vh;
-  border: 2px solid #ecf8ff;
-  border-radius: 8px;
+  width: 75%;
+  max-width: 1100px;
+  height: auto;
+  border: none;
+  border-radius: 20px;
   display: flex;
-  padding: 2%;
+  padding: 0;
   flex-direction: row;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  box-shadow: 0 20px 50px rgba(41, 128, 185, 0.12);
+  background-color: rgba(255, 255, 255, 0.92);
+  overflow: hidden;
 }
 
 .login-img {
@@ -25,91 +27,137 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #e0e7ec;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-img::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(61, 138, 185, 0.65), rgba(128, 95, 162, 0.85), rgba(128, 95, 162, 0.95));
 }
 
 .login-img img {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%) brightness(105%);
 }
 
 .login-form {
   width: 50%;
-  padding: 5%;
-  border-left: 1px solid #2A7AAD;
+  padding: 60px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .login-form strong {
-  font-size: 2rem;
-  font-weight: 550;
-  color: #2A7AAD;
-  margin-bottom: 20px;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #3d8ab9;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .input-container {
-  width: 80%;
-  height: 50px;
-  margin: 10px 0;
+  width: 100%;
+  height: 60px;
+  margin: 15px 0;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid #2A7AAD;
+  border: 2px solid #dae5f0;
+  border-radius: 12px;
+  padding: 0 20px;
+  transition: all 0.3s ease;
+  background-color: #fafcfd;
+}
+
+.input-container:focus-within {
+  border-color: #3d8ab9;
+  box-shadow: 0 0 0 4px rgba(61, 138, 185, 0.08);
+  transform: translateY(-2px);
 }
 
 .input-container i {
-  margin-right: 10px;
-  color: grey;
+  margin-right: 15px;
+  color: #3d8ab9;
+  font-size: 1.3rem;
 }
 
 input {
   width: 100%;
   height: 100%;
-  padding-left: 5px;
   border: none;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  color: #5a6a7a;
+  background-color: transparent;
 }
 
 input::placeholder {
-  color: grey;
-  font-size: 1rem;
+  color: #b0bec5;
+  font-size: 1.1rem;
 }
 
 input:focus {
   outline: none;
-  color: black;
-}
-
-input:focus::placeholder {
-  color: transparent;
 }
 
 .login-button {
-  width: 80%;
-  height: 50px;
-  margin-top: 20px;
-  background-color: #2A7AAD;
+  width: 100%;
+  height: 60px;
+  margin-top: 40px;
+  background: linear-gradient(135deg, #3d8ab9 0%, #3d8ab9 30%, #805fa2 100%);
   color: white;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .login-button:hover {
-  background-color: #1e5f82;
+  transform: translateY(-3px);
+  box-shadow: 0 7px 14px rgba(61, 138, 185, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
-// Color change for the "Forgot Password?" link
+.login-button:active {
+  transform: translateY(-1px);
+}
+
 .login-form a {
-  color: #2A7AAD;
+  color: #3d8ab9;
+  margin-top: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  align-self: center;
 }
 
-// Snackbar styles
+.login-form a:hover {
+  color: #805fa2;
+  text-decoration: underline;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.95rem;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
 ::ng-deep .mat-snack-bar-container.error-snackbar {
-background-color: #f44336; // Red for error
-color: white;
+  background-color: #f8a5a5;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }

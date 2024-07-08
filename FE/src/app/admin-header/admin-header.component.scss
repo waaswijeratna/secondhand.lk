@@ -1,56 +1,55 @@
 .header {
-    padding: 1rem 1.5rem; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #2A7AAD;
-  }
-  
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3498db;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
   .logo {
-    height: 2.5rem; 
+    height: 2.75rem;
+    transition: transform 0.3s ease;
+    &:hover { transform: scale(1.05); }
   }
-  
+
   .buttons {
-    button {
-    
+    display: flex;
+    align-items: center;
+
+    .logout {
+      background-color: #fff;
+      color: #3498db;
+      border: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
       font-weight: 600;
-      padding: 0.5rem 1rem; 
-      border-radius: 0.25rem; 
-      margin-right: 1rem; 
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       cursor: pointer;
-      &:last-child {
-        margin-right: 0;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      &:before {
+        content: "\f2f5";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+      }
+
+      &:hover {
+        background-color: #f8f9fa;
+        color: #2980b9;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
     }
   }
-
-.signup{
-    background-color: #fff;
-    color: #2A7AAD; 
-    width: 6rem;
-    border: 2px solid #2A7AAD;
-  }
-
-  .logout{
-    background-color: #2A7AAD;
-    color: #fff; 
-    width: 6rem;
-    border: 2px solid #fff;
-  }
-  
-
-  .logout:hover{
-    background-color: #fff;
-    color: #2A7AAD; 
-    width: 6rem;
-    border: 2px solid #2A7AAD;
-  }
-
-  .signup:hover{
-    background-color: #2A7AAD;
-    color: #fff; 
-    width: 6rem;
-    border: 2px solid #fff;
-  }
-
-
+}

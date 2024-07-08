@@ -1,4 +1,12 @@
 <div class="chart-container">
-  <h2>Daily Ad Count Analysis</h2>
+  <h2>Daily Ad Count</h2>
+  <div class="dropdown-container">
+    <div class="arrow-container" (click)="toggleDropdown()">
+      <div class="arrow"></div>
+    </div>
+    <ul class="dropdown-menu" [class.show]="dropdownOpen">
+      <li *ngFor="let month of months" (click)="selectMonth(month.value)">{{ month.name }}</li>
+    </ul>
+  </div>
   <canvas id="adCountChart"></canvas>
 </div>

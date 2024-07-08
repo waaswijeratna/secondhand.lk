@@ -9,15 +9,42 @@ import { Chart, ChartDataset, ChartOptions } from 'chart.js/auto';
 })
 export class DailyAdCountChartComponent implements OnInit {
   adData: any[] = [];
+  selectedMonth: string = '';
+  dropdownOpen: boolean = false;
+  months: { name: string, value: string }[] = [];
+  chart: Chart | undefined;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.populateMonths();
+    this.selectCurrentMonth();
   }
 
-  fetchData(): void {
-    this.http.get<any[]>('http://localhost:8000/daily-ad-count')
+  populateMonths(): void {
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    const currentYear = new Date().getFullYear();
+
+    for (let i = 0; i < 12; i++) {
+      this.months.push({
+        name: monthNames[i],
+        value: `${currentYear}-${(i + 1).toString().padStart(2, '0')}`
+      });
+    }
+  }
+
+  selectCurrentMonth(): void {
+    const currentDate = new Date();
+    const currentMonth = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}`;
+    this.selectedMonth = currentMonth;
+    this.fetchData(this.selectedMonth);
+  }
+
+  fetchData(month: string): void {
+    this.http.get<any[]>(`http://localhost:8000/daily-ad-count?month=${month}`)
       .subscribe(data => {
         this.adData = data;
         this.createChart();
@@ -31,19 +58,69 @@ export class DailyAdCountChartComponent implements OnInit {
     const options: ChartOptions = {
       responsive: true,
       maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            font: {
+              size: 14,
+              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+            }
+          }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          titleFont: {
+            size: 16,
+            weight: 'bold'
+          },
+          bodyFont: {
+            size: 14
+          },
+          padding: 12,
+          cornerRadius: 4,
+          displayColors: false
+        }
+      },
       scales: {
         x: {
           type: 'category',
-          labels: dates,
           title: {
             display: true,
-            text: 'Date'
+            font: {
+              size: 14,
+              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+            }
+          },
+          grid: {
+            display: false
+          },
+          ticks: {
+            font: {
+              size: 12,
+              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+            }
           }
         },
         y: {
+          beginAtZero: true,
           title: {
             display: true,
-            text: 'Ad Count'
+            text: 'Ad Count',
+            font: {
+              size: 14,
+              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+            }
+          },
+          grid: {
+            color: 'rgba(0, 0, 0, 0.1)'
+          },
+          ticks: {
+            font: {
+              size: 12,
+              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+            }
           }
         }
       }
@@ -60,7 +137,12 @@ export class DailyAdCountChartComponent implements OnInit {
     ];
 
     const ctx = document.getElementById('adCountChart') as HTMLCanvasElement;
-    new Chart(ctx, {
+
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
+    this.chart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: dates,
@@ -68,5 +150,15 @@ export class DailyAdCountChartComponent implements OnInit {
       },
       options: options
     });
+  }
+
+  toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  selectMonth(month: string): void {
+    this.selectedMonth = month;
+    this.dropdownOpen = false;
+    this.fetchData(this.selectedMonth);
   }
 }

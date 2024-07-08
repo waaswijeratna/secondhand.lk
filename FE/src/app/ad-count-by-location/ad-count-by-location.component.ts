@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
-import { Chart } from 'chart.js/auto';
+import { Chart, ChartOptions } from 'chart.js/auto';
 
 @Component({
   selector: 'app-ad-count-by-location',
@@ -29,8 +29,10 @@ export class AdCountByLocationComponent implements OnInit {
   createChart(data: any): void {
     const ctx = document.getElementById('adCountByLocation') as HTMLCanvasElement;
 
-    const backgroundColors = this.generateRandomColors(data.length);
-    const borderColors = backgroundColors.map(color => this.adjustColorOpacity(color, 1)); // Generate border colors with full opacity
+    const colors = [
+      '#4e79a7', '#f28e2c', '#e15759', '#76b7b2', '#59a14f',
+      '#edc949', '#af7aa1', '#ff9da7', '#9c755f', '#bab0ab'
+    ];
 
     new Chart(ctx, {
       type: 'bar',
@@ -39,27 +41,66 @@ export class AdCountByLocationComponent implements OnInit {
         datasets: [{
           label: '# of Ads',
           data: data.map((item: any) => item.ad_count),
-          backgroundColor: backgroundColors,
-          borderColor: borderColors,
+          backgroundColor: colors.map(color => this.adjustColorOpacity(color, 0.7)),
+          borderColor: colors,
           borderWidth: 1
         }]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              font: {
+                size: 14,
+                family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            titleFont: {
+              size: 16,
+              weight: 'bold'
+            },
+            bodyFont: {
+              size: 14
+            },
+            padding: 12,
+            cornerRadius: 4,
+            displayColors: false
+          }
+        },
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)'
+            },
+            ticks: {
+              font: {
+                size: 12,
+                family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+              }
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 12,
+                family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+              }
+            }
           }
         }
-      }
+      } as ChartOptions
     });
-  }
-
-  generateRandomColors(count: number): string[] {
-    const colors: string[] = [];
-    for (let i = 0; i < count; i++) {
-      colors.push('#' + Math.floor(Math.random() * 16777215).toString(16));
-    }
-    return colors;
   }
 
   adjustColorOpacity(color: string, opacity: number): string {

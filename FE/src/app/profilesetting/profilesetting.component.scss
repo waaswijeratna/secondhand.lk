@@ -1,13 +1,14 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f0f0f0;
+  background-color: #bcd3f5;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  color: #333;
 }
 
 .profile-settings {
@@ -20,32 +21,32 @@ body {
 }
 
 .settings-card {
-  width: 100%;
-  padding: 30px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;        
+  padding: 40px;
+  background-color: #f3f5f7;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   text-align: left;
 }
 
 .settings-card strong {
   display: block;
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.25rem;
+  font-weight: 700;
   color: #2a7aad;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .input-container {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .input-container label {
   display: block;
   font-size: 1rem;
-  font-weight: bold;
-  color: #2a7aad;
-  margin-bottom: 8px;
+  font-weight: 600;
+  color: #5f6368;
+  margin-bottom: 10px;
 }
 
 .input-container .info-container {
@@ -54,20 +55,21 @@ body {
 }
 
 .input-container .info {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
   font-size: 1rem;
   color: #333;
-  background-color: #f9f9f9;
-  margin-right: 10px;
-  flex-grow: 1; /* Ensures both inputs take up remaining space */
+  background-color: #ffffff;
+  margin-right: 12px;
+  flex-grow: 1;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.input-container input.info {
-  width: 100%;
-  padding: 8px; /* Adjust as needed */
-  box-sizing: border-box;
+.input-container input.info:focus {
+  outline: none;
+  border-color: #2a7aad;
+  box-shadow: 0 0 0 2px rgba(42, 122, 173, 0.2);
 }
 
 .input-container .edit-link {
@@ -75,26 +77,28 @@ body {
   color: #2a7aad;
   text-decoration: none;
   cursor: pointer;
+  transition: color 0.3s;
 }
 
 .input-container .edit-link:hover {
-  text-decoration: underline;
+  color: #1e5f82;
 }
 
 .button-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .button-container button {
   width: 48%;
-  height: 40px;
+  height: 48px;
   font-size: 1rem;
+  font-weight: 600;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.1s;
 }
 
 .confirm-button {
@@ -104,6 +108,7 @@ body {
 
 .confirm-button:hover {
   background-color: #1e5f82;
+  box-shadow: 0 4px 8px rgba(42, 122, 173, 0.3);
 }
 
 .cancel-button {
@@ -113,6 +118,7 @@ body {
 
 .cancel-button:hover {
   background-color: #d32f2f;
+  box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
 }
 
 .danger-button {
@@ -122,6 +128,7 @@ body {
 
 .danger-button:hover {
   background-color: #cc0000;
+  box-shadow: 0 4px 8px rgba(255, 68, 68, 0.3);
 }
 
 .modal {
@@ -135,25 +142,32 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(5px);
 }
 
 .modal-content {
   background-color: #ffffff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: left;
   max-width: 400px;
   width: 90%;
+  position: relative;
 }
 
 .modal-content .close {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
   font-size: 1.5rem;
-  color: #2a7aad;
+  color: #5f6368;
   cursor: pointer;
+  transition: color 0.3s;
+}
+
+.modal-content .close:hover {
+  color: #2a7aad;
 }
 
 .password-container {
@@ -164,26 +178,35 @@ body {
 
 .password-container input {
   flex: 1;
-  padding-right: 30px; /* Space for the eye icon */
+  padding-right: 40px;
 }
 
 .password-container i {
   position: absolute;
-  right: 10px;
+  right: 16px;
   cursor: pointer;
-  color: lightgray;
+  color: #5f6368;
+  transition: color 0.3s;
+}
+
+.password-container i:hover {
+  color: #2a7aad;
 }
 
 .error-message,
 .success-message {
   font-size: 1rem;
-  margin-top: 10px;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 8px;
 }
 
 .error-message {
-  color: #f44336;
+  color: #d32f2f;
+  background-color: #fdecea;
 }
 
 .success-message {
-  color: #4caf50;
+  color: #388e3c;
+  background-color: #e8f5e9;
 }

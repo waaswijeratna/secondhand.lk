@@ -1,7 +1,40 @@
-const connection = require('../../Services/connection')
+const connection = require('../../Services/connection');
 
 async function getAllUserComplaints(req, res) {
-    const sql = `SELECT advertisement_id, COUNT(*) AS total_complaints, MAX(complaint_date) AS latest_complaint_date, MAX(complaint_type) AS complaint_type, MAX(complaint_description) AS complaint_description, MIN(complaint_date) AS earliest_complaint_date FROM complaints WHERE status = 'Pending' GROUP BY advertisement_id;`
+    const sql = `
+    SELECT 
+        r.ad_id AS advertisement_id, 
+        COUNT(*) AS total_complaints, 
+        MAX(r.reported_time) AS latest_complaint_date, 
+        lr.latest_complaint_type AS complaint_type, 
+        lr.latest_complaint_description AS complaint_description, 
+        MIN(r.reported_time) AS earliest_complaint_date 
+    FROM 
+        reporting r
+    JOIN (
+        SELECT 
+            ad_id, 
+            reason AS latest_complaint_type, 
+            reportreview AS latest_complaint_description, 
+            reported_time
+        FROM 
+            reporting
+        WHERE 
+            (ad_id, reported_time) IN (
+                SELECT 
+                    ad_id, 
+                    MAX(reported_time) 
+                FROM 
+                    reporting 
+                GROUP BY 
+                    ad_id
+            )
+    ) lr ON r.ad_id = lr.ad_id
+    GROUP BY 
+        r.ad_id, 
+        lr.latest_complaint_type, 
+        lr.latest_complaint_description;
+    `;
 
     connection.query(sql, (err, result) => {
         if (err) {

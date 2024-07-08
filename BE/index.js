@@ -3,35 +3,29 @@ const bodyparser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const routes = require("./Routes/routes");
-const chatService = require('./Services/chatService');
+const http = require('http');
+const initializeSocket = require('./Services/socket');
 
 dotenv.config();
 
 const app = express();
+app.use(express.json());
+app.use(cors());
 
-app.use(cors({
-    origin: "http://localhost:4200",
-}));
+// app.use(cors({
+//     origin: "*",
+// }));
 
-app.use(bodyparser.urlencoded({ extended: true }));
-app.use(bodyparser.json());
+// app.use(bodyparser.urlencoded({ extended: true }));
+// app.use(bodyparser.json());
 
-const http = require('http');
-const socketIo = require('socket.io');
+// // Serve static files from the Angular app
+// app.use(express.static('public'));
 
 const server = http.createServer(app);
-const io = socketIo(server, {
-    cors: {
-        origin: "http://localhost:4200",
-        methods: ["GET", "POST"]
-    }
-});
 
-// Serve static files from the Angular app
-app.use(express.static('public'));
-
-// Initialize chat service
-chatService.initialize(io);
+const io = initializeSocket(server);
+app.set('io', io);
 
 app.use(routes);
 
