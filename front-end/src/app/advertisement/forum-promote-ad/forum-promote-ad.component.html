@@ -4,7 +4,7 @@
 
   <div class="headerText">
     <p id="headerT">Promote your Ad</p>
-    <p id="linkExt" [routerLink]="['/ad-promotion']">Learn more</p>
+    <p id="linkExt" (click)="openLinkInNewTab()">Learn more</p>
   </div>
 
   <form [formGroup]="promoteAdForm">

@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit{
     this.UserLocationService.getLocation().subscribe((response) =>{
       const data = response;
       this.userLocation = data;
-      console.log("ladasd", this.userLocation.city);
+      console.log("ladasd", this.userLocation);
     })
 
     this.router.events.subscribe((event) => {

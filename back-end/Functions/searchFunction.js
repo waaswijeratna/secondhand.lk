@@ -85,7 +85,8 @@ const searchFunction = async (req, res, next) => {
             params.push(sublocation);
         }
         if (nearMe) {
-            query += ` AND sl.sublocation = ?`;
+            query += ` AND (sl.sublocation = ? OR l.location = ?) `;
+            params.push(nearMe);
             params.push(nearMe);
         }
         if (urgent) {

@@ -7,6 +7,8 @@ import { PaymentGatewayDialogComponent } from './payment-gateway-dialog/payment-
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdvertisementService } from '../../app-services/app-service-getAdvertisementData';
 import { promotionDetailsService } from '../../app-services/app-services-getPromotionDetails';
+import { Router } from '@angular/router';
+
 
 
 interface promotion_details {
@@ -57,7 +59,7 @@ export class ForumPromoteAdComponent implements OnInit {
   @Input() submitForms: boolean = false;
   @Input() isUpdate: boolean = true;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private dialog: MatDialog, private snackBar: MatSnackBar, private advertisementService: AdvertisementService, private promotionDetailsService: promotionDetailsService) {
+  constructor(private router: Router,private fb: FormBuilder, private http: HttpClient, private dialog: MatDialog, private snackBar: MatSnackBar, private advertisementService: AdvertisementService, private promotionDetailsService: promotionDetailsService) {
     // Initialize form group and form controls
     this.promoteAdForm = this.fb.group({
       free: [false],
@@ -276,6 +278,10 @@ export class ForumPromoteAdComponent implements OnInit {
 
   }
 
+  openLinkInNewTab(): void {
+    const url = this.router.createUrlTree(['/ad-promotion']).toString();
+    window.open(url, '_blank');
+  }
 
 
   submitForm() {
