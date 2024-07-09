@@ -63,6 +63,9 @@ import { CountdownComponent } from './advertisement/forum-promote-ad/payment-gat
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {AsyncPipe} from '@angular/common';
+import { UserChatComponent } from './chat-platform-and-bot/user-chat/user-chat.component';
+import { ChatServiceService } from './app-services/chat-service.service';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -113,6 +116,7 @@ import {AsyncPipe} from '@angular/common';
     FeedebackComponent,
     BannerAdFooterComponent,
     CountdownComponent,
+    UserChatComponent,
     
 
 
@@ -144,10 +148,12 @@ import {AsyncPipe} from '@angular/common';
     TagModule,
     MatPaginatorModule,
     MatAutocompleteModule,
-    AsyncPipe
+    AsyncPipe,
+    FormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    ChatServiceService
   ],
   bootstrap: [AppComponent]
 })

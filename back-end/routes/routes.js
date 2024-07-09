@@ -26,7 +26,10 @@ const { updateUserData } = require('../Functions/updateUserData');
 const { bannerAd } = require('../Functions/bannerAds');
 
 
-
+const chat = require("../Functions/chat/chat.js");
+const getChat = require("../Functions/chat/getChat.js");
+const getUserId = require("../Functions/chat/getUserId.js");
+const getAllChat = require("../Functions/chat/getAllChat.js");
 
 
 ///////////////////// Defining Routes ////////////////////////
@@ -73,6 +76,22 @@ router.post('/ratingDetails', insertRatings);
 router.post('/reportingDetails', insertReporting);
 
 
+//chat routing
+router.get('/getAllChat', (req, res) => {
+    getAllChat(req, res);
+});
+
+router.get('/getUserId', (req, res) => {
+    getUserId(req, res);
+})
+
+router.get('/getChat/:userId', (req, res) => {
+    getChat(req ,res);
+});
+
+router.post('/chat', (req, res) => {
+    chat(req, res);
+})
 
 
 

@@ -19,6 +19,7 @@ import { ContactUsComponent } from './footer/contact-us/contact-us.component';
 import { TermsComponent } from './footer/terms/terms.component';
 import { FeedebackComponent } from './footer/feedeback/feedeback.component';
 import { BannerAdFooterComponent } from './footer/banner-ad-footer/banner-ad-footer.component';
+import { UserChatComponent } from './chat-platform-and-bot/user-chat/user-chat.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'terms', component: TermsComponent },
   { path: 'feedback', component: FeedebackComponent },
   { path: 'banner_footer', component: BannerAdFooterComponent },
+  { path: 'UserChatComponent', component: UserChatComponent },
 
 
 

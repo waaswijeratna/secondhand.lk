@@ -3,6 +3,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const routes = require('./routes/routes');
+const initializeSocket = require('./Services/socket');
+const http = require('http');
 
 // Initialize Express and Set Port
 const app = express();
@@ -16,6 +18,12 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bo
 // Serve uploaded images statically
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+//chatsocket
+const server = http.createServer(app);
+const io = initializeSocket(server);
+app.set('io', io);
+
+
 // Routes
 app.use('/api', routes); // Mount API routes
 
@@ -26,6 +34,6 @@ app.use((err, req, res, next) => {
 });
 
 // Start the Server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
