@@ -1,0 +1,45 @@
+.container {
+  text-align: center;
+  padding: 2rem;
+  color: #304E74;
+}
+
+.header img {
+  width: 17rem; /* Adjust as needed */
+  margin: 3rem 0;
+}
+
+.header h1 {
+  margin: 3rem 0;
+}
+
+.content p {
+  margin: 3rem 0;
+}
+
+.contact-methods {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 20rem; /* Adjust as needed */
+  text-align: left; /* Align text to the left for better readability */
+}
+
+.contact-method img {
+  width: 3rem; /* Adjust as needed */
+}
+
+.contact-text {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,38 @@
+<div class="formContainer">
+  <form [formGroup]="categorySelectionForm" class="formSet">
+
+    <!-- Ad Type Selection -->
+    <div class="adType">
+      <mat-radio-group formControlName="adType" color="primary">
+        <mat-radio-button  value="sell">Sell</mat-radio-button>
+        <mat-radio-button value="rent" class="atRadio">Rent</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- Category Selection -->
+    <div class="categories">
+      <h3 class="headline">Select a category</h3>
+      <mat-radio-group formControlName="category">
+        <!-- Iterate over categories -->
+        <mat-radio-button *ngFor="let category of categories" [value]="category.category_id" (change)="updateSelectedCategory(category.category)" color="primary" class="smallRadio" [disabled]="isUpdate">
+          <span class="icon" [style.backgroundImage]="'url(assets/icons/' + encodeCategoryName(category.category) + '.png)'"></span>
+          {{ category.category }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- Subcategory Selection -->
+    <div *ngIf="selectedCategory" class="subcategories">
+      <h3 class="headline">Select a subcategory for {{ selectedCategory }}</h3>
+      <mat-radio-group formControlName="subcategory">
+        <!-- Iterate over subcategories for the selected category -->
+        <mat-radio-button *ngFor="let subcategory of subcategories[selectedCategory]" [value]="subcategory.subcategory_id" (change)="onNext()" color="primary">
+          <span class="icon" [style.backgroundImage]="'url(../../../assets/icons/' + encodeCategoryName(subcategory.subcategory) + '.png)'"></span>
+          {{ subcategory.subcategory }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+  </form>
+</div>
+

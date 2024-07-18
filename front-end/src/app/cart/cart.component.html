@@ -1,0 +1,26 @@
+<div class="category_content">
+  <mat-card>
+    <mat-card-header>
+      <p class="cartHeader"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"></mat-icon>Advertisement Cart ({{cart_length}})</p>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <div class="cartContent" *ngFor="let ad of cartItems[0]">
+        <mat-card class="adCard">
+          <div>
+            <img class="pImg" [src]="ad.imagePaths[0]" alt="Ad Image" width="100rem" height="80rem">
+          </div>
+          <div class="details">
+            <div class="title">{{ ad.title }}</div>
+            <div class="price">Rs. {{ ad.price }}</div>
+            <div class="locations">{{ ad.location }}, {{ ad.sublocation }}</div>
+          </div>
+          <div class="adOptions">
+            <div class="seeAd" [routerLink]="['/advertisementResults']" [queryParams]="{ ad: ad | json }"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="visibility"></mat-icon>see the ad</div>
+            <div class="deleteAd" (click)="deleteCart(ad.cart_id)"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>delete ad</div>
+          </div>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

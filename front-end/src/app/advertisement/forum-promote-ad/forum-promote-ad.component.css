@@ -1,0 +1,85 @@
+.formContainer{
+    margin: 5% 10%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2vh;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 4% 7%;
+    padding-bottom: 7%;
+}
+
+/* header text styles */
+.headerText{
+    padding: 0% 10%;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+#headerT{
+    font-weight: 500;
+}
+#linkExt{
+    cursor: pointer;
+    font-size: small;
+    font-style: italic;
+    color: rgb(120, 155, 210);
+}
+
+/* form styles */
+form{
+    padding: 0% 10%;
+}
+
+.promotionCheck{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.promotionCheck mat-form-field {
+    height: 12vh;
+}
+
+.promotions{
+    width: 70%;
+}
+
+
+.divider {
+    margin: 5% 0%;
+    width: 34vw;
+}
+
+#continueButton{
+    margin-left: 2vw;
+}
+
+/* updat display message styles */
+#updateMsg{
+    margin: 2vh;
+    white-space: pre-line;
+    font-size: 2.5vh;
+    color: #304E74;
+}
+#updateMsgDiv{
+    padding: 3%;
+    background-color: rgb(167, 231, 251);
+    border-radius: 1vw;
+    margin: 10% 0;
+}
+
+.loading-blur{
+    overflow-y: hidden;
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter:blur(4px); 
+    -webkit-backdrop-filter:blur(4px) ;
+  }
+
+  ::ng-deep .custom-tooltip {
+    --mdc-plain-tooltip-container-color: #d9ecfc;
+    --mdc-plain-tooltip-supporting-text-color: #094d85;
+    --mdc-plain-tooltip-supporting-text-size: small;
+}

@@ -1,0 +1,41 @@
+<div class="banner_container">
+  <div class="bannerAd">
+    <app-banner-ad [banner_type_id]="5"></app-banner-ad>
+</div>
+</div>
+
+<div class="category-grid">
+  <div *ngFor="let category of categories" class="category-item" (click)="selectCategory(category.name)">
+    <div class="category-icon">
+      <img src="../../assets/{{category.icon }}.png" alt="{{ category.name }}">
+    </div>
+    <div class="category-name">{{ category.name }}</div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="details_container">
+    <div class="details">
+      <div class="sellFast" routerLink="/sellFast">
+        <div class="iconImage"><img src="../../assets/images/sellFast.png" width="80rem" height="60rem"></div>
+        <div class="card_content">
+          <div>Sell fast</div>
+          <div class="subcontent">Optimize Your Ads & Discover Our Posting Guidance</div>
+        </div>
+      </div>
+      <mat-divider vertical="true"></mat-divider>
+      <div class="staySafe" routerLink="/staySafe">
+        <div class="iconImage"><img src="../../assets/images/safetyFirst.png" width="60rem" height="60rem"></div>
+        <div class="card_content">
+          <div>Stay safe</div>
+          <div class="subcontent">Your Safety Matters Most. Discover Our Safety Guidance</div>
+        </div>
+      </div>
+    </div>
+    <div class="postButton"  (click)="navigateToAdvertisement()">Post your ad now</div>
+  </div>
+</div>
+
+<!-- <div>
+  <button mat-raised-button color="primary" id="postButton" (click)="sendAdId()">Advertisement:{{ad_id}}</button>
+</div> -->

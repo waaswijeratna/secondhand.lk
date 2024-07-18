@@ -1,0 +1,98 @@
+const express = require('express');
+const router = express.Router();
+const { upload, handleFirebaseUpload } = require('../config/multerConfig'); // Import Multer middleware
+
+// Import controller functions
+const { createOrUpdateAdvertisement } = require('../Functions/advertisementController');
+const { sendCategories } = require('../Functions/sendCategories');
+const { sendSubcategories } = require('../Functions/sendSubcategories');
+const { sendLocations } = require('../Functions/sendLocations');
+const { sendSublocations } = require('../Functions/sendSublocations');
+const { sendPromotionDetails } = require('../Functions/sendPromotionDetails');
+const { selectedPromotions} = require('../Functions/selectedPromotions');
+const { getAdvertisement} = require('../Functions/sendAdData');
+const {chatBotFunction} = require('../Functions/chatBotFunction');
+const {searchFunction} = require('../Functions/searchFunction');
+const {sendCategoryDetails} = require('../Functions/sendCategoryDetails');
+const {insertRatings } = require('../Functions/ratingcontroller');
+const {insertReporting } = require('../Functions/reportingcontroller');
+const {insertToCart} = require('../Functions/insertToCart');
+const { getCartData } = require('../Functions/getCartData');
+const {deleteCart} = require('../Functions/deleteCart');
+const {getUserReviews} = require('../Functions/getUserReviews');
+const {deleteAd} = require('../Functions/deleteAd');
+const {getUserData} = require('../Functions/getUserData');
+const { updateUserData } = require('../Functions/updateUserData');
+const { bannerAd } = require('../Functions/bannerAds');
+
+
+const chat = require("../Functions/chat/chat.js");
+const getChat = require("../Functions/chat/getChat.js");
+const getUserId = require("../Functions/chat/getUserId.js");
+const getAllChat = require("../Functions/chat/getAllChat.js");
+
+
+///////////////////// Defining Routes ////////////////////////
+
+// POST route for creating a new advertisement generalDetails
+router.post('/generalDetails', upload.array('images[]', 6), handleFirebaseUpload, createOrUpdateAdvertisement);
+//Define route for payement gateway implementation
+router.post('/selectedPromotions',selectedPromotions);
+//Define route for chatbot
+router.post('/chatBot',chatBotFunction);
+//define search routing
+router.post('/search',searchFunction);
+//define search routing
+router.post('/categoryDetails',sendCategoryDetails);
+//define inserting to cart
+router.post('/insert_cart',insertToCart);
+// Define route for fetching cart data
+router.post('/getCart', getCartData);
+// Define route for delete cart item
+router.post('/deleteCart', deleteCart);
+// Define route for get user reviews
+router.post('/user_reviews', getUserReviews);
+// Define route for delete ad 
+router.post('/deleteAd', deleteAd);
+// Define route for delete ad 
+router.post('/userData', getUserData);
+// Define route for updating user data
+router.put('/updateUserData', updateUserData);
+// Define route for getting banner ad images
+router.post('/bannerImages', bannerAd);
+
+// Define routes to fetch categories and subcategories
+router.get('/categories', sendCategories);
+router.get('/subcategories', sendSubcategories);
+// Define routes to fetch locations and sublocations
+router.get('/locations', sendLocations);
+router.get('/sublocations', sendSublocations);
+//define route to fetch advertisement data
+router.get('/advertisementData/:ad_id', getAdvertisement);
+// Define routes to fetch promotion details
+router.get('/promotionDetails', sendPromotionDetails);
+//routes for reporting and ratings
+router.post('/ratingDetails', insertRatings);
+router.post('/reportingDetails', insertReporting);
+
+
+//chat routing
+router.get('/getAllChat', (req, res) => {
+    getAllChat(req, res);
+});
+
+router.get('/getUserId', (req, res) => {
+    getUserId(req, res);
+})
+
+router.get('/getChat/:userId', (req, res) => {
+    getChat(req ,res);
+});
+
+router.post('/chat', (req, res) => {
+    chat(req, res);
+})
+
+
+
+module.exports = router;

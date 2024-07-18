@@ -1,0 +1,13 @@
+const db = require('../Services/db');
+
+const sendSublocations = async(req, res, next) => {
+  try {
+    const [results] = await db.query('SELECT * FROM sublocation');
+    res.json(results);
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error fetching categories' });
+}
+}
+
+module.exports = { sendSublocations };
