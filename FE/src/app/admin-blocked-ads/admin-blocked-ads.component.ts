@@ -21,6 +21,7 @@ export class AdminBlockedAdsComponent implements OnInit {
   }
 
   async fetchBlockedAds() {
+    this.loading = true; // Set loading to true before starting data fetch
     try {
       const response = await axios.get('http://localhost:8000/admin/get-blocked-ads');
       this.ads = response.data;
@@ -74,23 +75,34 @@ export class AdminBlockedAdsComponent implements OnInit {
   }
 
   async acceptAd(adId: string) {
+    this.loading = true; // Set loading to true before making the API call
     try {
       await axios.put(`http://localhost:8000/admin/update-ad-status/${adId}`, { status: 'approved' });
+      this.removeAdFromList(adId);
       this.closePopup();
-      this.fetchBlockedAds(); // Refresh ads list after action
     } catch (error) {
       console.error('Error accepting ad:', error);
+    } finally {
+      this.loading = false; // Set loading to false after updating ads list
     }
   }
 
   async rejectAd(adId: string) {
+    this.loading = true; // Set loading to true before making the API call
     try {
       await axios.put(`http://localhost:8000/admin/update-ad-status/${adId}`, { status: 'rejected' });
+      this.removeAdFromList(adId);
       this.closePopup();
-      this.fetchBlockedAds(); // Refresh ads list after action
     } catch (error) {
       console.error('Error rejecting ad:', error);
+    } finally {
+      this.loading = false; // Set loading to false after updating ads list
     }
+  }
+
+  removeAdFromList(adId: string) {
+    this.ads = this.ads.filter(ad => ad.ad_id !== adId);
+    this.updateDisplayedAds();
   }
 
   goToPage(page: number) {

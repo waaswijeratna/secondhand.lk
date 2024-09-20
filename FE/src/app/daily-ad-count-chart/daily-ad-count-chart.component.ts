@@ -35,7 +35,7 @@ export class DailyAdCountChartComponent implements OnInit {
       });
     }
   }
-
+//select current month
   selectCurrentMonth(): void {
     const currentDate = new Date();
     const currentMonth = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}`;
@@ -64,7 +64,7 @@ export class DailyAdCountChartComponent implements OnInit {
           position: 'top',
           labels: {
             font: {
-              size: 14,
+              size: 16,
               family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
             }
           }
@@ -151,11 +151,11 @@ export class DailyAdCountChartComponent implements OnInit {
       options: options
     });
   }
-
+//drop down menu
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }
-
+//select current month
   selectMonth(month: string): void {
     this.selectedMonth = month;
     this.dropdownOpen = false;
