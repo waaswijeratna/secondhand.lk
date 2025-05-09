@@ -1,0 +1,161 @@
+<div class="bg">
+    <div class="grid-container">
+
+        <div class="bannerTop">
+            <app-banner-ad [formPayload]="filters" [banner_type_id]="1"></app-banner-ad>
+        </div>
+
+
+        <div class="gridColumns">
+            <mat-card>
+                <div class="search-bar-container">
+                    <div class="search_bar">
+                        <input matInput #searchInput placeholder="Search ads..."
+                            (keyup.enter)="setKeyword(searchInput.value)">
+                        <div class="search-icon-circle" (click)="setKeyword(searchInput.value)"><i
+                                class="material-icons">search</i></div>
+                    </div>
+                    <div class="location-icon-circle" [class.active]="isLocationIconClicked"
+                        (click)="toggleLocationIcon()">
+                        <i class="material-icons">location_on</i>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="ad-full-content">
+                    <div class="filter-content">
+                        <div class="filter_header">
+                            <div>Filters ads by</div>
+                            <button id="clearButton" (click)="clearFilters()"><i
+                                    class="material-icons">filter_alt_off</i></button>
+                        </div>
+                        <form [formGroup]="filterForm">
+                            <div class="check-boxes">
+                                <mat-checkbox color="primary" formControlName="sell">Sell</mat-checkbox>
+                                <mat-checkbox color="primary" formControlName="rent">Rent</mat-checkbox>
+                                <mat-checkbox color="primary" formControlName="urgent">Urgent</mat-checkbox>
+                                <mat-checkbox color="primary" formControlName="top"
+                                    (change)="toggleTopad()">top</mat-checkbox>
+                            </div>
+                            <div class="option-content">
+                                <!-- location Select -->
+                                <div>
+                                    <mat-form-field>
+                                        <mat-label>Category:</mat-label>
+                                        <mat-select formControlName="category">
+                                            <mat-option *ngFor="let category of categories"
+                                                [value]="category.category_id">{{category.category }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="option-content">
+                                <!-- location Select -->
+                                <div>
+                                    <mat-form-field>
+                                        <mat-label>Location:</mat-label>
+                                        <mat-select formControlName="location" (change)="updateSublocations()">
+                                            <mat-option *ngFor="let location of locations"
+                                                [value]="location.location_id">{{
+                                                location.location }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- Sublocation Select -->
+                                <div>
+                                    <mat-form-field>
+                                        <mat-label>Sublocation:</mat-label>
+                                        <mat-select formControlName="sublocation">
+                                            <mat-option
+                                                *ngFor="let sublocation of sublocations[filterForm.get('location')?.value]"
+                                                [value]="sublocation.sublocation_id">{{ sublocation.sublocation
+                                                }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <mat-divider vertical></mat-divider>
+                    <div class="results-content">
+                        @if(displayNoresults){
+                        <div class="noResults">
+                            <img src="../../assets/images/noResults.png">
+                            <h4>Ooops ! no any results</h4>
+                        </div>
+                        }
+                        <div *ngIf="!displayNoresults">
+                            <div *ngIf="isTopFilterSelected() ? topAds.length > 0 : randomTopAds.length > 0">
+                                <div *ngFor="let topAd of isTopFilterSelected() ? topAds : randomTopAds">
+                                    <mat-card class="top-ad-card">
+                                        <div [routerLink]="['/advertisementResults']"
+                                            [queryParams]="{ ad: topAd | json }">
+                                            <div class="ad-content">
+                                                <img [src]="topAd.imagePaths[0]" class="ad-image" alt="Top Ad Image">
+                                                <div class="ad-details">
+                                                    <div class="ad-title">{{ topAd.title }}</div>
+                                                    <div class="ad-location">{{ topAd.location }}, {{ topAd.sublocation
+                                                        }}
+                                                    </div>
+                                                    <div class="ad-price">Rs {{ topAd.price }}</div>
+                                                    <div class="promotionsBadge">
+                                                        <button *ngIf="isUrgent(topAd)"
+                                                            class="badge-urgent">Urgent</button>
+                                                        <button *ngIf="isTopAd(topAd)" class="badge-top">Top Ad</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ad-time">{{ calculateTimeAgo(topAd.created_at) }}</div>
+                                        </div>
+                                        <div class="addToCart" (click)="addToCart($event, topAd.ad_id)"
+                                            matTooltip="Add to advertisement cart" matTooltipPosition="right">
+                                            <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                                fontIcon="add_shopping_cart"></mat-icon>
+                                        </div>
+                                    </mat-card>
+                                </div>
+                            </div>
+
+                            <div *ngIf="!isTopFilterSelected()">
+                                <div *ngFor="let ad of paginatedSearchResults">
+                                    <mat-card class="ad-card" [routerLink]="['/advertisementResults']"
+                                        [queryParams]="{ ad: ad | json }">
+                                        <div class="ad-content">
+                                            <img [src]="ad.imagePaths[0]" class="ad-image" alt="Ad Image">
+                                            <div class="ad-details">
+                                                <div class="ad-title">{{ ad.title }}</div>
+                                                <div class="ad-location">{{ ad.location }}, {{ ad.sublocation }}</div>
+                                                <div class="ad-price">Rs {{ ad.price }}</div>
+                                                <div class="promotionsBadge">
+                                                    <button *ngIf="isUrgent(ad)" class="badge-urgent">Urgent</button>
+                                                    <button *ngIf="isTopAd(ad)" class="badge-top">Top Ad</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ad-time">{{ calculateTimeAgo(ad.created_at) }}</div>
+                                        <div class="addToCart" (click)="addToCart($event, ad.ad_id)"
+                                            matTooltip="Add to advertisement cart" matTooltipPosition="right">
+                                            <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                                fontIcon="add_shopping_cart"></mat-icon>
+                                        </div>
+                                    </mat-card>
+                                </div>
+                            </div>
+
+
+                            <div class="pagination-container">
+                                <mat-paginator [length]="totalResults" [pageSize]="pageSize"
+                                    [pageSizeOptions]="[5, 10, 15, 20]" (page)="onPageChange($event)" class="paginator">
+                                </mat-paginator>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+            <div class="bannerRight">
+                <app-banner-ad [formPayload]="filters" [banner_type_id]="2"></app-banner-ad>
+            </div>
+        </div>
+    </div>
+</div>

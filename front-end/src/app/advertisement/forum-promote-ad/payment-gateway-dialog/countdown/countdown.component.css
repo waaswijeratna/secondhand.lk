@@ -1,0 +1,20 @@
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .box {
+    display: inline-block;
+    width: 2rem; 
+    height: 3rem; 
+    background-color: #304E74; 
+    border-radius: 0.3rem; 
+    text-align: center;
+    line-height: 3rem; 
+    color: #ffffff; 
+    font-size: 1rem; 
+    font-weight: bold; 
+    margin: 0 0.5rem; 
+  }
+  

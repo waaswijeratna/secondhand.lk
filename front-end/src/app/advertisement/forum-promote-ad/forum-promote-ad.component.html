@@ -1,0 +1,90 @@
+<script src="https://js.stripe.com/v3/"></script>
+
+<div class="formContainer">
+
+  <div class="headerText">
+    <p id="headerT">Promote your Ad</p>
+    <p id="linkExt" (click)="openLinkInNewTab()">Learn more</p>
+  </div>
+
+  <form [formGroup]="promoteAdForm">
+
+    <!-- Free Checkbox -->
+    <div>
+      <mat-checkbox formControlName="free" color="primary" matTooltip="Free ad posting without the need for promotion" matTooltipPosition="left" matTooltipClass="custom-tooltip">Free</mat-checkbox>
+    </div>
+
+    <mat-divider class="divider"></mat-divider>
+
+    <!-- Promotion Options -->
+    @if(promotionDetails){
+    <div class="promotions"> 
+      <div class="promotionCheck">
+        <!-- Bump Up Checkbox and Duration Selector -->
+        <mat-checkbox formControlName="bumpUp" color="primary" matTooltip="Get more details from our chat bot or click learn more" matTooltipPosition="left" matTooltipClass="custom-tooltip">Bump Up</mat-checkbox>
+        <mat-form-field>
+          <mat-select [(value)]="selectedAmount1" [disabled]="disableOptionBumpUp" >
+            <mat-option [value]="promotionDetails[0].amount">{{promotionDetails[0].days}}
+              days(${{promotionDetails[0].amount}})</mat-option>
+            <mat-option [value]="promotionDetails[1].amount">{{promotionDetails[1].days}}
+              days(${{promotionDetails[1].amount}})</mat-option>
+            <mat-option [value]="promotionDetails[2].amount">{{promotionDetails[2].days}}
+              days(${{promotionDetails[2].amount}})</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="promotionCheck">
+        <!-- Top Ad Checkbox and Duration Selector -->
+        <mat-checkbox formControlName="topAd" color="primary" matTooltip="Get more details from our chat bot or click learn more" matTooltipPosition="left" matTooltipClass="custom-tooltip">Top Ad</mat-checkbox>
+        <mat-form-field>
+          <mat-select [(value)]="selectedAmount2" [disabled]="disableOptionTopAd">
+            <mat-option [value]="promotionDetails[3].amount">{{promotionDetails[3].days}}
+              days(${{promotionDetails[3].amount}})</mat-option>
+            <mat-option [value]="promotionDetails[4].amount">{{promotionDetails[4].days}}
+              days(${{promotionDetails[4].amount}})</mat-option>
+            <mat-option [value]="promotionDetails[5].amount">{{promotionDetails[5].days}}
+              days(${{promotionDetails[5].amount}})</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="promotionCheck">
+        <!-- Urgent Checkbox and Duration Selector -->
+        <mat-checkbox formControlName="urgent" color="primary" matTooltip="Get more details from our chat bot or click learn more" matTooltipPosition="left" matTooltipClass="custom-tooltip">Urgent</mat-checkbox>
+        <mat-form-field>
+          <mat-select [(value)]="selectedAmount3" [disabled]="disableOptionUrgent">
+            <mat-option [value]="promotionDetails[6].amount">{{promotionDetails[6].days}}
+              days(${{promotionDetails[6].amount}})</mat-option>
+            <mat-option [value]="promotionDetails[7].amount">{{promotionDetails[7].days}}
+              days(${{promotionDetails[7].amount}})</mat-option>
+            <mat-option [value]="promotionDetails[8].amount">{{promotionDetails[8].days}}
+              days(${{promotionDetails[8].amount}})</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    }
+
+    @if(isUpdate){
+    <div id="updateMsgDiv">
+      <p id="updateMsg">{{message}}</p>
+    </div>
+    }
+
+    <mat-divider class="divider"></mat-divider>
+
+    <div class="btnChange">
+      <!-- Post Button -->
+      <button mat-raised-button color="primary" id="postButton" [disabled]="postChecked"
+        (click)="onPostButtonClick()">Post</button>
+
+      <!-- Continue Button -->
+      <button mat-raised-button color="primary" id="continueButton" [disabled]="promoteChecked"
+        (click)="onContinueButtonClick()">Continue</button>
+    </div>
+
+
+  </form>
+
+  <div *ngIf="loading" class="loading-blur"></div>
+
+</div>

@@ -1,0 +1,46 @@
+.container {
+    text-align: center;
+    margin: 4rem 6rem;
+    color: #304E74;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+}
+
+.main-content-container {
+    margin: 4rem 0;
+}
+
+.detail-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.img-left {
+    flex: 0 0 auto;
+    margin-right: 20px;
+}
+
+.img-left img {
+    width: 100px; /* Adjust as needed */
+    height: auto;
+}
+
+.para {
+    flex: 1 1 auto;
+}
+
+#firstImg {
+    width: 17rem; /* Adjust as needed */
+    height: auto;
+}
+
+h4, #main-para {
+    margin: 10px 0;
+}

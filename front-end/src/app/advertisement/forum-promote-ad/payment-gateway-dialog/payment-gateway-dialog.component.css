@@ -1,0 +1,112 @@
+.dialog-container {
+    display: flex;
+    flex-direction: row;
+    padding: 4vh;
+    text-align: center;
+    color: #304E74;
+}
+
+.dialog-header {
+    color: #304E74;
+    font-size: 3vh;
+    font-weight: bold;
+    margin-bottom: 2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.payment-element-container {
+    margin: 3vh 0;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3vh;
+}
+
+.dialog-actions button {
+    min-width: 10vw;
+}
+
+#cancel_btn {
+    color: white;
+    background-color: rgb(250, 58, 58);
+}
+
+
+/* leftside style */
+.left{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 1rem;
+}
+.totCal, .calTot{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.7rem;
+}
+.calTot{
+    margin-top: 1rem;
+}
+.cardS{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: left;
+    top: 0;
+    padding: 0 1rem;
+    width: 35%;
+    height: 55%;
+    box-shadow: rgba(19, 69, 141, 0.4) 0px 2px 4px, rgba(23, 67, 120, 0.3) 0px 7px 13px -3px, rgba(17, 80, 132, 0.2) 0px -3px 0px inset;
+    z-index: 1000;
+    background-color:rgba(255, 255, 255, 0.7);
+    backdrop-filter:blur(4px); 
+    -webkit-backdrop-filter:blur(4px) ;
+    margin-top: 2.5rem;
+    border-radius: 0.5rem;
+}
+
+.amount-display {
+    text-align: left;
+    color: #304E74;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+.amoutheading{
+    font-size: small;
+    color: #74a9ef;
+}
+.amount{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.security{
+    width: 100%;
+    height: 70%;
+    bottom: 0;
+    background-color: #d8f2ff; 
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: flex-end;
+    text-align: left;
+    font-size: small;
+}
+.secText{
+    padding: 2rem;
+}
+
+.daysP{
+    font-size: small;
+    color: #304E74;
+}
+

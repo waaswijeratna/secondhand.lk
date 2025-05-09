@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="sidebar">
+      <div (click)="toggleSection('myAccount')" [class.active]="myAccount">My Account</div>
+      <div (click)="toggleSection('settings')" [class.active]="settings">Settings</div>
+      <div (click)="toggleSection('myAds')" [class.active]="myAds">My Ads</div>
+      <div (click)="toggleSection('myReviews')" [class.active]="myReviews">My Reviews</div>
+    </div>
+    <div class="content">
+      <ng-container *ngIf="myAccount">
+        <app-my-account></app-my-account>
+      </ng-container>
+      <ng-container *ngIf="settings">
+        <app-settings></app-settings>
+      </ng-container>
+      <ng-container *ngIf="myAds">
+        <app-my-ads></app-my-ads>
+      </ng-container>
+      <ng-container *ngIf="myReviews">
+        <app-my-reviews></app-my-reviews>
+      </ng-container>
+    </div>
+  </div>
+  

@@ -1,0 +1,59 @@
+.adPromotions{
+    background-color: #f7f7f7; /* Replace with the desired color code */
+    padding: 4rem 6rem;
+    color: #304E74;
+}
+
+mat-card{
+    padding: 2%;
+}
+
+.Inside-card{
+    margin: 3% auto;
+    width: 70%;
+    border:solid 0.4vmin #304E74;
+    border-radius: 1vh;
+}
+.Inside-card mat-card-content{
+    margin-top: 2%;
+}
+.Inside-card mat-card-header{
+    text-align: left;
+}
+
+.header-image1{
+    background-image: url('../../../assets/icons/IncreaseDiscount.png');
+    background-size: cover;   
+}
+.header-image2{
+    background-image: url('../../../assets/icons/MedalFirstPlace.png');
+    background-size: cover;   
+}
+.header-image3{
+    background-image: url('../../../assets/icons/Countdown.png');
+    background-size: cover;   
+}
+
+.headerImage{
+    display: block;
+    margin: 2% auto;
+    width:25%;
+    height:35%;
+}
+
+mat-card-header{
+    margin-top: 2%;
+    margin-bottom: 4%;
+    font-weight: bold;
+    text-align: center;
+}
+
+mat-divider{
+    display: block;
+    margin: 0% auto;
+    width: 95%;
+}
+
+.hTitle{
+    margin-bottom: 2rem;
+}

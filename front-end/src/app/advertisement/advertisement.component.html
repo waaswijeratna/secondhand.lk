@@ -1,0 +1,72 @@
+
+<mat-card class="chatbotPanel">
+  <div *ngIf="chatbotVisible" class="chatbot-container">
+    <app-chat-bot></app-chat-bot>
+  </div>
+  <div class="chatbot-button" (click)="toggleChatbot()">
+    <mat-icon>chat</mat-icon>
+  </div>
+</mat-card>
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper class="stepper" >
+
+  <div>
+    <mat-step [completed]="step1Completed" class="custom-step">
+      <ng-template matStepLabel>Step 1</ng-template>
+      <app-forum-category-selection (form1ValidityChanged)="handleValidityChanged1($event)"
+        (subcategorySelected)="transmitSubcategory($event)" (categorySelected)="transmitCategory($event)"
+        [submitForms]="submitForms" [isUpdate]="isUpdate" (form1)="form1test($event)">
+      </app-forum-category-selection>
+      <div>
+        <button matStepperNext [disabled]="!step1Completed" class="next_btn">Next</button>
+      </div>
+    </mat-step>
+  </div>
+
+  <div>
+    <mat-step [completed]="step2Completed" class="custom-step">
+      <ng-template matStepLabel>Step 2</ng-template>
+      <app-forum-unique-details [selectedSubcategory]="selectedSubcategoryName"
+        [selectedCategory]="selectedCategoryName" (form2ValidityChanged)="handleValidityChanged2($event)"
+        [submitForms]="submitForms" (form2)="form1test($event)" [isUpdate]="isUpdate"></app-forum-unique-details>
+      <div>
+        <button  matStepperNext [disabled]="!step2Completed" class="next_btn">Next</button>
+      </div>
+      <div>
+        <button  matStepperPrevious class="back_btn">Back</button>
+      </div>
+    </mat-step>
+  </div>
+
+  <div>
+    <mat-step [completed]="step3Completed" class="custom-step">
+      <ng-template matStepLabel>Step 3</ng-template>
+      <app-forum-general-details (form3ValidityChanged)="handleValidityChanged3($event)" [submitForms]="submitForms"
+        (form3)="form1test($event)" [isUpdate]="isUpdate"></app-forum-general-details>
+      <div>
+        <button  matStepperNext [disabled]="!step3Completed" class="next_btn">Next</button>
+      </div>
+      <div>
+        <button  matStepperPrevious class="back_btn">Back</button>
+      </div>
+    </mat-step>
+  </div>
+
+  <div>
+    <mat-step class="custom-step">
+      <ng-template matStepLabel>Step 4</ng-template>
+      <app-forum-promote-ad (form4ValidityChanged)="handleValidityChanged4($event)" [submitForms]="submitForms"
+        (form4)="form1test($event)" [isUpdate]="isUpdate"></app-forum-promote-ad>
+    </mat-step>
+  </div>
+
+
+</mat-horizontal-stepper>
+
+<!-- Overlay and spinner -->
+<div *ngIf="loading" class="loading-blur"></div>
+<div *ngIf="loading" class="loading-overlay">
+  <mat-spinner class="loading-spinner"></mat-spinner>
+  <div class="spinnerMsg">Your Advertisement is posting..</div>
+</div>
+

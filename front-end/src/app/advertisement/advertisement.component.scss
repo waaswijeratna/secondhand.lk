@@ -1,0 +1,178 @@
+
+.stepper {
+  background-color: #f7f7f7; /* Replace with the desired color code */
+  padding: 2% 5%;
+  color: #304E74;
+}
+
+.parent-container.disabled {
+  pointer-events: none; /* Disable mouse interactions */
+  opacity: 0.5; /* Optionally adjust opacity to indicate disabled state */
+}
+
+.stepper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.next_btn {
+  float: right;
+  background-color: #2A7AAD;
+  border: none;
+  font-size: medium;
+  border-radius: 0.7vw;
+  color: white;
+  padding: 0.8vw 3vw;
+  cursor: pointer;
+}
+
+.next_btn:disabled {
+  background-color: #bee4fc; /* Change background color when disabled */
+}
+
+.back_btn {
+  float: left;
+  font-size: medium;
+  background-color: #2A7AAD;
+  border: none;
+  border-radius: 0.7vw;
+  color: white;
+  padding: 0.8vw 3vw;
+  cursor: pointer;
+}
+
+.back_btn:disabled {
+  background-color: #bee4fc; /* Change background color when disabled */
+}
+
+/* Override focus styles for Angular Material stepper */
+::ng-deep .mat-horizontal-stepper-header-container {
+  background-color: #ffffff;
+  border-radius: 5vw;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .mat-stepper-horizontal-line {
+  border-top-color: rgb(0, 0, 0) !important;
+  border-top-style: dashed !important;
+}
+
+::ng-deep .mat-primary.mat-step-header {
+  border-radius: 5vw;
+}
+
+::ng-deep .mat-primary.mat-step-header:focus[aria-selected="true"] {
+  background-color: #bee4fc;
+}
+
+/* snackbar styles */
+::ng-deep .customSnackbar2 {
+  border-radius: .5vw;
+  outline: 2px solid red;
+  --mdc-snackbar-container-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+  backdrop-filter: blur(1px); /* Apply blur effect */
+  --mdc-snackbar-supporting-text-color: red;
+}
+
+::ng-deep .customSnackbar2 button {
+  color: white !important;
+  background-color: red;
+}
+
+::ng-deep .customSnackbar1 {
+  border-radius: .5vw;
+  outline: 2px solid #2a9af3;
+  --mdc-snackbar-container-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+  backdrop-filter: blur(1px); /* Apply blur effect */
+  --mdc-snackbar-supporting-text-color: #2a9af3;
+}
+
+::ng-deep .customSnackbar1 button {
+  color: white !important;
+  background-color: #2a9af3;
+}
+
+/* Floating Chatbot Button */
+
+.chatbot-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background-color: #2196f3;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.chatbot-button mat-icon {
+  font-size: 24px;
+}
+
+
+.chatbot-container {
+  position: fixed;
+  bottom: 90px;
+  right: 65px;
+  width: 35%;
+  height: 70%;
+  z-index: 1000; /* Ensure it appears above other content */
+  background: white;
+  border-radius: 8px;
+  overflow: auto;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.loading-blur{
+  overflow-y: hidden;
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter:blur(4px); 
+  -webkit-backdrop-filter:blur(4px) ;
+}
+.loading-overlay {
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  // background-color: rgba(120, 210, 255, 0.5); /* Blue color with 0.5 opacity */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Make sure it's above other elements */
+  pointer-events: none; /* Disable mouse interactions */
+
+}
+
+.loading-spinner {
+  z-index: 1001; /* Ensure the spinner is above the overlay */
+}
+
+.stepperDisabled{
+  filter: blur(4px);
+  overflow-y: hidden;
+  position:fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.spinnerMsg{
+  font-size: large;
+  color: #2196F3;
+  font-weight: bold;
+}
+
+
+

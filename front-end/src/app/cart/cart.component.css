@@ -1,0 +1,111 @@
+/* snackbar styles */
+::ng-deep .customSnackbar2 {
+    border-radius: .5vw;
+    outline: 2px solid red;
+    --mdc-snackbar-container-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+    backdrop-filter: blur(1px); /* Apply blur effect */
+    --mdc-snackbar-supporting-text-color: red;
+  }
+  
+  ::ng-deep .customSnackbar2 button {
+    color: white !important;
+    background-color: red;
+  }
+  
+  ::ng-deep .customSnackbar1 {
+    border-radius: .5vw;
+    outline: 2px solid #2a9af3;
+    --mdc-snackbar-container-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+    backdrop-filter: blur(1px); /* Apply blur effect */
+    --mdc-snackbar-supporting-text-color: #2a9af3;
+  }
+  
+  ::ng-deep .customSnackbar1 button {
+    color: white !important;
+    background-color: #2a9af3;
+  }
+
+/* cart styles */
+
+.category_content{
+    background-color: #f1f1f1;
+    padding: 3rem 12rem;
+    color: #304E74;
+}
+mat-divider{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.cartHeader{
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.adCard{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+.adOptions{
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 1rem;
+}
+.details{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.title{
+    font-weight: bold;
+}
+.locations{
+    font-size: small;
+    color: #a1a1a1;
+}
+.seeAd {
+    color: #239be5;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.seeAd:hover {
+    color: #1a7cc0; /* Slightly darker shade of the original color */
+    transform: scale(1.05); /* Slightly increase size */
+}
+
+.deleteAd {
+    color: #f23f4e;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.deleteAd:hover {
+    color: #d12e3b; /* Slightly darker shade of the original color */
+    transform: scale(1.05); /* Slightly increase size */
+}
+
+
+.pImg{
+    border-radius: 0.5rem;
+}

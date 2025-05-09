@@ -1,0 +1,39 @@
+.container {
+    margin: 4rem 10vw;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5rem;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    color: #114686;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+img {
+    max-width: 50vw;
+    max-height: 50vh;
+}
+
+.content-container {
+    padding: 5rem;
+    width: 100%;
+    text-align: left;
+}
+
+h4 {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+h5 {
+    color: #093468;
+}

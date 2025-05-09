@@ -1,0 +1,23 @@
+<div class="content-container">
+    <div class="total-ratings" *ngIf="ratingCount > 0">
+        {{ totalRating | number:'1.1-1' }} <div class="tot">Total Ratings</div>
+    </div>
+    <div class="my-reviews">
+        <div class="reviews">
+            <div class="reviews-details" *ngFor="let details of paginatedReviews">
+                <div class="info">
+                    <div class="rating">
+                        <span *ngFor="let star of [1, 2, 3, 4, 5]" [class.filled]="star <= details.rating">&#9733;</span>
+                    </div>
+                    <div class="review-text">{{details.review}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="pagination-controls">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{currentPage}} of {{totalPages}}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+</div>

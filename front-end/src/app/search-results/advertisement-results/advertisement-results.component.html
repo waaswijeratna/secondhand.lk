@@ -1,0 +1,72 @@
+<div class="advertisement-container">
+    <div class="bannerTop">
+        <app-banner-ad [formPayload]="filters" [banner_type_id]="3"></app-banner-ad>
+    </div>
+    <mat-card class="card-container">
+        <h3>{{adDetails.title}}</h3>
+        <div class="content">
+            <div class="left-side">
+                <div class="imageCarousal">
+                    <div class="main-image">
+                        <img [src]="selectedImage" />
+                    </div>
+                    <div class="thumbnail-controls">
+                        <button (click)="previous()" [disabled]="currentIndex === 0"><i class="material-icons" >arrow_back_ios</i></button>
+                        <div class="thumbnail-images">
+                            <div *ngFor="let image of visibleImages()" class="thumbnail-wrapper">
+                                <img [src]="image" (click)="selectImage(image)" [class.selected]="image === selectedImage" alt="Thumbnail" />
+                                <div class="overlay" *ngIf="image !== selectedImage"></div>
+                            </div>
+                        </div>
+                        <button (click)="next()" [disabled]="currentIndex + 4 >= images.length"><i class="material-icons" >arrow_forward_ios</i></button>
+                    </div>
+                </div>
+                
+
+                <div class="description-container">
+                    <div class="details-description">
+                        <div class="details">
+                            <h4>Details</h4>
+                            <div *ngFor="let detail of firstArray" class="list">
+                                {{ detail.key }}: {{ detail.value }}
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <div (click)="reportAd()">Report this ad</div>
+                            <div (click)="rateAd()">Rate and Review this ad</div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h4>Description</h4>
+                        <p>{{ description }}</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="right-side">
+                <div class="price">Rs {{adDetails.price}}</div>
+                <mat-divider></mat-divider>
+                <div class="contact-numbers">
+                    <div>Contact Numbers</div>
+                    <div *ngFor="let number of contactNumbers">{{ number }}</div>
+                </div>
+                <mat-divider></mat-divider>
+                <div >
+                    <div (click)="openChat()" class="chat"><i class="material-icons">forum</i>Chat</div>
+                </div>
+                <div class="safety-first">
+                    <div class="safetyHead"><i class="material-icons">health_and_safety</i>Safety First</div>
+                    <p>Beware of online scammers. Don't share sensitive information (credit/debit card details, OTP
+                        messages, etc.) with 3rd parties.</p>
+                    <div class="safetyGuidance" routerLink="/staySafe">See our safety guidance</div>
+                </div>
+
+                <div class="bannerInside">
+                    <app-banner-ad [formPayload]="filters" [banner_type_id]="4"></app-banner-ad>
+                </div>
+                
+            </div>
+        </div>
+    </mat-card>
+</div>
